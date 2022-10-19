@@ -1,6 +1,7 @@
 <?php
     session_start();
     define('SITE_ROOT', __DIR__);
+    require_once "./connexion.php";
     
 ?>
 <!DOCTYPE html>

@@ -2,16 +2,16 @@
 
 <div id="Div_Connection" class="text-center pt-5">
     <main class="form-signin w-100 mt-5 m-auto">
-        <form>
+        <form action="index.php?module=mod_connexion&action=connexion" method="POST">
             <img class="mt-5 mb-4" src="sources/Images/logo.jpg" alt="" width="100" height="100">
             <h1 class="h3 mb-3 fw-normal">Connexion</h1>
 
             <div class="form-floating">
-                <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
+                <input type="text" class="form-control" id="floatingInput" name="login" placeholder="name@example.com">
                 <label for="floatingInput">Adresse e-mail / Identifiant</label>
             </div>
             <div class="form-floating">
-                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" minlength="8" maxlength="20">
+                <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">
                 <label for="floatingPassword">Mot de passe</label>
             </div>
 

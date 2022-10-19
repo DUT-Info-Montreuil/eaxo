@@ -93,4 +93,4 @@ CREATE TABLE IF NOT EXISTS permissions(
 
 
 
-INSERT INTO users (email, username, passwd) VALUES("prof@gmail.com", "prof", " $2y$10$S0EONdKejoe6jxprdZr7B.KjKO4FGGNmB.ih/v5R98bVo6fabSrRqok");
+INSERT INTO users (email, username, passwd) VALUES("prof@gmail.com", "prof", "$2y$10$yHbePSFLLEQGTeyJRrO7S.V8yo.kmYdrncoxK2GM8sPYp3ydTjeyC");

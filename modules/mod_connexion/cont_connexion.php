@@ -39,7 +39,7 @@ class ContConnexion {
     }
 
     public function connected() {
-        $this->v->connected();
+        echo "connected";
     }
 
     public function exec() {
@@ -53,6 +53,8 @@ class ContConnexion {
             case "connected":
                 $this->connected();
                 break;
+            case "connexion":
+                $this->connexion();
         }
     }
 }

@@ -40,3 +40,7 @@
 			<li><?php require_once __DIR__ . "/widgets/components/text.php" ?></li>
 		</ul>
 	</div>
+
+
+<script src="./resources/widgets_controller.js"></script>
+<script src="./resources/widgets.js"></script>

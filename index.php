@@ -8,7 +8,7 @@
     <!-- Onglet mise en forme-->
 
     <!--Pour l'image de l'onglet la taille est de 16*16-->
-    <link rel="icon" type="image/png" href="logo.jpg" />
+    <link rel="icon" type="image/png" href="sources/Images/logo.jpg" />
 
     <!-- Ajout des Fichiers CSS-->
     
@@ -22,8 +22,8 @@
 
 
 <body>
-    <!-- En tête de la page -->
-    <header class="p-3 text-bg-dark">
+    <!-- nav bar -->
+    <header class="p-3 text bg-dark">
         <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                 <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
@@ -31,16 +31,10 @@
                 </a>
 
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
+                    <li><a href="#" class="nav-link px-2 text-white">Accueil</a></li>
                     <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+                    <li><a href="#" class="nav-link px-2 text-secondary">A propos de nous :)</a></li>
                 </ul>
-
-                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-                    <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">
-                </form>
 
                 <div class="text-end">
                     <button type="button" class="btn btn-outline-light me-2">Login</button>
@@ -50,14 +44,14 @@
         </div>
     </header>
     
-    <!-- FIN  En tête de la page -->
+    <!-- fin de nav bar -->
 
     
 
     <div id="Div_Connection" class="text-center">
         <main class="form-signin w-100 m-auto">
             <form>
-                <img class="mb-4" src="logo.jpg" alt="" width="100" height="100">
+                <img class="mb-4" src="sources/Images/logo.jpg" alt="" width="100" height="100">
                 <h1 class="h3 mb-3 fw-normal">Please Log in</h1>
     
                 <div class="form-floating">
@@ -74,20 +68,12 @@
                         <input type="checkbox" value="remember-me"> Remember me
                     </label>
                 </div>
-                <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+                <button id="bouton_send" class="w-100 btn btn-lg btn-warning" type="submit">Sign in</button>
                 <p class="mt-5 mb-3 text-muted">&copy; 2022–2023</p>
             </form>
         </main>
     </div>
-
-
-
-
-
-
-
-
-
+    
 
 <!-- Bootstrap Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

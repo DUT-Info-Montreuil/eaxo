@@ -13,7 +13,7 @@ body {
 }
 
 .form-signin {
-    max-width: 330px;
+    max-width: 385px;
     padding: 15px;
 }
 
@@ -31,4 +31,11 @@ body {
     margin-bottom: 10px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+}
+
+#bouton_send {
+    color: black;
+    background-color: #f3d503;
+    border-color: #f3d503;
+
 }

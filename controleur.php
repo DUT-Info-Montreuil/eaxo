@@ -4,6 +4,7 @@ class Controleur {
 
     public function __construct() {
         $this->module = isset($_GET['module']) ? $_GET['module'] : "mod_connexion";
+        $this->exec();
     }
 
     public function exec() {

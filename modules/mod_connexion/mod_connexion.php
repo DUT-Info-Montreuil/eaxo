@@ -1,4 +1,6 @@
 <?php
+
+require_once __DIR__ . "/cont_connexion.php";
 class ModConnexion {
     private $cont;
 

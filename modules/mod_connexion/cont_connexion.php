@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . "/modele_connexion.php";
 class ContConnexion {
     public function __construct()
     {
@@ -7,6 +8,7 @@ class ContConnexion {
     }
 
     public function form_connexion() {
+
         require_once "./modules/mod_connexion/vue_connexion.php";
     }
 

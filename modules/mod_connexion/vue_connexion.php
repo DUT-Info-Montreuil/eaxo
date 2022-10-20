@@ -1,36 +1,29 @@
-<?php
-class VueConnexion {
-    public function __construct()
-    {
-        
-    }
 
-    public function form_inscription() {
-        echo 'Inscription';
-        echo ' <form action="index.php?module=mod_connexion&action=inscription" method="POST">
-            <input type="text" name="username" maxlength="20">
-            <input type = "password" name = "password" maxlength="255">
-            <input type = "password" name = "passwordVerify" maxlength="255">
-            <input type = "text" name = "emailAdress" maxlength="100">
-            <input type="submit" value="S\'inscrire">
-        </form>';
-        echo "<p>Déjà un compte ?</p>
-        <p><a href=\"index.php?module=mod_connexion&action=form_connexion\">Connectez-vous ici.</a></p>";
-    }
 
-    public function form_connexion() {
-        echo 'Connexion';
-        echo ' <form action="index.php?module=mod_connexion&action=connecte" method="POST">
-            <input type="text" name="login" maxlength="20">
-            <input type = "password" name = "password" maxlength="255">
-            <input type="submit" value="se connecter">
-        </form>';
-        echo "<p>Pas encore compte ?</p>
-        <p><a href=\"index.php?module=mod_connexion&action=form_register\">Inscrivez-vous ici.</a></p>";
-    }
+<div id="Div_Connection" class="text-center pt-5">
+    <main class="form-signin w-100 mt-5 m-auto">
+        <form>
+            <img class="mt-5 mb-4" src="sources/Images/logo.jpg" alt="" width="100" height="100">
+            <h1 class="h3 mb-3 fw-normal">Connexion</h1>
 
-    public function connected() {
-        echo "vous êtes connecté";
-    }
-}
-?>
+            <div class="form-floating">
+                <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
+                <label for="floatingInput">Adresse e-mail / Identifiant</label>
+            </div>
+            <div class="form-floating">
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" minlength="8" maxlength="20">
+                <label for="floatingPassword">Mot de passe</label>
+            </div>
+
+            <a id="TextePasEncoreDeCompte" href="https://example.com">pas encore de compte ?</a>
+
+            <div class="checkbox mt-2 mb-1">
+                <label>
+                    <input id="test" type="checkbox" value="remember-me" checked> Se souvenir de moi
+                </label>
+            </div>
+            <button id="bouton_send" class="w-100 btn btn-lg btn-warning" type="submit">Connexion</button>
+            <p class="mt-5 mb-3 text-muted">&copy; 2022–2023</p>
+        </form>
+    </main>
+</div>

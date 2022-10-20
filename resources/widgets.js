@@ -87,8 +87,8 @@ $( function() {
     $("#pageContainer").on("click", function(handler) {
         var target = handler.target;
 
-        if(target.id != "pageContainer" && !target.inputAdded ) {
-
+        if(target.id != "pageContainer" && target.className == "ui-widget-header" && !target.inputAdded ) {
+            
             var oldTxt = target.textContent;
             
 
@@ -96,33 +96,47 @@ $( function() {
             target.textContent = ""
             target.inputAdded = true
 
-            var input = $("<input>")
+            let input = $("<input>")
             input.attr("type", "text")
             
             input.appendTo(target);
             input.attr("value", oldTxt)
 
+            console.log(input)
+
+            function saveContent(target, input) {
+                //Allow click before destroying input
+                target.inputAdded = false
+                if(input.val() == "") {
+                    target.textContent = oldTxt;
+                } else {
+
+                    target.textContent = input.val()
+                    input.remove()
+                }
+
+                //$("#pageContainer").off("click.saveChange");
+                
+                
+            }
+
         
             input.keypress(function(eventData, handler) {
                 if(eventData.originalEvent.code == "Enter") {
-                    if(input.val() == "") {
-                        target.textContent = oldTxt;
-                    } else {
-
-                        target.textContent = input.val()
-                        input.remove()
-                    }
-                    
-                    target.inputAdded = false
+                    saveContent(target, input)
                 }
             })
 
-            console.log(this)
+            $("#pageContainer").on("click.saveChange", "#saveChange", function() {
+                console.log(target, input)
+                saveContent(target, input)
+                
 
-            input.on("click", function()
-            {
-                console.log("ok")
+                
             })
+
+
+
 
         
 

@@ -19,10 +19,10 @@
 
             <div class="checkbox mt-2 mb-1">
                 <label>
-                    <input id="test" type="checkbox" value="remember-me" checked> Se souvenir de moi
+                    <input id="formulaire-saisie-inscription" type="checkbox" value="remember-me" checked> Se souvenir de moi
                 </label>
             </div>
-            <button id="bouton_send" class="w-100 btn btn-lg btn-warning" type="submit">Connexion</button>
+            <button id="bouton_send_connection" class="w-100 btn btn-lg btn-warning" type="submit">Connexion</button>
             <p class="mt-5 mb-3 text-muted">&copy; 2022–2023</p>
         </form>
     </main>

@@ -12,8 +12,20 @@
             </ul>
 
             <div class="text-end">
-                <button type="button" class="btn btn-outline-light me-2">Connexion</button>
-                <a href="./index.php?module=mod_connexion" type="button" class="btn btn-warning">Creer un compte</a>
+            <?php
+                    if (!isset($_SESSION['newsession'])) {
+                        
+                ?>
+                    <a href="./index.php?module=mod_connexion&action=form_connexion" type="button" class="btn btn-outline-light me-2">Connexion</a>
+                    <button type="button" class="btn btn-warning">Creer un compte</button>
+                    <?php
+                    }
+                    else {
+                ?>
+                 <a href="./index.php?module=mod_connexion&action=deconnexion" type="button" class="btn btn-warning">Deconnexion</a>
+                 <?php
+                    }
+                ?>
             </div>
         </div>
     </div>

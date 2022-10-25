@@ -2,6 +2,7 @@
 class Controleur {
     private $module;
     private $m;
+    private $controller;
 
     public function __construct() {
         require_once ("modele.php");
@@ -20,6 +21,11 @@ class Controleur {
                 session_destroy();
                 unset($_SESSION["newsession"]);
                 echo "Deconnecté";
+                break;
+            case "mod_pages":
+                require_once "./modules/mod_pages/cont_pages.php";
+                $this->controller = new ContPages();
+                break;
 
         }
     }

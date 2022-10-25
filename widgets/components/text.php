@@ -1,1 +1,1 @@
-<p class="widgetDraggable widgetClonable widgetResizable">Example</p>
+<p class="eaxoDraggable eaxoClonable">Texte</p>

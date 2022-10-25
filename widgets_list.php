@@ -7,7 +7,7 @@
   </script>
  
 <div id="accordion">
-	<h3>Section 1</h3>
+	<h3>Principe Alphabétique</h3>
 	<div>
   		<?php
 			require_once (__DIR__ . "/widgets/components/box.php");
@@ -38,6 +38,7 @@
             <li><?php require_once __DIR__ . "/widgets/components/box.php" ?></li>
 			<li><?php require_once __DIR__ . "/widgets/components/trueorfalse.php" ?></li>
 			<li><?php require_once __DIR__ . "/widgets/components/text.php" ?></li>
+			<li><?php require_once __DIR__ . "/widgets/components/templates/textinbox.php" ?></li>
 		</ul>
 	</div>
 

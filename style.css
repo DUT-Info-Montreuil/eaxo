@@ -11,15 +11,28 @@
       display: none;
     }
 
+    body > * {
+      margin: 0;
+    }
+
+    .container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl{
+      margin-left: 0;
+      padding-right: 0;
+    }
+
+
+    @page {
+      size: auto;  margin: 0mm; 
+    }
+
     
 }
 
 #pageContainer {
-  background: white;
   display: block;
   margin: 0 auto;
   margin-bottom: 0.5cm;
-  box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+  box-shadow: 0 0 0.5cm rgba(0,0,0,0.1);
 }
 
 #pageContainer[size="A4"] {  
@@ -73,3 +86,18 @@ body {
   border-color: #f3d503;
 
 }
+
+/* Widgets property */
+
+.eaxoText {
+  display: inline-block;
+  margin: 4px;
+}
+
+.eaxoBox {
+  display: inline-block;
+  border:black 2px solid;
+  
+}
+
+

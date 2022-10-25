@@ -1,3 +1,4 @@
-<div class="ui-state-active widgetDraggable widgetClonable widgetResizable">
-<h3 class="ui-widget-header">Resizable</h3>
+<div class="ui-state-active widgetDraggable eaxoClonable eaxoResizable" data-widget="box">
+<h3 class="ui-widget-header">Entourer</h3>
+
 </div>

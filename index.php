@@ -2,7 +2,6 @@
     session_start();
     define('SITE_ROOT', __DIR__);
     require_once "./connexion.php";
-    
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -41,11 +40,23 @@
                     <li><a href="https://github.com/DUT-Info-Montreuil/eaxo" class="nav-link px-2 text-white">Documentation</a></li>
                     <li><a href="https://github.com/DUT-Info-Montreuil" class="nav-link px-2 text-secondary">A propos de nous :)</a></li>
                 </ul>
-
                 <div class="text-end">
+                <?php
+                    if (!isset($_SESSION['newsession'])) {
+                        
+                ?>
                     <button type="button" class="btn btn-outline-light me-2">Connexion</button>
                     <button type="button" class="btn btn-warning">Creer un compte</button>
+                    <?php
+                    }
+                    else {
+                ?>
+                 <button type="button" class="btn btn-warning">Deconnexion</button>
+                 <?php
+                    }
+                ?>
                 </div>
+              
             </div>
         </div>
     </header>

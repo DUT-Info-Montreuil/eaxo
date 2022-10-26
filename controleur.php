@@ -24,7 +24,7 @@ class Controleur {
                 echo "Deconnecté";
                 break;
             case "mod_pages":
-                require_once "./modules/mod_pages/cont_pages.php";
+                require_once "./modules/mod_pages/mod_pages.php";
                 $this->mod = new ModPages();
                 break;
 

@@ -43,5 +43,5 @@
 	</div>
 
 
-<script src="./resources/widgets_controller.js"></script>
 <script src="./resources/widgets.js" type="module"></script>
+<script src="./resources/fonts_controller.js" type="module"></script>

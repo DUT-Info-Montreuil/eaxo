@@ -28,12 +28,29 @@
             ?>
             <div class="container-sm">
 
-                <select id="selectFont" class="form-select" aria-label="Default select example">
-                    <option selected>Open this select menu</option>
-                    <option value="1">Caveat</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                </select>
+                <div class="row row-cols-auto">
+                    <div class="col">
+                        <select id="selectFont" class="form-select" aria-label="Default select example">
+                            <option selected>Open this select menu</option>
+                            <option value="1">Cursive</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                    </div>
+
+                    <div class="col col-lg-2">
+                        <div class="input-group mb-3">
+
+                            <button id="decreaseFontSize" type="button" class="btn btn-light">-</button>
+                            <input id="fontSizeInput" type="text" class="form-control" value="15">
+
+
+
+                            <button id="increaseFontSize" type="button" class="btn btn-light">+</button>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <?php
         }

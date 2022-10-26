@@ -1,7 +1,9 @@
 import { createTextBox } from "./scripts/textbox";
 import widget_c from "./widgets_controller";
+import {getFontProperty} from './scripts/fonts';
 
-
+console.log(widget_c.getID());
+console.log(widget_c.getID());
 function editableNode(node) {
     let array = ["h", "p"]
     for(var n in array) {
@@ -14,15 +16,16 @@ function editableNode(node) {
     return false
 }
 
-$( "select" ).change(function() {
+$( "select" ).on("click", function() {
     var str = "";
     $( "select option:selected" ).each(function() {
-      str += $( this ).text() + " ";
+      str += $( this ).text()
+      
     });
-    console.log(str.indexOf("Caveat"))
-    if(str.indexOf("Caveat") >= 0) {
+    console.log(str)
+    if(str) {
         let element = widget_c.getSelectedElement();
-        $(element).css({'font-family':"'Cursive'"})
+        $(element).css(getFontProperty(str))
     }
 })
 

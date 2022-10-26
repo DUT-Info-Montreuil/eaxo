@@ -60,10 +60,8 @@ class ContConnexion {
                 $this->connexion();
                 break;
             case "deconnexion":
-                session_destroy();
+                //session_destroy();
                 unset($_SESSION['newsession']);
-                header("Location: ./index.php");
-
                 break;
         }
     }

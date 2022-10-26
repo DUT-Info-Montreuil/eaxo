@@ -54,14 +54,16 @@ class ContConnexion {
                 $this->form_inscription();
                 break;
             case "connected":
-                header("./index.php");
+                header("Location: ./index.php");
                 break;
             case "connexion":
                 $this->connexion();
                 break;
             case "deconnexion":
-                //session_destroy();
+                session_destroy();
                 unset($_SESSION['newsession']);
+                header("Location: ./index.php");
+
                 break;
         }
     }

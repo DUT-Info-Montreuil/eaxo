@@ -44,7 +44,7 @@ class ContConnexion {
     }
 
     public function connected() {
-        $this->v->connected();
+        echo "connected";
     }
 
     public function exec() {
@@ -56,7 +56,14 @@ class ContConnexion {
                 $this->form_inscription();
                 break;
             case "connected":
-                $this->connected();
+                header("Location: ./index.php");
+                break;
+            case "connexion":
+                $this->connexion();
+                break;
+            case "deconnexion":
+                //session_destroy();
+                unset($_SESSION['newsession']);
                 break;
         }
     }

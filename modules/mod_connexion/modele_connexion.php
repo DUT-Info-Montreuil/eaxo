@@ -22,7 +22,7 @@ class ModeleConnexion extends Connexion{
     //Checks if the couple (username or email adress/password) exists in the database, returns True if it does, False otherwise
     public function verif_connexion() {
         if (isset($_SESSION)) {
-            $sql = 'SELECT * FROM accounts WHERE (username=:login) OR (email=:login)';
+            $sql = 'SELECT * FROM users WHERE (username=:login) OR (email=:login)';
             $sth = self::$bdd->prepare($sql);
             $sth->execute(array(':login'=>$_POST['login']));
             $result = $sth->fetch();

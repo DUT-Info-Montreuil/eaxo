@@ -8,5 +8,10 @@ class ModConnexion {
         $this->cont = new ContConnexion();
         $this->cont->exec();
     }
+
+    public function getCont()
+    {
+        return $this->cont;
+    }
 }
 ?>

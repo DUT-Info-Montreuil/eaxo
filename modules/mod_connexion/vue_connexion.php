@@ -1,7 +1,8 @@
 
 
 <?php
-    class VueConnexion {
+    require_once "./vue_generique.php";
+    class VueConnexion extends VueGenerique {
 
 
         public function formConnexion() {
@@ -9,6 +10,9 @@
             <div id="Div_Connection" class="text-center pt-5">
             <main class="form-signin w-100 mt-5 m-auto">
                 <form action="./index.php?module=mod_connexion&action=connexion" method="POST">
+                    <?php
+                    if (!isset($_SESSION['newsession'])) {
+                    ?>
                     <img class="mt-5 mb-4" src="sources/Images/logo.jpg" alt="" width="100" height="100">
                     <h1 class="h3 mb-3 fw-normal">Connexion</h1>
 
@@ -30,9 +34,17 @@
                     </div>
                     <button id="bouton_send" class="w-100 btn btn-lg btn-warning" type="submit">Connexion</button>
                     <p class="mt-5 mb-3 text-muted">&copy; 2022–2023</p>
+
+                    <?php
+                    }
+                    else {
+                        echo "t'es deja co mec";
+                    }
+                    ?>
                 </form>
             </main>
         </div>
         <?php
         }
     }
+?>

@@ -2,6 +2,11 @@
     session_start();
     define('SITE_ROOT', __DIR__);
     require_once "./connexion.php";
+    require_once("./vue_generique.php");
+    require_once("./navbar.php");
+
+    $v = new VueGenerique();
+    $nb = new VueNavbar();
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +27,10 @@
 
     <body>
         <?php
-            require_once("./navbar.php")
+            
+            $nb->vueNavbar();
+            $result = $v->getAffichage();
+            echo $result;
         ?>
 
 

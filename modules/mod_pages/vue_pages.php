@@ -1,5 +1,6 @@
 <?php
-    class VuePages {
+    require_once "./vue_generique.php";
+    class VuePages extends VueGenerique{
 
         public function __construct(){}
     

@@ -1,12 +1,14 @@
 <?php
 require_once __DIR__ . "/modele_connexion.php";
 require_once __DIR__ . "/vue_connexion.php";
+require_once __DIR__ . "/vue_creation_compte.php";
 
 class ContConnexion {
     public function __construct()
     {
         $this->m = new ModeleConnexion();
         $this->v = new VueConnexion();
+        $this->vI = new VueInscription();
         $this->action = isset($_GET['action']) ? $_GET['action'] : "form_connexion";
         $this->exec();
     }
@@ -16,7 +18,7 @@ class ContConnexion {
     }
 
     public function form_inscription() {
-        //vue inscription
+        $this->vI->formInscription();
     }
 
     public function inscrit() {
@@ -42,7 +44,7 @@ class ContConnexion {
     }
 
     public function connected() {
-        $this->v->connected();
+        echo "connected";
     }
 
     public function exec() {
@@ -54,7 +56,14 @@ class ContConnexion {
                 $this->form_inscription();
                 break;
             case "connected":
-                $this->connected();
+                header("Location: ./index.php");
+                break;
+            case "connexion":
+                $this->connexion();
+                break;
+            case "deconnexion":
+                //session_destroy();
+                unset($_SESSION['newsession']);
                 break;
         }
     }

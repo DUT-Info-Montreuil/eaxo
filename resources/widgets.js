@@ -1,3 +1,7 @@
+import { createTextBox } from "./scripts/textbox";
+import widget_c from "./widgets_controller";
+
+
 function editableNode(node) {
     let array = ["h", "p"]
     for(var n in array) {
@@ -10,30 +14,18 @@ function editableNode(node) {
     return false
 }
 
-function createTextBox(parent, place, text) {
-    let box = $("<div>");
-    box.addClass("eaxoDraggable")
-    box.addClass("eaxoBox")
-
-    let txt = $("<p>");
-    txt.addClass("eaxoText");
-    txt[0].textContent = text
-
-    let initialLeft = 100
-
-    let top = 50 + (place >= 5 ?  50 : 0) ;
-    let left =  (place >= 5 ? -83 + (place-5) * 20 : initialLeft + (place) * 20) 
-    box.css({top:top, left:left, position:"relative"});
-
-    txt.appendTo(box)
-    box.appendTo(parent)
-
-    box.draggable({
-        snap:parent
+$( "select" ).change(function() {
+    var str = "";
+    $( "select option:selected" ).each(function() {
+      str += $( this ).text() + " ";
     });
+    console.log(str.indexOf("Caveat"))
+    if(str.indexOf("Caveat") >= 0) {
+        let element = widget_c.getSelectedElement();
+        $(element).css({'font-family':"'Cursive'"})
+    }
+})
 
-    
-}
 
 function cloneElement(original, id) {
     
@@ -102,7 +94,7 @@ $( function() {
         accept:".eaxoClonable",
         drop:function(event, ui) {
             loadChildren(ui.draggable[0])
-            cloneElement(ui.draggable, widgets_controller.getNewID());
+            cloneElement(ui.draggable, widget_c.getID());
             
             
         }
@@ -111,14 +103,14 @@ $( function() {
     
     $("#pageContainer").on("click", function(handler) {
         var target = handler.target;
-        if(target.id != "pageContainer" && editableNode(target) && !target.inputAdded ) {
-            
+        console.log(widget_c.getSelectedElement())
+        if(target.id != "pageContainer" && editableNode(target) && !widget_c.getSelectedElement()) {
+            widget_c.setSelectedElement(target);
             var oldTxt = target.textContent;
             
 
             var oldTxt = target.textContent;
             target.textContent = ""
-            target.inputAdded = true
 
             let input = $("<input>")
             input.attr("type", "text")
@@ -128,7 +120,7 @@ $( function() {
 
             function saveContent(target, input) {
                 //Allow click before destroying input
-                target.inputAdded = false
+                widget_c.setSelectedElement(null)
                 if(input.val() == "") {
                     target.textContent = oldTxt;
                 } else {

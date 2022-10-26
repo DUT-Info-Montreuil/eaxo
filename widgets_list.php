@@ -44,4 +44,4 @@
 
 
 <script src="./resources/widgets_controller.js"></script>
-<script src="./resources/widgets.js"></script>
+<script src="./resources/widgets.js" type="module"></script>

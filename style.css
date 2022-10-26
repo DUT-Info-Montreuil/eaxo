@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "Cursive";
+  src: url("./resources/fonts/cursive_standard.ttf");
+}
+
 @media print {
     nav {
       display: none;
@@ -99,5 +104,3 @@ body {
   border:black 2px solid;
   
 }
-
-

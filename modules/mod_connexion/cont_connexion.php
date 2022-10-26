@@ -1,19 +1,24 @@
 <?php
 require_once __DIR__ . "/modele_connexion.php";
+require_once __DIR__ . "/vue_connexion.php";
+require_once __DIR__ . "/vue_creation_compte.php";
+
 class ContConnexion {
     public function __construct()
     {
         $this->m = new ModeleConnexion();
+        $this->v = new VueConnexion();
+        $this->vI = new VueInscription();
         $this->action = isset($_GET['action']) ? $_GET['action'] : "form_connexion";
+        $this->exec();
     }
 
     public function form_connexion() {
-
-        require_once "./modules/mod_connexion/vue_connexion.php";
+        $this->v->formConnexion();
     }
 
     public function form_inscription() {
-        //vue inscription
+        $this->vI->formInscription();
     }
 
     public function inscrit() {

@@ -1,6 +1,7 @@
 <?php
 class Controleur {
     private $module;
+    private $controller;
 
     public function __construct() {
         $this->module = isset($_GET['module']) ? $_GET['module'] : "mod_connexion";
@@ -17,6 +18,11 @@ class Controleur {
                 session_destroy();
                 unset($_SESSION["newsession"]);
                 echo "Deconnecté";
+                break;
+            case "mod_pages":
+                require_once "./modules/mod_pages/cont_pages.php";
+                $this->controller = new ContPages();
+                break;
 
         }
     }

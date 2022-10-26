@@ -12,8 +12,8 @@
             </ul>
 
             <div class="text-end">
-                <button type="button" class="btn btn-outline-light me-2">Connexion</button>
-                <a href="./index.php?module=mod_connexion" type="button" class="btn btn-warning">Creer un compte</a>
+                <a href="./index.php?module=mod_connexion&action=form_connexion" type="button" class="btn btn-outline-light me-2">Connexion</a>
+                <a href="./index.php?module=mod_connexion&action=form_register" type="button" class="btn btn-warning">Creer un cgergtertompte</a>
             </div>
         </div>
     </div>

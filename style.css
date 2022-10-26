@@ -73,3 +73,21 @@ body {
   border-color: #f3d503;
 
 }
+
+#bouton_send_connection {
+  color: black;
+  background-color: #f3d503;
+  border-color: #f3d503;
+
+}
+#bouton_send_incription{
+  color: black;
+  margin-top: 50px;
+  background-color: #f3d503;
+  border-color: #f3d503;
+}
+
+/*Page de creation de compte*/
+#formulaire-saisie-inscription{
+  margin-left: 400px;
+}

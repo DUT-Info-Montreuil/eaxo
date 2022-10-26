@@ -22,7 +22,6 @@ $( "select" ).on("click", function() {
       str += $( this ).text()
       
     });
-    console.log(str)
     if(str) {
         let element = widget_c.getSelectedElement();
         $(element).css(getFontProperty(str))

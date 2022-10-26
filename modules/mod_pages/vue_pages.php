@@ -2,19 +2,67 @@
     require_once "./vue_generique.php";
     class VuePages extends VueGenerique{
 
-        public function __construct(){}
+        public function __construct(){
+            parent::__construct();
+        }
+
+        public function widgetList() {
+            ?>
+
+                <div id="accordion">
+                    <h3>Principe Alphabétique</h3>
+                    <div>
+                        <?php
+                            require_once (SITE_ROOT . "/widgets/components/box.php");
+                        ?>
+                    </div>
+                        <h3>Section 2</h3>
+                    <div>
+                        <p>Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In suscipit faucibus urna. </p>
+                    </div>
+                        <h3>Section 3</h3>
+                    <div>
+                        <p>Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis. Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui. </p>
+                    <ul>
+                        <li>List item</li>
+                        <li>List item</li>
+                        <li>List item</li>
+                        <li>List item</li>
+                        <li>List item</li>
+                        <li>List item</li>
+                        <li>List item</li>
+                    </ul>
+                    </div>
+
+                    <h3>Base</h3>
+                    <div>
+                        <ul>
+
+                            <li><?php require_once SITE_ROOT. "/widgets/components/box.php" ?></li>
+                            <li><?php require_once SITE_ROOT . "/widgets/components/trueorfalse.php" ?></li>
+                            <li><?php require_once SITE_ROOT . "/widgets/components/text.php" ?></li>
+                            <li><?php require_once SITE_ROOT . "/widgets/components/templates/textinbox.php" ?></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <script src="./resources/widgets.js" type="module"></script>
+                <script src="./resources/fonts_controller.js" type="module"></script>
+
+
+            <?php
+        }
     
         public function formEdit() {
             $this->fontTools();
+            
             ?>
 
             
                 <div class ="container mt-2">
                 <div class="row">
                     <div class="widgets col-3 displaynone">
-                        <?php require_once(SITE_ROOT . "/widgets_list.php") ?>
-                    </div>
-
+                        <?php $this->widgetList(); ?>
                     </div>
 
                     <div class="apercu col-sm-9">

@@ -20,11 +20,11 @@
                     <h1 class="h3 mb-3 fw-normal">Connexion</h1>
 
             <div class="form-floating">
-                <input type="text" class="form-control" id="floatingInput" name = "login" placeholder="name@example.com">
+                <input type="text" class="form-control" id="floatingInput" name = "login" placeholder="name@example.com" value="proftest">
                 <label for="floatingInput">Adresse e-mail / Identifiant</label>
             </div>
             <div class="form-floating">
-                <input type="password" class="form-control" id="floatingPassword" name = "password" placeholder="Password" minlength="8" maxlength="20">
+                <input type="password" class="form-control" id="floatingPassword" name = "password" placeholder="Password" minlength="8" maxlength="20" value="proftest">
                 <label for="floatingPassword">Mot de passe</label>
             </div>
 

@@ -6,7 +6,7 @@ class ModConnexion {
 
     public function __construct() {
         $this->cont = new ContConnexion();
-        $this->cont->exec();
+        //$this->cont->exec();
     }
 
     public function getCont()

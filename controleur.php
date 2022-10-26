@@ -13,6 +13,9 @@ class Controleur {
     }
 
     public function exec() {
+        if(!isset($_SESSION["newsession"])) {
+            $this->module = "mod_connexion";
+        }
         switch($this->module) {
             case "mod_connexion":
                 require_once "./modules/mod_connexion/mod_connexion.php";

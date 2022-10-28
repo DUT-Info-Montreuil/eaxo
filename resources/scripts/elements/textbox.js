@@ -21,4 +21,4 @@ export function createTextBox(parent, place, text) {
         snap:parent
     });
     
-}
+} 

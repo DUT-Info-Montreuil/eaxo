@@ -1,4 +1,4 @@
-import widget_c from "./widgets_controller";
+import widget_c from "./widgets_controller.js";
 
 function changeFontSize(size) {
     if(widget_c.getSelectedElement()) {

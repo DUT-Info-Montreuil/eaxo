@@ -14,6 +14,8 @@
                     <div>
                         <?php
                             require_once (SITE_ROOT . "/widgets/components/box.php");
+                            require_once (SITE_ROOT . "/widgets/components/trueorfalse.php");
+
                         ?>
                     </div>
                         <h3>Section 2</h3>
@@ -46,8 +48,7 @@
                     </div>
                 </div>
 
-                <script src="./resources/widgets.js" type="module"></script>
-                <script src="./resources/fonts_controller.js" type="module"></script>
+                <?php ?>
 
 
             <?php

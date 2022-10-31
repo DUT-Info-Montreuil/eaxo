@@ -7,6 +7,7 @@ class Controleur {
 
     public function __construct() {
         require_once ("modele.php");
+
         $this->m = new Modele();
         $this->module = isset($_GET['module']) ? $_GET['module'] : "mod_connexion";
         $this->exec();
@@ -32,6 +33,7 @@ class Controleur {
                 break;
 
         }
+
         $this->result = $this->mod->getCont()->v->getAffichage();
     }
 }

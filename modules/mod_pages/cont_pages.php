@@ -5,6 +5,7 @@
     class ContPages {
         public function __construct()
         {
+
             $this->m = new ModelePages();
             $this->v = new VuePages();
             $this->action = isset($_GET['action']) ? $_GET['action'] : "formEdit";
@@ -13,6 +14,7 @@
 
 
         public function exec() {
+
             switch($this->action) {
                 case "formEdit":
                     $this->v->formEdit();

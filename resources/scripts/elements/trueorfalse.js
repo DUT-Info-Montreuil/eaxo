@@ -16,5 +16,4 @@ export function createTrueOrFalse(parent, index) {
 
     box.appendTo(parent)
 
-    $(box).snap(parent)
 }

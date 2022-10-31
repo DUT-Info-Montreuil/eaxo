@@ -1,4 +1,5 @@
 import * as txt from './utils/textcontroller.js'
+import * as cp from './copypaste.js'
 
 class WidgetController {
     constructor() {
@@ -53,9 +54,9 @@ class WidgetController {
         txt.enableEdit(this, node)
     }
 
+    unselect() {
 
-
-
+    }
 }
 
 const widget_c = new WidgetController();

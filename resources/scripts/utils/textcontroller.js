@@ -1,3 +1,9 @@
+/*
+    This function create input to allow editing text
+*/
+
+import widget_c from "../widgets_controller.js";
+
 export function enableEdit(widgetController, node) {
     widgetController.setSelectedElement(node);
     var oldTxt = node.textContent;
@@ -8,9 +14,18 @@ export function enableEdit(widgetController, node) {
 
     let input = $("<input>")
     input.attr("type", "text")
+    input.addClass("eaxoInput")
+
+    //We want same style for input and text
+    input.css({"width":"100%", "font-weight":"inherit", "font-style":"inherit"})
+    
     
     input.appendTo(node);
     input.attr("value", oldTxt)
+    input.focus();
+
+    //Focus on last character
+    input[0].setSelectionRange(input.val().length, input.val().length)
 
     function saveContent(node, input) {
         //Allow click before destroying input
@@ -24,7 +39,7 @@ export function enableEdit(widgetController, node) {
         }
     }
 
-
+    
     input.keypress(function(eventData, handler) {
         if(eventData.originalEvent.key == "Enter") {
             saveContent(node, input)
@@ -36,4 +51,17 @@ export function enableEdit(widgetController, node) {
             saveContent(node, input)
         }
     })
+
+    //Need to be fixed
+    $("body").on("click", function(handler) {
+        let target = handler.target;
+
+        if(widget_c.getSelectedElement() && (target.nodeName == "PAGE")) {
+            console.log(target)
+            if(target.nodeName == "PAGE" || $(target) != $(widget_c.getSelectedElement())) {
+                saveContent(node, input)
+            }
+        }
+    })
 }
+

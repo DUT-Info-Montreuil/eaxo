@@ -2,6 +2,9 @@ import { createTextBox } from "./elements/textbox.js";
 import widget_c from "./widgets_controller.js";
 import {getFontProperty} from './elements/fonts.js';
 import {cloneElement} from './cloneelement.js'
+import exoParser from './exoParser.js'
+
+
 
 
 
@@ -37,17 +40,23 @@ $( function() {
     $(".eaxoClonable").draggable({
         helper:"clone",
         revert:true,
-        revertDuration:0
+        revertDuration:0,
     });
 
 
     $("#pageContainer").droppable({
         accept:".eaxoClonable",
         drop:function(event, ui) {
+            
             loadChildren(ui.draggable[0])
             cloneElement(ui.draggable, widget_c.getID());
+            exoParser.stringify(); 
         }
     }) 
 
+    //exoParser.stringify();
+    //exoParser.loadExo("test")
 
 } ); 
+
+

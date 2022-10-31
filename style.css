@@ -104,3 +104,23 @@ body {
   border:black 2px solid;
   
 }
+
+.eaxoInput {
+  border:none;
+  background: none;
+}
+
+.eaxoInput:focus {
+  outline: none;
+}
+
+.blackIcon {
+  color:black
+}
+
+#spinnerLoading {
+  position :absolute;
+  right: 20%;
+  top:100px;
+  opacity: 0;
+}

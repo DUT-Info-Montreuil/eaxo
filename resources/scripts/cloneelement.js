@@ -1,5 +1,6 @@
 import {createTextBox} from './elements/textbox.js'
 import {createTrueOrFalse} from './elements/trueorfalse.js'
+import widget_c from './widgets_controller.js'
 
 function loadChildrenElements(clone) {
     //let attrs = clone[0].dataset.widget
@@ -24,8 +25,6 @@ export function cloneElement(original, id) {
     
     var clone = original.clone();
     let array = clone[0].classList;
-    
-
 
 
     for(var i = 0; i < array.length; i++) {
@@ -39,14 +38,14 @@ export function cloneElement(original, id) {
                 containment:"#pageContainer"
             });
         }
+
     }
 
-    
+    clone.attr("id", "div" + widget_c.getID())
     clone.appendTo("#pageContainer");
-    clone.attr("id", "pageTest" + id);
 
    
-    $("#pageTest" + id).draggable({
+    $(clone).draggable({
         containment:"#pageContainer"
     });
 

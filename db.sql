@@ -52,11 +52,12 @@ CREATE TABLE IF NOT EXISTS widgets(
 CREATE TABLE IF NOT EXISTS widgets_elements(
     id serial,
     widgetId bigint(20) UNSIGNED,
+    parentId bigint(20) UNSIGNED,
     wType varchar(100),
     class varchar(255),
     content text,
     css text,
-    FOREIGN KEY (widgetId)
+    FOREIGN KEY (parentId)
         REFERENCES widgets(id)
         ON DELETE CASCADE
 );

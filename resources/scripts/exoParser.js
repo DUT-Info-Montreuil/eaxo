@@ -1,3 +1,5 @@
+import widget_c from "./widgets_controller.js"
+
 class ExoParser {
     constructor() {
         this.page = $("#pageContainer")
@@ -35,19 +37,20 @@ class ExoParser {
     }
 
     stringifySub(element, parent, array) {
+        if(element.nodeName == "H3") {
+            console.log(element);
+        }
         let jQueryElement = $(element);
         let arrayObj;
 
-        if(element.nodeName == "DIV") {
-            array[jQueryElement.attr("id")] = array[jQueryElement.attr("id")] ? array[jQueryElement.attr("id")] : {}
-            arrayObj = array[jQueryElement.attr("id")];
-        } else {
-            array[parent.children.length > 0 ? parent.children.length + 1 : 0] = {}
-            arrayObj = array[parent.children.length > 0 ? parent.children.length + 1 : 0]
-        }
+        jQueryElement.attr("id", widget_c.getNewID(element));
+
+        array[jQueryElement.attr("id")] = array[jQueryElement.attr("id")] ? array[jQueryElement.attr("id")] : {}
+        arrayObj = array[jQueryElement.attr("id")];
+
 
         arrayObj.nodeName = element.nodeName;
-        arrayObj.nodeID = jQueryElement.attr("id")
+        arrayObj.nodeID = jQueryElement.attr("id");
         arrayObj.parent = parent.attr("id")
 
         if(element.innerText != "" && element.nodeName != "DIV") {
@@ -59,6 +62,7 @@ class ExoParser {
         
         arrayObj.style = this.clearArray(jQueryElement[0].style)
 
+        //Only div can include html element,so just extends tree when we found new div
         if(element.nodeName == "DIV") {
             
 
@@ -75,8 +79,10 @@ class ExoParser {
 
     stringify(callback) {
         this.exoArray.children = {}
-        for(var i = 0; i < this.page.children().length; i++) {
-            this.stringifySub(this.page.children()[i], this.page, this.exoArray.children)
+        //for(var i = 0; i < this.page.children().length; i++) {
+
+        if(this.page.children().length > 0) {
+            this.stringifySub(this.page.children()[0], this.page, this.exoArray.children)
         }
 
         let json = JSON.stringify(this.exoArray);
@@ -126,8 +132,9 @@ class ExoParser {
             let data = {
                 exoJson : json
             }
-            $.post("./traitement.php", data, function(result) {
-                console.log(result)
+            $.post("./index.php?module=mod_pages&action=save", data, function(result) {
+                console.log(JSON.parse(json))
+                console.log(result);
                 setTimeout(function() {
                     $("#spinnerLoading").css({"opacity":0} );
                 }, 300)

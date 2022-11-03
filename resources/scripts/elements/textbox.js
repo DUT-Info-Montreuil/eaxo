@@ -7,7 +7,7 @@ export function createTextBox(parent, place, text) {
     let box = $("<div>");
     box.addClass("eaxoDraggable")
     box.addClass("eaxoBox")
-    box.attr("id", "div" + widget_c.getID())
+    box.attr("id", widget_c.getNewID(box[0]))
 
 
     let txt = $("<p>");
@@ -31,10 +31,14 @@ export function createTextBox(parent, place, text) {
 
     $(parent).css({"height" : parent.maxHeight});
     box.draggable({
-        snap:parent
+        //snap:parent
     });
 
+    let canChange = true;
+
     box.on("drag", function(event, ui) {
+
+        
         let target = event.target;
         let parent = target.parentNode;
 
@@ -43,53 +47,33 @@ export function createTextBox(parent, place, text) {
         let oldLeft = ui.originalPosition.left;
         let oldTop = ui.originalPosition.top;
 
-        //Check if we need to align vertical or horizontally
-        if(Math.abs((ui.position.top - ui.originalPosition.top)) > Math.abs((ui.position.left - ui.originalPosition.left)) )  {
-            align = "top"
-        } else {
-            align = "left"
-        }
-        let element = null;
-        let distance = -1
+        //console.log(ui)
 
-        for(var i = 0; i < parent.childNodes.length; i++) {
+
+        /*for(var i = 0; i < parent.childNodes.length; i++) {
             let child = $(parent.childNodes[i]);
             
-            let style = child[0].style;
-            if(style && !$(target).is(child) && child[0].nodeName != "H3") {
-                console.log(child)
-                let top = parseFloat(style.top);
-                let left = parseFloat(style.left);
-                
-                if(distance < 0 || (top * top + left * left) < distance) {
-                    console.log(distance)
-                    distance = (top * top + left * left)
-                    element = child;
-                }
-                
+            
+        }*/
+        let posX = Math.abs(oldTop - ui.position.top)
+        let posY = Math.abs(oldLeft - ui.position.left)
 
-                
+        console.log(`x : ${posX} y : ${posY}`)
+        if(canChange && Math.abs(posX - posY) > 3) {
+            if(posX > posY) {
+                box.draggable("option", "axis", "y");
+            } else {
+                box.draggable("option", "axis", "x");
             }
+
+            canChange = false
         }
+    })
 
-        if(element != null) {
-            $(element).css({"background-color" : "black"})
-            let style = element[0].style;
-
-            let top = parseFloat(style.top);
-            let left = parseFloat(style.left);
-
-            setTimeout(function() {
-                if(align == "top") {
-                    $(target).css({"top" : top})
-                    $(target).css({"top" : oldLeft})
-                } else {
-                    $(target).css({"left" : left})
-                    $(target).css({"left" : oldTop})
-                }
-
-            }, 1)
-        }
+    box.on("dragstop", function(event, ui) {
+        box.draggable("option", "axis", false);
+        console.log("daccord")
+        canChange = true
     })
 
     

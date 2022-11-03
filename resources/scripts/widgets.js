@@ -21,12 +21,12 @@ $( "select" ).on("click", function() {
 })
 
 
-function loadChildren(wid) {
+/*function loadChildren(wid) {
     for(var i = 0; i < wid.children.length; i++) {
         let child = wid.children[i];
         $(child).draggable();
     }
-}
+}*/
 
 $( function() {
     
@@ -48,9 +48,9 @@ $( function() {
         accept:".eaxoClonable",
         drop:function(event, ui) {
             
-            loadChildren(ui.draggable[0])
-            cloneElement(ui.draggable, widget_c.getID());
-            exoParser.stringify(); 
+            //loadChildren(ui.draggable[0])
+            cloneElement(ui.draggable);
+            //exoParser.stringify(); 
         }
     }) 
 

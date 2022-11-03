@@ -16,11 +16,12 @@ class WidgetController {
             }
         });
 
-        
+    
     }
 
-    getID() {
-        return this.id++;
+    //Next step : find better function to generate new unique id
+    getNewID(element) {
+        return new Date().getUTCMilliseconds() + "" + Date.now() + parseInt(Math.random() * 1000);
     }
 
     setSelectedElement(element) {

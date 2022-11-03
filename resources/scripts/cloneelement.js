@@ -23,7 +23,7 @@ function loadChildrenElements(clone) {
 
 export function cloneElement(original, id) {
     
-    var clone = original.clone();
+    let clone = original.clone();
     let array = clone[0].classList;
 
 
@@ -41,7 +41,7 @@ export function cloneElement(original, id) {
 
     }
 
-    clone.attr("id", "div" + widget_c.getID())
+    clone.attr("id", widget_c.getNewID(clone[0]))
     clone.appendTo("#pageContainer");
 
    

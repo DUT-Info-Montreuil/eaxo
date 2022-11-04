@@ -1,1 +1,1 @@
-<p class="eaxoDraggable eaxoClonable">Texte</p>
+<p class="eaxoDraggable eaxoClonable eaxoText" data-eaxoElement = "text">Texte</p>

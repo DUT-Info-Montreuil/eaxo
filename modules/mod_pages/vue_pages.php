@@ -15,7 +15,7 @@ class VuePages extends VueGenerique
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingOne">
                     <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        Accordion Item #1
+                        Principe alphabétique
                     </button>
                 </h2>
                 <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
@@ -30,7 +30,7 @@ class VuePages extends VueGenerique
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingTwo">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        Accordion Item #2
+                        Conscience phonologique
                     </button>
                 </h2>
                 <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
@@ -42,7 +42,7 @@ class VuePages extends VueGenerique
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingThree">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        Accordion Item #3
+                        Décodage
                     </button>
                 </h2>
                 <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
@@ -51,6 +51,7 @@ class VuePages extends VueGenerique
                             <li><?php require_once SITE_ROOT . "/widgets/components/trueorfalse.php" ?></li>
                             <li><?php require_once SITE_ROOT . "/widgets/components/text.php" ?></li>
                             <li><?php require_once SITE_ROOT . "/widgets/components/templates/textinbox.php" ?></li>
+                            <li><p class="eaxoDraggable eaxoClonable eaxoText" data-eaxoElement = "lines">Lignes</p></li>
                     </div>
                 </div>
             </div>

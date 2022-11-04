@@ -124,3 +124,15 @@ body {
   top:100px;
   opacity: 0;
 }
+
+.exoID {
+  display: inline-block;
+  border-radius: 50%;
+  border: 1px solid;
+  width:calc(2em);
+  text-align: center;
+}
+
+h3 {
+  display: inline;
+}

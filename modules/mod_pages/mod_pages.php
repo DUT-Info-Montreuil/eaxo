@@ -6,7 +6,11 @@ class ModPages {
 
     public function __construct() {
         $this->cont = new ContPages();
-        $this->cont->exec();
+    }
+
+    public function getCont()
+    {
+        return $this->cont;
     }
 }
 ?>

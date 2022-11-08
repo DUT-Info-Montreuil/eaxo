@@ -1,6 +1,6 @@
 //import exo  from './surronded.js'
 //We can't get folder content, then we need to manually declare files which we want to load
-const allWidgets = ["surronded"];
+const allWidgets = ["surronded", "trueorfalse", "write"];
 const allElements = ["text", "lines"];
 
 class WidgetElementLoader {
@@ -13,7 +13,6 @@ class WidgetElementLoader {
             import("./elements/" + allElements[i] + ".js").then(module => {
                 this.registerElement(module.element)
 
-                //console.log(this)
             })
         }
 

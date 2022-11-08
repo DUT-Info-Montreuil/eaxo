@@ -1,9 +1,11 @@
-export function createText(cloned) {
-    cloned.addClass("eaxoText");
+export function createText(parent) {
+    let text = $("<p>");
+
+    text.addClass("eaxoText");
     
 
     let canChange = true
-    cloned.on("drag", function(event, ui) {
+    text.on("drag", function(event, ui) {
 
         if (event.shiftKey) {
             let target = event.target;
@@ -17,20 +19,23 @@ export function createText(cloned) {
 
             if(canChange && Math.abs(posX - posY) > 3) {
                 if(posX > posY) {
-                    cloned.draggable("option", "axis", "y");
+                    text.draggable("option", "axis", "y");
                 } else {
-                    cloned.draggable("option", "axis", "x");
+                    text.draggable("option", "axis", "x");
                 }
 
                 canChange = false
             }
         }
     })
+    
 
-    cloned.on("dragstop", function(event, ui) {
-        cloned.draggable("option", "axis", false);
+    text.on("dragstop", function(event, ui) {
+        text.draggable("option", "axis", false);
         canChange = true
     })
+
+    text.appendTo(parent);
 }
 
 const element = {"name" : "text", "func" : createText};

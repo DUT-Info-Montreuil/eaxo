@@ -1,5 +1,5 @@
 function createTrueOrFalse(parent) {
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < 5; i++) {
         let box = $("<div>");
         box.css({"word-break": "break-word", "display":"flex", "align-items":"center"})
 

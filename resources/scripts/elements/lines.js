@@ -37,48 +37,65 @@ function drawLines(canvas) {
     }
 }
 
-export function createLinesElement(clone) {
 
-    let parent = clone.parent();
-    let canvasDiv = $("<div>");
 
-    let addBtn = $("<button>");
-    addBtn.text("+");
-    addBtn.css({"position": "relative", "left":"95%"})
+export function createLinesElement(parent, isPreview) {
 
-    let removeBtn = $("<button>");
-    removeBtn.text("-");
-    removeBtn.css({"position": "relative", "left":"90%"})
+    let canvasDiv = $("<div>")
 
     let canvas = $("<canvas>");
     canvas.data({"lines": 1});
     canvas[0].width = parseInt(parent.css("width").substring(0, parent.css("width").indexOf("px")));
+
+    if(!isPreview) {
+    
+
+        let addBtn = $("<button>");
+        addBtn.text("+");
+        addBtn.css({"position": "relative", "left":"95%"})
+        addBtn.addClass("hideForPrint");
+
+        let removeBtn = $("<button>");
+        removeBtn.text("-");
+        removeBtn.css({"position": "relative", "left":"90%"})
+        removeBtn.addClass("hideForPrint");
+
+        addBtn.on("click", function() {
+            let nbLines = canvas.data("lines");
+            canvas.data({"lines": nbLines+ 1})
+            drawLines(canvas)
+        })
+    
+        removeBtn.on("click", function() {
+            let nbLines = canvas.data("lines");
+            canvas.data({"lines": nbLines- 1 > 0 ? nbLines- 1: 0})
+            drawLines(canvas)
+        })
+
+        addBtn.appendTo(canvasDiv)
+        removeBtn.appendTo(canvasDiv)
+
+        //clone.remove();
+
+        canvasDiv.draggable({
+            containment:parent
+        });
+    } else {
+        canvas[0].width = 200;
+    }
+
+    
     
 
     drawLines(canvas)
     
-    addBtn.on("click", function() {
-        let nbLines = canvas.data("lines");
-        canvas.data({"lines": nbLines+ 1})
-        drawLines(canvas)
-    })
-
-    removeBtn.on("click", function() {
-        let nbLines = canvas.data("lines");
-        canvas.data({"lines": nbLines- 1 > 0 ? nbLines- 1: 0})
-        drawLines(canvas)
-    })
-   
-    addBtn.appendTo(canvasDiv)
-    removeBtn.appendTo(canvasDiv)
+    
     canvas.appendTo(canvasDiv);
     canvasDiv.appendTo(parent)
 
-    clone.remove();
+    
 
-    canvasDiv.draggable({
-        containment:parent
-    });
+    
     
 }
 

@@ -6,6 +6,7 @@ function loadChildrenElements(clone) {
     //let attrs = clone[0].dataset.widget
     let widgetType = clone[0].dataset.widget
     let elementType = clone[0].dataset.eaxoelement;
+    let isPreview = clone.hasClass("elementPreview")
 
     if(widgetType) {
         if (widgetElementLoader.loadExercice(widgetType)) {
@@ -14,7 +15,7 @@ function loadChildrenElements(clone) {
     }
     else if (elementType) {
         if(widgetElementLoader.loadElement(elementType)) {
-            widgetElementLoader.loadElement(elementType)(clone)
+            widgetElementLoader.loadElement(elementType)(clone, isPreview)
         }
     }
     
@@ -28,6 +29,7 @@ export function cloneElement(original, id) {
 
     //Forbid clone
     clone.removeClass("eaxoClonable");
+    
     for(var i = 0; i < array.length; i++) {
         
         if(array[i] != "eaxoDraggable") {
@@ -42,8 +44,17 @@ export function cloneElement(original, id) {
         }
 
     }
+    clone.resizable({
+        containment:"#pageContainer"
+    });
 
-
+    clone.on("drag", function() {
+        clone.position({
+            collision:"fit"
+        })
+    
+    })
+    
     clone.attr("id", widget_c.getNewID(clone[0]))
     clone.appendTo("#pageContainer");
 

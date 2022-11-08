@@ -20,11 +20,13 @@ class VuePages extends VueGenerique
                 </h2>
                 <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
-                    <?php
-                        require_once(SITE_ROOT . "/widgets/components/box.php");
-                        require_once(SITE_ROOT . "/widgets/components/trueorfalse.php");
+                        <?php
+                            require_once(SITE_ROOT . "/widgets/components/box.php");
+                            require_once(SITE_ROOT . "/widgets/components/trueorfalse.php");
+                            require_once(SITE_ROOT . "/widgets/components/write.php");
+                        ?> 
 
-                        ?>                    </div>
+                    </div>
                 </div>
             </div>
             <div class="accordion-item">
@@ -47,11 +49,26 @@ class VuePages extends VueGenerique
                 </h2>
                 <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
+                           
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                        Composants
+                    </button>
+                </h2>
+                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <ul>
                             <li><?php require_once SITE_ROOT . "/widgets/components/box.php" ?></li>
                             <li><?php require_once SITE_ROOT . "/widgets/components/trueorfalse.php" ?></li>
                             <li><?php require_once SITE_ROOT . "/widgets/components/text.php" ?></li>
                             <li><?php require_once SITE_ROOT . "/widgets/components/templates/textinbox.php" ?></li>
-                            <li><p class="eaxoDraggable eaxoClonable eaxoText" data-eaxoElement = "lines">Lignes</p></li>
+                            <li><div class="elementPreview eaxoDraggable eaxoClonable ui-draggable ui-draggable-handle" data-eaxoElement="lines"></div></li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -77,15 +94,15 @@ class VuePages extends VueGenerique
 
             
                 <div class ="container mt-2">
-                <div class="row">
-                    <div class="widgets col-3 displaynone">
-                        <?php $this->widgetList(); ?>
-                    </div>
+                    <div class="row">
+                        <div class="widgets col-3 displaynone">
+                            <?php $this->widgetList(); ?>
+                        </div>
 
-                    <div class="apercu col-sm-9">
-                        <page id="pageContainer" size="A4"></page>
+                        <div class="apercu col-sm-9">
+                            <page id="pageContainer" size="A4"></page>
+                        </div>
                     </div>
-                </div>
 
                 
                 
@@ -95,7 +112,7 @@ class VuePages extends VueGenerique
         public function fontTools()
         {
             ?>
-            <div class="container-sm">
+            <div class="container-sm hideForPrint ">
 
                 <div class="row row-cols-auto">
                     <div class="col">

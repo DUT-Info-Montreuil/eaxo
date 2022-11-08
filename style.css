@@ -25,9 +25,15 @@
       padding-right: 0;
     }
 
+    .hideForPrint {
+      display: none;
+    }
+
+
 
     @page {
       size: auto;  margin: 0mm; 
+      position: absolute;
     }
 
     
@@ -135,4 +141,22 @@ body {
 
 h3 {
   display: inline;
+}
+
+.elementPreview {
+  width: 300px;
+  height: 30px;
+}
+
+
+/*
+Components style css
+*/
+
+.accordion-body ul {
+  list-style: none;
+}
+
+.eaxoResizable  {
+  border: 1px dashed black;
 }

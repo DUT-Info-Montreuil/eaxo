@@ -12,7 +12,7 @@ class ContHome {
     }
 
     public function homepage() {
-        $this->v->homepage();
+        $this->v->homepage($this->m->get_pages_name());
     }
     
     public function exec() {

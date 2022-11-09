@@ -4,6 +4,17 @@ import {getFontProperty} from './elements/fonts.js';
 import {cloneElement} from './cloneelement.js'
 
 
+const exo = {}
+exo.children = {}
+for(var i = 0; i < 10; i++) {
+    exo.children[i] = {
+        exoID : i,
+        exoName : "exo" + i,
+    }
+}
+
+console.log(exo);
+export default exo
 
 $( "select" ).on("click", function() {
     var str = "";

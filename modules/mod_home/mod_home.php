@@ -6,7 +6,6 @@ class ModHome {
 
     public function __construct() {
         $this->cont = new ContHome();
-        //$this->cont->exec();
     }
 
     public function getCont()

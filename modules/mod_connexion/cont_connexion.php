@@ -34,13 +34,19 @@ class ContConnexion {
 
     public function connexion() {
         if ($this->m->verif_connexion()) {
-            $this->action = "connected";
-            $this->exec();
+            header('Location: ./index.php');
         }
         else {
             $this->action = "form_connexion";
             $this->exec();
         }
+    }
+
+    public function deconnexion() {
+        session_destroy();
+        unset($_SESSION['newsession']);
+        $this->action = "form_connexion";
+        $this->exec();
     }
 
     public function connected() {
@@ -61,8 +67,7 @@ class ContConnexion {
                 $this->connexion();
                 break;
             case "deconnexion":
-                session_destroy();
-                unset($_SESSION['newsession']);
+                $this->deconnexion();
                 break;
         }
     }

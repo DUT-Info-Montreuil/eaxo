@@ -1,22 +1,26 @@
 <?php
-class Controleur {
+
+class Controleur
+{
     private $module;
     private $m;
     private $mod;
     public $result;
 
-    public function __construct() {
-        require_once ("modele.php");
+    public function __construct()
+    {
+        require_once("modele.php");
         $this->m = new Modele();
         $this->module = isset($_GET['module']) ? $_GET['module'] : "mod_connexion";
         $this->exec();
     }
 
-    public function exec() {
-        if(!isset($_SESSION["newsession"])) {
+    public function exec()
+    {
+        if (!isset($_SESSION["newsession"])) {
             $this->module = "mod_connexion";
         }
-        switch($this->module) {
+        switch ($this->module) {
             case "mod_connexion":
                 require_once "./modules/mod_connexion/mod_connexion.php";
                 $this->mod = new ModConnexion();
@@ -26,7 +30,7 @@ class Controleur {
                 unset($_SESSION["newsession"]);
                 echo "Deconnecté";
                 break;
-            case "mod_pages":
+            case "mod_images":
                 require_once "./modules/mod_pages/mod_pages.php";
                 $this->mod = new ModPages();
                 break;
@@ -35,4 +39,5 @@ class Controleur {
         $this->result = $this->mod->getCont()->v->getAffichage();
     }
 }
+
 ?>

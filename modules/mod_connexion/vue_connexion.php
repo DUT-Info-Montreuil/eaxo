@@ -17,7 +17,7 @@ class VueConnexion extends VueGenerique
                     <?php
                     if (!isset($_SESSION['newsession'])) {
                         ?>
-                        <img class="mt-5 mb-4" src="sources/Images/logo.jpg" alt="" width="100" height="100">
+                        <img class="mt-5 mb-4" src="resources/images/logo.jpg" alt="" width="100" height="100">
                         <h1 class="h3 mb-3 fw-normal">Connexion</h1>
 
                         <div class="form-floating">
@@ -59,7 +59,7 @@ class VueConnexion extends VueGenerique
             <div class="container">
                 <main>
                     <div class="pt-5 text-center">
-                        <img class="d-block mx-auto mb-0" src="sources/Images/logo.jpg" alt="" width="100"
+                        <img class="d-block mx-auto mb-0" src="resources/images/logo.jpg" alt="" width="100"
                              height="100">
                     </div>
 

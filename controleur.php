@@ -30,6 +30,10 @@ class Controleur {
                 require_once "./modules/mod_pages/mod_pages.php";
                 $this->mod = new ModPages();
                 break;
+            case "mod_home":
+                require_once "./modules/mod_home/mod_home.php";
+                $this->mod = new ModHome();
+                break;
 
         }
         $this->result = $this->mod->getCont()->v->getAffichage();

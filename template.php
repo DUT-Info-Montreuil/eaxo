@@ -11,7 +11,7 @@
         <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
         
         <link rel="icon" type="image/png" href="sources/Images/logo.jpg" />
-        <base href="/eaxo/"> 
+        <base href="/~gfaure/eaxo/"> 
     </head>
 
 

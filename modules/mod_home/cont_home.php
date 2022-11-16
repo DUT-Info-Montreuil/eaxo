@@ -8,11 +8,12 @@ class ContHome {
         $this->m = new ModeleHome();
         $this->v = new VueHome();
         $this->action = isset($_GET['action']) ? $_GET['action'] : "homepage";
+        $this->page = isset($_GET['page']) ? $_GET['page'] : '1';
         $this->exec();
     }
 
     public function homepage() {
-        $this->v->homepage($this->m->get_pages_name());
+        $this->v->homepage($this->m->get_pages_name(intval($this->page)), $this->m->get_number_of_pages(), intval($this->page));
     }
     
     public function exec() {

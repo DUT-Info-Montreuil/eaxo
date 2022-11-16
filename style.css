@@ -105,6 +105,32 @@ body {
   
 }
 
+.pagination {
+  display: inline-block;
+  align-items: center;
+}
+
+.paginationbis {
+  text-align: center;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 1px solid #ddd;
+}
+
+.pagination a.active {
+  background-color: #ffc107;
+  color: white;
+  border: 1px solid #ffc107;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+
 /*Temporary*/
 .bd-placeholder-img {
   background-color: gray;

@@ -7,7 +7,7 @@ class VueHome extends VueGenerique
         parent::__construct();
     }
 
-    public function homepage($names)
+    public function homepage($names, $nb_pages, $current_page)
     {
 ?>
 
@@ -19,6 +19,9 @@ class VueHome extends VueGenerique
                     ?>
                 </div>
             </div>
+            <?php
+                $this->generate_pages_a($nb_pages, $current_page);
+            ?>
         </body>
 
         </html>
@@ -28,14 +31,14 @@ class VueHome extends VueGenerique
 
     public function generate_divs($names)
     {
+
+        $ligne = 1;
         $colonne = 0;
         $names = array('page1', 'page2', 'page3', 'page4', 'page5');
+        if (isset($names) && count($names) > 0) {
+            echo '<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mt-3">';
+        }
         foreach ($names as $name) {
-            if ($colonne % 3 == 0) {
-        ?>
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mt-3">
-                <?php
-            }
                 ?>
                 <div class="col">
                     <div class="card shadow-sm">
@@ -51,13 +54,28 @@ class VueHome extends VueGenerique
                     </div>
                 </div>
                 <?php
-                if ($colonne % 3 == 2) {
-                ?>
-                </div>
-<?php
-                }
                 $colonne++;
-            }
         }
+        if (isset($names) && count($names) > 0) {
+            echo '</div>';
+        }
+        }
+
+        public function generate_pages_a($number_of_pages, $current_page) {
+            $number_of_pages = 5 ;
+            echo '<div class="paginationbis">';
+            echo '<div class="pagination">';
+            echo '<a href="#">&laquo;</a>';
+            for ($i = 1; $i <= $number_of_pages; $i++) {
+                if ($i == $current_page) 
+                    echo "<a href=\"./index.php?module=mod_home&action=homepage&page=$i\" class=\"active\">$i</a>";
+                else
+                    echo "<a href=\"./index.php?module=mod_home&action=homepage&page=$i\">$i</a>";
+            }
+            echo '<a href="#">&raquo;</a>';
+            echo '</div>';
+            echo '</div>';
+        }
+        
     }
 ?>

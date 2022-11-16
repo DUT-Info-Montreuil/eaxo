@@ -12,10 +12,12 @@
             ?>
             <div id="Div_Connection" class="text-center pt-5">
             <main class="form-signin w-100 mt-5 m-auto">
-                <form action="./index.php?module=mod_connexion&action=connexion" method="POST">
-                    <?php
+                <form action="./index.php?module=mod_connexion&action=connexion" method="POST"> 
+                  <?php
                     if (!isset($_SESSION['newsession'])) {
                     ?>
+                                    <input type="hidden" name="token" value='<?php echo $_SESSION['token']?>'> <!--TOKEN -->
+
                     <img class="mt-5 mb-4" src="sources/Images/logo.jpg" alt="" width="100" height="100">
                     <h1 class="h3 mb-3 fw-normal">Connexion</h1>
 

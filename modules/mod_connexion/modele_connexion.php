@@ -1,6 +1,7 @@
 <?php
 
 require_once "./connexion.php";
+require_once "./guardian.php";
 class ModeleConnexion extends Connexion{
     public function __construct()
     {
@@ -9,6 +10,9 @@ class ModeleConnexion extends Connexion{
 
     //Inserts the data (emailAdress, username and password) in the database, returns True if it worked, False otherwise
     public function form_ajout() {
+        if (!token_verification()) {
+            return 1;
+        }
         $sth = self::$bdd->prepare('INSERT INTO accounts values(NULL, :username, :password, :email)');
         if (!$this->verif_username($_POST['username'])) {
             if (!$this->verif_email($_POST['emailAdress'])) {
@@ -21,6 +25,9 @@ class ModeleConnexion extends Connexion{
 
     //Checks if the couple (username or email adress/password) exists in the database, returns True if it does, False otherwise
     public function verif_connexion() {
+        if (!token_verification()) {
+            return 1;
+        }
         if (isset($_SESSION)) {
             $sql = 'SELECT * FROM users WHERE (username=:login) OR (email=:login)';
             $sth = self::$bdd->prepare($sql);

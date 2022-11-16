@@ -2,6 +2,7 @@
 require_once __DIR__ . "/modele_connexion.php";
 require_once __DIR__ . "/vue_connexion.php";
 require_once __DIR__ . "/vue_creation_compte.php";
+require_once "./guardian.php";
 
 class ContConnexion {
     public function __construct()
@@ -14,10 +15,12 @@ class ContConnexion {
     }
 
     public function form_connexion() {
+        create_token();
         $this->v->formConnexion();
     }
 
     public function form_inscription() {
+        create_token();
         $this->vI->formInscription();
     }
 

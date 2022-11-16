@@ -81,9 +81,28 @@ body {
     border-style: none;
 }
 
-#motDePassentCorrespondentPas{
+#forceMotPasseMinimal{
+    border-style: dashed;
+    width: 350px;
+    height: 110px;
+    border: 2px;
+    border-radius: 30px;
+    border-color: black;
+    display: inline-block;
     color: red;
-    display: none
+    margin-top: 90px;
+    padding-right: 0px;
+    padding-left: 0px;
+    display: none;
+
+}
+#specMotPasse{
+    color: black;
+}
+
+.inscriptionErreur{
+    color: red;
+    display: none;
 }
 
 .form-signin {

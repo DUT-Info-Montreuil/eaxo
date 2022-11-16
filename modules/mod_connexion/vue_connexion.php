@@ -67,6 +67,16 @@ class VueConnexion extends VueGenerique
                         <div class="text-center pt-5">
                             <h4 class="mb-1">Inscription</h4>
                         </div>
+
+                        <div id="forceMotPasseMinimal" class="pt-0 pb-0 ml-0 mr-0 mb-0">
+                            <p id="specMotPasse" class="pt-0 mt-0 mb-0">Le mot de passe doit contenir :</p>
+                            <p id="MinusculeMDP" class="pt-0 mt-0 mb-0">⋰ Au moin une minuscule</p>
+                            <p id="MajusculeMDP" class="pt-0 mt-0 mb-0">⋰ Au moin une majuscule</p>
+                            <p id="chifreMDP" class="pt-0 mt-0 mb-0">⋰ Au moin un chiffre</p>
+                            <p id="characteresMDP" class="pt-0 mt-0 mb-0">⋰ Au moin huit charactères</p>
+                            <p id="CharactereMDP" class="pt-0 mt-0 mb-0">⋰ Un de ces charactère special: $ @ % * + - _ !</p>
+                        </div>
+
                         <script src="resources/scripts/modules/mod_connection/inscription.js"></script>
                         <form class="needs-validation" novalidate>
 
@@ -86,7 +96,7 @@ class VueConnexion extends VueGenerique
                                     <div class="invalid-feedback">Validation du mot de passe obligatoire</div>
                                 </div>
 
-                                <p id="motDePassentCorrespondentPas" class="pt-0 mt-0 mb-0">*Les mots de passes ne correspondent pas</p>
+                                <p id="motDePassentCorrespondentPas" class="pt-0 mt-0 mb-0, inscriptionErreur">*Les mots de passes ne correspondent pas</p>
 
                                 <div class="col-12 mt-1">
                                     <label for="username" class="form-label">Nom d'utilisateur</label>
@@ -98,12 +108,18 @@ class VueConnexion extends VueGenerique
                                     </div>
                                 </div>
 
+                                <p id="UsernameIncorect" class="pt-0 mt-0 mb-0, inscriptionErreur">*Nom d'utilisateur incorrect</p>
+                                <p id="UsernamePris" class="pt-0 mt-0 mb-0, inscriptionErreur">*Nom d'utilisateur déja pris</p>
+
                                 <div class="col-12">
                                     <label for="email" class="form-label">Email <span class="text-muted"></span></label>
                                     <input type="email" class="form-control" id="email"
                                            placeholder="utilisateur@example.com" name="emailAdress">
                                     <div class="invalid-feedback">adresse e-mail invalide</div>
                                 </div>
+
+                                <p id="eMailIncorect" class="pt-0 mt-0 mb-0, inscriptionErreur">*L'adresse e-mail utiliser n'existe pas</p>
+                                <p id="eMailUtiliser" class="pt-0 mt-0 mb-0, inscriptionErreur">*Cette adresse e-mail est déja utiliser</p>
 
                                 <button id="bouton_send_incription" class="w-100 btn btn-primary btn-lg" type="submit">
                                     Inscription

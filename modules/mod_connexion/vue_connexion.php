@@ -85,7 +85,7 @@ class VueConnexion extends VueGenerique
                                 <div class="col-sm-6">
                                     <label for="motDePasse1" class="form-label">Mot de passe</label>
                                     <input type="text" class="form-control" id="motDePasse1" placeholder="1234" value=""
-                                           name="passwd" required minlength="8" maxlength="20">
+                                           name="passwd" required maxlength="64">
                                     <div class="invalid-feedback">Mot de passe obligatoire</div>
                                 </div>
 

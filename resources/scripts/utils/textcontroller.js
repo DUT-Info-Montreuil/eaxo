@@ -5,6 +5,7 @@
 import widget_c from "../widgets_controller.js";
 
 export function enableEdit(widgetController, node) {
+    $("#fontSizeInput").val($(node).css("font-size"));
     widgetController.setSelectedElement(node);
     var oldTxt = node.textContent;
     

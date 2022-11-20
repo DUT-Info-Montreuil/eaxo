@@ -15,10 +15,21 @@ class ModeleConnexion extends Connexion
         $sth = self::$bdd->prepare('INSERT INTO users (email, username, passwd) values(:email, :username, :password)');
         if (!$this->verif_username($_POST['username'])) {
             if (!$this->verif_email($_POST['emailAdress'])) {
-                $sth->execute(array(':username' => $_POST['username'], ':password' => password_hash($_POST['passwd'], PASSWORD_DEFAULT), ':email' => $_POST['emailAdress']));
-                return true;
+                if($this->verifierMotDePasseFormAjout($_POST['passwd']) === TRUE){
+                    $sth->execute(array(':username' => $_POST['username'], ':password' => password_hash($_POST['passwd'], PASSWORD_DEFAULT), ':email' => $_POST['emailAdress']));
+                    return true;
+                }else{
+                    return false;
+                }
             }
         }
+        return false;
+    }
+
+    //Vérification du mot de passe
+    public function verifierMotDePasseFormAjout($var){
+        if (strlen($var) >=8 && strtoupper($var) != $var && preg_replace('/[^0-9]/', '', $var) != '')
+            return true;
         return false;
     }
 

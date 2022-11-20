@@ -4,8 +4,7 @@ $('DOMContentLoaded', function() {
     var colorBoutonInscription = $("#bouton_send_incription").css("background-color");
     var marginInscriptionDiv = $("#formulaire-saisie-inscription").css("margin-left");
 
-    $("#motDePasse1").focusout(function (){
-        verrifierMotDePasseEgalSaisie1();});
+
     $("#motDePasse1").change(function (){
         verifierForceMotPasse();
     });
@@ -13,6 +12,7 @@ $('DOMContentLoaded', function() {
         verifierForceMotPasse();
     });
     $("#motDePasse1").focusin(function (){
+        verifierForceMotPasse();
         $("#forceMotPasseMinimal").css("display", "block");
         $("#formulaire-saisie-inscription").css("margin-left", "50px");
     });
@@ -20,6 +20,7 @@ $('DOMContentLoaded', function() {
         if(verifierForceMotPasse()) {
             $("#forceMotPasseMinimal").css("display", "none");
             $("#formulaire-saisie-inscription").css("margin-left", marginInscriptionDiv);
+            verrifierMotDePasseEgalSaisie1();
         }
     });
 
@@ -53,9 +54,9 @@ $('DOMContentLoaded', function() {
     }
 
     function desactiverBoutonInscription() {
-        $("#bouton_send_incription").disabled;
+        //$("#bouton_send_incription").disabled;
         //$("#bouton_send_incription").css("background-color", "grey");
-        $("#bouton_send_incription").css("opacity", "0.5");
+        //$("#bouton_send_incription").css("opacity", "0.5");
     }
 
     function verifierForceMotPasse(){

@@ -15,22 +15,24 @@ class VuePages extends VueGenerique
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingOne">
                     <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        Accordion Item #1
+                        Principe alphabétique
                     </button>
                 </h2>
                 <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
-                    <?php
-                        require_once(SITE_ROOT . "/widgets/components/box.php");
-                        require_once(SITE_ROOT . "/widgets/components/trueorfalse.php");
+                        <?php
+                            require_once(SITE_ROOT . "/widgets/components/box.php");
+                            require_once(SITE_ROOT . "/widgets/components/trueorfalse.php");
+                            require_once(SITE_ROOT . "/widgets/components/write.php");
+                        ?> 
 
-                        ?>                    </div>
+                    </div>
                 </div>
             </div>
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingTwo">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        Accordion Item #2
+                        Conscience phonologique
                     </button>
                 </h2>
                 <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
@@ -42,15 +44,30 @@ class VuePages extends VueGenerique
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingThree">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        Accordion Item #3
+                        Décodage
                     </button>
                 </h2>
                 <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
-                            <li><?php require_once SITE_ROOT . "/widgets/components/box.php" ?></li>
-                            <li><?php require_once SITE_ROOT . "/widgets/components/trueorfalse.php" ?></li>
-                            <li><?php require_once SITE_ROOT . "/widgets/components/text.php" ?></li>
-                            <li><?php require_once SITE_ROOT . "/widgets/components/templates/textinbox.php" ?></li>
+                           
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                        Composants
+                    </button>
+                </h2>
+                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <ul>
+
+                            <li><div class="elementPreview eaxoDraggable eaxoClonable ui-draggable ui-draggable-handle" data-eaxoElement="text"></div></li>
+                            <!--<li><?php require_once SITE_ROOT . "/widgets/components/templates/textinbox.php" ?></li><-->
+                            <li><div class="elementPreview eaxoDraggable eaxoClonable ui-draggable ui-draggable-handle" data-eaxoElement="lines"></div></li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -76,25 +93,27 @@ class VuePages extends VueGenerique
 
             
                 <div class ="container mt-2">
-                <div class="row">
-                    <div class="widgets col-3 displaynone">
-                        <?php $this->widgetList(); ?>
+                    <div class="row">
+                        <div class="widgets col-3 displaynone">
+                            <?php $this->widgetList(); ?>
+                        </div>
+
+                        <div class="apercu col-sm-9">
+                            <page id="pageContainer" size="A4"></page>
+                        </div>
                     </div>
 
-                    <div class="apercu col-sm-9">
-                        <page id="pageContainer" size="A4"></page>
-                    </div>
-                </div>
+                
+                <script src="./resources/scripts/widgets.js" type="module"></script>
+                <script src="./resources/scripts/fonts_controller.js"  type="module"></script>
 
-                
-                
             <?php
         }
 
         public function fontTools()
         {
             ?>
-            <div class="container-sm">
+            <div class="container-sm hideForPrint ">
 
                 <div class="row row-cols-auto">
                     <div class="col">

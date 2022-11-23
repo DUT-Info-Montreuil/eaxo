@@ -1,4 +1,5 @@
-export function createTrueOrFalse(parent, index) {
+
+function createSurrounded(parent) {
     let box = $("<div>");
     box.css({"word-break": "break-word", "display":"flex", "align-items":"center"})
 
@@ -17,3 +18,7 @@ export function createTrueOrFalse(parent, index) {
     box.appendTo(parent)
 
 }
+
+const exo = {"name" : "box", "func" : createSurrounded};
+export {exo};
+//exerciceList.registerExercice("box", createSurrounded);

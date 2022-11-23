@@ -29,53 +29,10 @@ export function createTextBox(parent, place, text) {
     //We need to resize parent div
     parent.maxHeight = elementHeight > parent.maxHeight ? elementHeight : parent.maxHeight 
 
-    $(parent).css({"height" : parent.maxHeight});
-    box.draggable({
-        //snap:parent
-    });
-
-    let canChange = true;
-
-    box.on("drag", function(event, ui) {
-
-        
-        let target = event.target;
-        let parent = target.parentNode;
-
-        let align;
-
-        let oldLeft = ui.originalPosition.left;
-        let oldTop = ui.originalPosition.top;
-
-        //console.log(ui)
-
-
-        /*for(var i = 0; i < parent.childNodes.length; i++) {
-            let child = $(parent.childNodes[i]);
-            
-            
-        }*/
-        let posX = Math.abs(oldTop - ui.position.top)
-        let posY = Math.abs(oldLeft - ui.position.left)
-
-        console.log(`x : ${posX} y : ${posY}`)
-        if(canChange && Math.abs(posX - posY) > 3) {
-            if(posX > posY) {
-                box.draggable("option", "axis", "y");
-            } else {
-                box.draggable("option", "axis", "x");
-            }
-
-            canChange = false
-        }
-    })
-
-    box.on("dragstop", function(event, ui) {
-        box.draggable("option", "axis", false);
-        console.log("daccord")
-        canChange = true
-    })
-
+    $(parent).css({"height" : parent.maxHeight}); 
     
-    
+      
 } 
+
+/*const element = {"name" : "text", "func" : createText};
+export {element};*/

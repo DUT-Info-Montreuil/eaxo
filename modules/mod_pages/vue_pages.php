@@ -63,10 +63,9 @@ class VuePages extends VueGenerique
                 <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
                         <ul>
-                            <li><?php require_once SITE_ROOT . "/widgets/components/box.php" ?></li>
-                            <li><?php require_once SITE_ROOT . "/widgets/components/trueorfalse.php" ?></li>
-                            <li><?php require_once SITE_ROOT . "/widgets/components/text.php" ?></li>
-                            <li><?php require_once SITE_ROOT . "/widgets/components/templates/textinbox.php" ?></li>
+
+                            <li><div class="elementPreview eaxoDraggable eaxoClonable ui-draggable ui-draggable-handle" data-eaxoElement="text"></div></li>
+                            <!--<li><?php require_once SITE_ROOT . "/widgets/components/templates/textinbox.php" ?></li><-->
                             <li><div class="elementPreview eaxoDraggable eaxoClonable ui-draggable ui-draggable-handle" data-eaxoElement="lines"></div></li>
                         </ul>
                     </div>
@@ -105,7 +104,9 @@ class VuePages extends VueGenerique
                     </div>
 
                 
-                
+                <script src="./resources/scripts/widgets.js" type="module"></script>
+                <script src="./resources/scripts/fonts_controller.js"  type="module"></script>
+
             <?php
         }
 

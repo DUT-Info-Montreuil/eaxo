@@ -45,7 +45,13 @@ export function createLinesElement(parent, isPreview) {
 
     let canvas = $("<canvas>");
     canvas.data({"lines": 1});
-    canvas[0].width = parseInt(parent.css("width").substring(0, parent.css("width").indexOf("px")));
+
+    if(parent.css) {
+        canvas[0].width = parseInt(parent.css("width").substring(0, parent.css("width").indexOf("px")));
+    } else {
+        canvas[0].width = 0
+    }
+    
 
     if(!isPreview) {
     

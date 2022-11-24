@@ -30,8 +30,10 @@ CREATE TABLE IF NOT EXISTS users(
 
 CREATE TABLE IF NOT EXISTS exercices(
     id serial,
+    exoNumber int(10), 
     userID bigint(20) UNSIGNED,
     name varchar(100),
+    PRIMARY KEY (id, userID),
     FOREIGN KEY (userID)
         REFERENCES users(id)
         ON DELETE CASCADE
@@ -57,8 +59,8 @@ CREATE TABLE IF NOT EXISTS exercice_elements(
     class varchar(255),
     content text,
     css text,
-    PRIMARY KEY(id),
-    /*FOREIGN KEY (parentId)
+    PRIMARY KEY(id)/*,
+    FOREIGN KEY (parentId)
         REFERENCES widgets(id)
         ON DELETE CASCADE*/
 );

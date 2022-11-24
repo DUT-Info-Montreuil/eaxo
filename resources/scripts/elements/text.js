@@ -1,6 +1,12 @@
-export function createText(parent) {
-    let text = $("<p>");
+export function createText(parent, isPreview) {
+    console.log("fdffsd")
+    let text = $("<textarea>");
+    text.addClass("eaxoInput")
 
+    if(isPreview) {
+        //text.attr("readonly", "readonly")
+    }
+    text.text("Value")
     text.addClass("eaxoText");
     
 
@@ -28,6 +34,8 @@ export function createText(parent) {
             }
         }
     })
+
+    text.draggable();
     
 
     text.on("dragstop", function(event, ui) {

@@ -29,7 +29,7 @@ export function createTextBox(parent, place, text) {
     //We need to resize parent div
     parent.maxHeight = elementHeight > parent.maxHeight ? elementHeight : parent.maxHeight 
 
-    $(parent).css({"height" : parent.maxHeight});
+    $(parent).css({"height" : parent.maxHeight}); 
     
       
 } 

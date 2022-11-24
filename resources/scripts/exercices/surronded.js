@@ -1,6 +1,6 @@
 
 function createSurrounded(parent) {
-    /*let box = $("<div>");
+    let box = $("<div>");
     box.css({"word-break": "break-word", "display":"flex", "align-items":"center"})
 
     let txt = $("<p>");
@@ -19,6 +19,6 @@ function createSurrounded(parent) {
 
 }
 
-const exo = {"name" : "surronded", "func" : createSurrounded};
+const exo = {"name" : "box", "func" : createSurrounded};
 export {exo};
 //exerciceList.registerExercice("box", createSurrounded);

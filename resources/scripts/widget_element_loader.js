@@ -2,6 +2,7 @@
 //We can't get folder content, then we need to manually declare files which we want to load
 const allWidgets = ["surronded", "trueorfalse", "write"];
 const allElements = ["text", "lines"];
+import previewLoader from './loadPreview.js'
 
 class WidgetElementLoader {
     constructor() {
@@ -12,6 +13,7 @@ class WidgetElementLoader {
         for(var i = 0; i < allElements.length; i++) {
             import("./elements/" + allElements[i] + ".js").then(module => {
                 this.registerElement(module.element)
+                previewLoader.register(module.element.name, module.element.func);
 
             })
         }
@@ -25,6 +27,9 @@ class WidgetElementLoader {
                 
             })
         }
+
+
+        previewLoader.loadPreviews();
     }
 
     loadExercice(name) {

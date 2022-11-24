@@ -38,7 +38,7 @@ class ExoParser {
 
     stringifySub(element, parent, array) {
         if(element.nodeName == "H3") {
-            console.log(element);
+            //console.log(element);
         }
         let jQueryElement = $(element);
         let arrayObj;
@@ -82,7 +82,9 @@ class ExoParser {
         //for(var i = 0; i < this.page.children().length; i++) {
 
         if(this.page.children().length > 0) {
-            this.stringifySub(this.page.children()[0], this.page, this.exoArray.children)
+            for(var i = 0; i < this.page.children().length; i++) {
+                this.stringifySub(this.page.children()[i], this.page, this.exoArray.children)
+            }
         }
 
         let json = JSON.stringify(this.exoArray);
@@ -90,7 +92,6 @@ class ExoParser {
         if(callback) {
             callback(json)
         }
-
 
     }
 
@@ -132,8 +133,8 @@ class ExoParser {
             let data = {
                 exoJson : json
             }
-            $.post("./index.php?module=mod_pages&action=save", data, function(result) {
-                console.log(JSON.parse(json))
+            //console.log(json)
+            $.post("./api/exercice/save.php", data, function(result) {
                 console.log(result);
                 setTimeout(function() {
                     $("#spinnerLoading").css({"opacity":0} );
@@ -148,10 +149,13 @@ class ExoParser {
         if(jsonExo) {
             let parsedElement = JSON.parse(jsonExo)
             for(var key in parsedElement.children) {
+                console.log(key)
                 this.loadChild(parsedElement.children[key], "#pageContainer")
             }
         }
     }
+
+    
 }
 
 const exoParser = new ExoParser();

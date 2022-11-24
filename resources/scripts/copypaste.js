@@ -1,11 +1,10 @@
+
+import exoParser from './exoParser.js'
 let ctrlPressed = false
 let copyPressed = false
 let pastePressed = false
-let copiedElement = null
 
-import widget_c from './widgets_controller.js'
-import {cloneElement} from './cloneelement.js'
-import exoParser from './exoParser.js'
+
 
 $("body").keydown(function(event) {
     

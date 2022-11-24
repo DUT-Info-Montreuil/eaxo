@@ -15,11 +15,12 @@
             }
         }
 
-        public function loadChildren($element, $parent, $callback, $continue) {
+        public function loadChildren($exoID, $element, $parent, $callback, $continue) {
             if($continue) {
                 if(!is_int($element)) {
+                    var_dump($element->nodeID);
                     $parentID = isset($parent) ? $parent->nodeID : null;
-                    
+                    var_dump($exoID);
                     if($parent != null) {
                         
                     }
@@ -41,15 +42,15 @@
                     $sth = self::$bdd->prepare('INSERT INTO exercice_elements (exerciceId, parentId, htmlID, wType, class, content, css)'
                     . 'values(:exoID, :parentID, :htmlID, :nodeName, :jsonClass, :jsonContent, :jsonCss)');
 
-                    $sth->execute(array(":exoID" => 1, ":parentID" => $parentID, ":htmlID" => $nodeID, ":nodeName" => $nodeName, ":jsonClass" => $jsonClass,
+                    $sth->execute(array(":exoID" => $exoID, ":parentID" => $parentID, ":htmlID" => $nodeID, ":nodeName" => $nodeName, ":jsonClass" => $jsonClass,
                     ":jsonContent" => $jsonContent, ":jsonCss" => $jsonCss));
                     
-                    var_dump($sth);
+                    var_dump("ok");
                 }   
                 //var_dump($sth);
                 if(isset($element->children)) {
                     foreach($element->children as $child) {
-                        $this->loadChildren($child, $element, $callback, $continue);
+                        $this->loadChildren($exoID, $child, $element, $callback, $continue);
                         
                     }
                 }
@@ -59,19 +60,51 @@
             }
         }
 
+        public function getExercice($exoId, $userID) {
+            $params = array(":userID" => $userID, ":exoID" => $exoId);
+
+            $sql = "SELECT e.exoNumber as exoID, e.userID FROM exercices as e WHERE e.exoNumber = :exoID AND e.userID = :userID";
+            $sth = self::$bdd->prepare($sql);
+            $sth->execute($params);
+            $result = $sth->fetch();
+
+            if(!$result) {
+                $insertSQL = "INSERT INTO exercices (userID, exoNumber) VALUES (:userID, :exoID)";
+                $sth = self::$bdd->prepare($insertSQL);
+                $sth->execute($params);
+                return array("userID" => $userID, "exoID" => $exoId);
+            } else {
+                $dropSQL = "DELETE FROM exercice_elements WHERE exerciceId IN (SELECT id as exerciceId FROM exercices as ex WHERE ex.userID = :userID AND ex.exoNumber = :exoID)";
+                $sth = self::$bdd->prepare($dropSQL);
+                $sth->execute($params);
+                
+                return $result;
+            }
+        }
+
+        /*public function createNewExercice($exoId) {
+
+        }*/
+
+
         public function save() {
 
             if(isset($_SESSION["newsession"])) {
                 $this->userID = $_SESSION["newsession"];
+                $exerciceID = $_SESSION["exoID"];
 
                 $value = json_decode($_POST["exoJson"]);
-                //var_dump($value);
+
+                //Check if we need to insert new exercice into database
+                $dataExo = $this->getExercice($exerciceID, $this->userID);
+                
+                //var_dump($dataExo);
                 try {
                     
                     self::$bdd->beginTransaction();
 
                     foreach($value->children as $key) {
-                        $this->loadChildren($key, null, function($result) {
+                        $this->loadChildren($dataExo["exoID"], $key, null, function($result) {
                             if(!$result) {
                                 self::$bdd->rollback();
                                 return $this->isOk(false);

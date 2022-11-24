@@ -36,5 +36,9 @@ class Controleur {
 
         $this->result = $this->mod->getCont()->v->getAffichage();
     }
+
+    public function showTemplate() {
+        return $this->module != "mod_saveexo";
+    }
 }
 ?>

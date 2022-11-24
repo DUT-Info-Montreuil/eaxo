@@ -1,4 +1,6 @@
 function createTrueOrFalse(parent) {
+    $(parent).collision(".eaxoResizable");
+    
     for (var i = 0; i < 5; i++) {
         let box = $("<div>");
         box.css({"word-break": "break-word", "display":"flex", "align-items":"center"})

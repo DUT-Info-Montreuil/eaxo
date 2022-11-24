@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS widgets(
 CREATE TABLE IF NOT EXISTS exercice_elements(
     id serial,
     exerciceId bigint(20) UNSIGNED,
-    parentId bigint(20) UNSIGNED,
+    parentId varchar(255),
     htmlID varchar(255) UNIQUE,
     wType varchar(100),
     class varchar(255),

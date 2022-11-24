@@ -24,16 +24,15 @@ class ExerciceLoader {
     }
 
     createExercice(object) {
+        let parentID = 0
         for(var arr in object) {
             let elementData = object[arr];
-            let element = this.findOrCreatElement(elementData.htmlID);
-            
-
             let jElement = $("<" + elementData.wType + ">");
             jElement.attr('id', elementData.htmlID);
         
             let objectCSS = JSON.parse(elementData.css);
 
+            //console.log(jElement)
             //Load css
             for(let ind in objectCSS) {
                 if(CSS.supports(ind, objectCSS[ind])) {
@@ -57,11 +56,13 @@ class ExerciceLoader {
             if(elementData.parentId == null) {
                 jElement.appendTo($("#pageContainer"));
             } else {
-                //console.log(elementData.parentId)
+                
                 jElement.appendTo($("#" + elementData.parentId));
             }
             
         }
+
+        console.log($("#" + parentID))
     }
 
 }

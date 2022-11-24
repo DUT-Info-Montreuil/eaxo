@@ -45,7 +45,6 @@
                     $sth->execute(array(":exoID" => $exoID, ":parentID" => $parentID, ":htmlID" => $nodeID, ":nodeName" => $nodeName, ":jsonClass" => $jsonClass,
                     ":jsonContent" => $jsonContent, ":jsonCss" => $jsonCss));
                     
-                    var_dump("ok");
                 }   
                 //var_dump($sth);
                 if(isset($element->children)) {
@@ -72,7 +71,11 @@
                 $insertSQL = "INSERT INTO exercices (userID, exoNumber) VALUES (:userID, :exoID)";
                 $sth = self::$bdd->prepare($insertSQL);
                 $sth->execute($params);
-                return array("userID" => $userID, "exoID" => $exoId);
+
+                //Get exoID
+                $sth2 = self::$bdd->prepare("SELECT id as exerciceId FROM exercices as ex WHERE ex.userID = :userID AND ex.exoNumber = :exoID");
+                $sth2->execute($params);
+                return array("userID" => $userID, "exoID" => $sth2->fetch()["exerciceId"]);
             } else {
                 $dropSQL = "DELETE FROM exercice_elements WHERE exerciceId IN (SELECT id as exerciceId FROM exercices as ex WHERE ex.userID = :userID AND ex.exoNumber = :exoID)";
                 $sth = self::$bdd->prepare($dropSQL);

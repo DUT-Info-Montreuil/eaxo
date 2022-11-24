@@ -7,9 +7,9 @@ class Controleur
     private $mod;
     public $result;
 
-    public function __construct()
-    {
-        require_once("modele.php");
+    public function __construct() {
+        require_once ("modele.php");
+
         $this->m = new Modele();
         $this->module = isset($_GET['module']) ? $_GET['module'] : "mod_connexion";
         $this->exec();
@@ -36,8 +36,12 @@ class Controleur
                 break;
 
         }
+
         $this->result = $this->mod->getCont()->v->getAffichage();
     }
-}
 
+    public function showTemplate() {
+        return $this->module != "mod_saveexo";
+    }
+}
 ?>

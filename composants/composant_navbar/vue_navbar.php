@@ -19,12 +19,9 @@ class VueNavbar
                     </a>
 
                     <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                        <li><a href="./index.php?module=mod_pages&action=formEdit" class="nav-link px-2 text-white">Accueil</a>
-                        </li>
-                        <li><a href="https://github.com/DUT-Info-Montreuil/eaxo" class="nav-link px-2 text-white">Documentation</a>
-                        </li>
-                        <li><a href="https://github.com/DUT-Info-Montreuil" class="nav-link px-2 text-secondary">A
-                                propos de nous :)</a></li>
+                        <li><a href="./index.php?module=mod_pages&action=formEdit&exo=1" class="nav-link px-2 text-white">Accueil</a></li>
+                        <li><a href="https://github.com/DUT-Info-Montreuil/eaxo" class="nav-link px-2 text-white">Documentation</a></li>
+                        <li><a href="https://github.com/DUT-Info-Montreuil" class="nav-link px-2 text-secondary">A propos de nous :)</a></li>
                     </ul>
 
                     <div class="text-end">

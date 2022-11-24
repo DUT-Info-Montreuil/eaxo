@@ -1,4 +1,5 @@
 @media print {
+
     nav {
         display: none;
     }
@@ -12,7 +13,28 @@
         display: none;
     }
 
+    body > * {
+      margin: 0;
+    }
 
+    .container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl{
+      margin-left: 0;
+      padding-right: 0;
+      width: 100%;
+    }
+
+    .hideForPrint {
+      display: none;
+    }
+
+
+
+    @page {
+      size: auto;  margin: 0mm; 
+      position: absolute;
+    }
+
+    
 }
 
 #pageContainer {
@@ -94,4 +116,74 @@ body {
     margin-bottom: 10px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+}
+
+#bouton_send {
+  color: black;
+  background-color: #f3d503;
+  border-color: #f3d503;
+
+}
+
+/* Widgets property */
+
+.eaxoText {
+  display: inline-block;
+  margin: 4px;
+}
+
+.eaxoBox {
+  display: inline-block;
+  border:black 2px solid;
+  
+}
+
+.eaxoInput {
+  border:none;
+  background: none;
+}
+
+.eaxoInput:focus {
+  outline: none;
+}
+
+.blackIcon {
+  color:black
+}
+
+#spinnerLoading {
+  position :absolute;
+  right: 20%;
+  top:100px;
+  opacity: 0;
+}
+
+.exoID {
+  display: inline-block;
+  border-radius: 50%;
+  border: 1px solid;
+  width:calc(2em);
+  text-align: center;
+}
+
+h3 {
+  display: inline;
+}
+
+.elementPreview {
+  width: 300px;
+  height: 30px;
+}
+
+
+/*
+Components style css
+*/
+
+.accordion-body ul {
+  list-style: none;
+}
+
+.eaxoResizable  {
+  border: 1px dashed black;
 }

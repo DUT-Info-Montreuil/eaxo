@@ -3,8 +3,7 @@
 DROP TABLE IF EXISTS exercices;
 
 DROP TABLE IF EXISTS widgets_exercices_list;
-DROP TABLE IF EXISTS widgets_elements;
-DROP TABLE IF EXISTS widgets_elements;
+DROP TABLE IF EXISTS exercice_elements;
 DROP TABLE IF EXISTS gallery_folders;
 DROP TABLE IF EXISTS gallery_images;
 DROP TABLE IF EXISTS groups;
@@ -31,8 +30,10 @@ CREATE TABLE IF NOT EXISTS users(
 
 CREATE TABLE IF NOT EXISTS exercices(
     id serial,
+    exoNumber int(10), 
     userID bigint(20) UNSIGNED,
     name varchar(100),
+    PRIMARY KEY (id, userID),
     FOREIGN KEY (userID)
         REFERENCES users(id)
         ON DELETE CASCADE
@@ -49,16 +50,19 @@ CREATE TABLE IF NOT EXISTS widgets(
     id serial
 );
 
-CREATE TABLE IF NOT EXISTS widgets_elements(
+CREATE TABLE IF NOT EXISTS exercice_elements(
     id serial,
-    widgetId bigint(20) UNSIGNED,
+    exerciceId bigint(20) UNSIGNED,
+    parentId varchar(255),
+    htmlID varchar(255) UNIQUE,
     wType varchar(100),
     class varchar(255),
     content text,
     css text,
-    FOREIGN KEY (widgetId)
+    PRIMARY KEY(id)/*,
+    FOREIGN KEY (parentId)
         REFERENCES widgets(id)
-        ON DELETE CASCADE
+        ON DELETE CASCADE*/
 );
 
 CREATE TABLE IF NOT EXISTS gallery_folders(
@@ -94,3 +98,7 @@ CREATE TABLE IF NOT EXISTS permissions(
 
 
 INSERT INTO users (email, username, passwd) VALUES("prof@gmail.com", "proftest", "$2y$10$CRsZddHPQ66oc8fE2l6VEOL4epL8P2XT7KIqacSR.ZfGA8TJ/WWea");
+
+/*SELECT c.Name FROM Mondial.borders as b INNER JOIN Mondial.country as c ON b.country2 = c.Code" +
+"INNER JOIN (SELECT b2.country1 as code, c2.Name as name FROM Mondial.borders as b2 INNER JOIN Mondial.country as c2 WHERE b2.country1 = c2.Code) as t ON t.code = b.country2 " +
+"WHERE b.country1 = ?*/

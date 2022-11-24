@@ -32,7 +32,7 @@ class ModeleConnexion extends Connexion
             $result = $sth->fetch();
             if ($result) {
                 if (password_verify($_POST['password'], $result['passwd'])) {
-                    $_SESSION['newsession'] = $result['email'];
+                    $_SESSION['newsession'] = $result['id'];
                     return true;
                 }
             }

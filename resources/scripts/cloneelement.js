@@ -1,37 +1,40 @@
-import {createTextBox} from './elements/textbox.js'
-import {createTrueOrFalse} from './elements/trueorfalse.js'
+
+import widget_c from './widgets_controller.js'
+import widgetElementLoader from './widget_element_loader.js';
 
 function loadChildrenElements(clone) {
     //let attrs = clone[0].dataset.widget
-    let attrs = clone[0].dataset.widget
-    switch(attrs) {
-        case "box":
-            var inputArray = ["village", "villape", "ville", "village", "sillage", "loup", "loupe", "louve", "long", "loup"]
-            for(var i  = 0; i < inputArray.length; i++) {
-                createTextBox(clone, i, inputArray[i])
-            }
-            break;
-        case "trueorfalse":
-            for(var i = 0; i < 3; i++) {
-                createTrueOrFalse(clone, i)
-            }
-            break;
+    let widgetType = clone[0].dataset.widget
+    let elementType = clone[0].dataset.eaxoelement;
+    let isPreview = clone.hasClass("elementPreview")
+
+    if(widgetType) {
+        if (widgetElementLoader.loadExercice(widgetType)) {
+            widgetElementLoader.loadExercice(widgetType)(clone);
+        }
     }
+    else if (elementType) {
+        if(widgetElementLoader.loadElement(elementType)) {
+            widgetElementLoader.loadElement(elementType)(clone, isPreview)
+        }
+    }
+    
 
 }
 
 export function cloneElement(original, id) {
     
-    var clone = original.clone();
+    let clone = original.clone();
     let array = clone[0].classList;
+
+    //Forbid clone
+    clone.removeClass("eaxoClonable");
     
-
-
-
     for(var i = 0; i < array.length; i++) {
         
         if(array[i] != "eaxoDraggable") {
             clone.removeClass(array[i])
+            
         }
 
         if(array[i] =="eaxoResizable") {
@@ -39,14 +42,24 @@ export function cloneElement(original, id) {
                 containment:"#pageContainer"
             });
         }
-    }
 
+    }
+    clone.resizable({
+        containment:"#pageContainer"
+    });
+
+    clone.on("drag", function() {
+        clone.position({
+            collision:"fit"
+        })
     
+    })
+    
+    clone.attr("id", widget_c.getNewID(clone[0]))
     clone.appendTo("#pageContainer");
-    clone.attr("id", "pageTest" + id);
 
    
-    $("#pageTest" + id).draggable({
+    $(clone).draggable({
         containment:"#pageContainer"
     });
 

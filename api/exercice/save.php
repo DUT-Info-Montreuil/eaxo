@@ -25,12 +25,13 @@
                         
                     }
                     
-                    $jsonClass = is_object($element->classList) ?  json_encode($element->classList) : "";
+                    $jsonClass = is_object($element->classList) ?  json_encode($element->classList) : "{}";
                     $nodeID = isset($element->nodeID) ? intval($element->nodeID) : null;
+                    $dataset = isset($element->dataset) ? json_encode($element->dataset) : "";
 
 
                     $jsonCss =  is_object($element->style) ? json_encode($element->style) : "";
-                    $jsonContent =  property_exists($element, "textContent") ? json_encode($element->textContent) : "";
+                    $jsonContent =  property_exists($element, "textContent") ? json_encode($element->textContent) : "{}";
 
 
                     //var_dump($jsonContent);
@@ -39,10 +40,10 @@
                         var_dump($element);
                     }
                     
-                    $sth = self::$bdd->prepare('INSERT INTO exercice_elements (exerciceId, parentId, htmlID, wType, class, content, css)'
-                    . 'values(:exoID, :parentID, :htmlID, :nodeName, :jsonClass, :jsonContent, :jsonCss)');
+                    $sth = self::$bdd->prepare('INSERT INTO exercice_elements (exerciceId, parentId, htmlID, wType, dataset, class, content, css)'
+                    . 'values(:exoID, :parentID, :htmlID, :nodeName, :dataset, :jsonClass, :jsonContent, :jsonCss)');
 
-                    $sth->execute(array(":exoID" => $exoID, ":parentID" => $parentID, ":htmlID" => $nodeID, ":nodeName" => $nodeName, ":jsonClass" => $jsonClass,
+                    $sth->execute(array(":exoID" => $exoID, ":parentID" => $parentID, ":htmlID" => $nodeID, ":dataset" => $dataset, ":nodeName" => $nodeName, ":jsonClass" => $jsonClass,
                     ":jsonContent" => $jsonContent, ":jsonCss" => $jsonCss));
                     
                 }   

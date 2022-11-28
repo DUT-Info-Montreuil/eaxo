@@ -56,6 +56,7 @@ CREATE TABLE IF NOT EXISTS exercice_elements(
     parentId varchar(255),
     htmlID varchar(255) UNIQUE,
     wType varchar(100),
+    dataset text,
     class varchar(255),
     content text,
     css text,

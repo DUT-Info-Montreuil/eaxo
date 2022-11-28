@@ -43,12 +43,24 @@ class ExoParser {
         let jQueryElement = $(element);
         let arrayObj;
 
+        
+        
         jQueryElement.attr("id", widget_c.getNewID(element));
 
         array[jQueryElement.attr("id")] = array[jQueryElement.attr("id")] ? array[jQueryElement.attr("id")] : {}
         arrayObj = array[jQueryElement.attr("id")];
+        arrayObj.dataset = {}
 
+        let dataValues = jQueryElement.data();
 
+        for(var dataAttr in dataValues) {
+            //console.log(dataAttr + " " + dataValues[dataAttr])
+            if(typeof(dataAttr) == "string" && typeof(dataValues[dataAttr]) != "object") {
+                arrayObj.dataset.dataAttr = dataValues[dataAttr];
+            }
+        }
+
+        
         arrayObj.nodeName = element.nodeName;
         arrayObj.nodeID = jQueryElement.attr("id");
         arrayObj.parent = parent.attr("id")
@@ -119,6 +131,7 @@ class ExoParser {
 
         //Load custom css style
         this.loadStyles(nodeElement, child)
+        console.log(this.exoArray)
 
         for(var objElement in child.children) {
             let subChild = child.children[objElement]

@@ -107,3 +107,5 @@ export function createLinesElement(parent, isPreview) {
 
 const element = {"name" : "lines", "func" : createLinesElement};
 export {element};
+
+

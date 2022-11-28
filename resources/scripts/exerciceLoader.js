@@ -1,3 +1,5 @@
+import jqueryLoader from "./loader/jqueryLoader.js";
+
 class ExerciceLoader {
     constructor() {
         this.loadExercice(1);
@@ -46,6 +48,7 @@ class ExerciceLoader {
             for(let ind in elementClass) {
                 jElement.addClass(elementClass[ind]);
             }
+            
 
             //Set content
             if (elementData.content) {
@@ -60,9 +63,10 @@ class ExerciceLoader {
                 jElement.appendTo($("#" + elementData.parentId));
             }
             
+            jqueryLoader.loadElement(jElement);
         }
 
-        console.log($("#" + parentID))
+        //console.log($("#" + parentID))
     }
 
 }

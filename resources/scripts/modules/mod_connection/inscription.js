@@ -1,7 +1,6 @@
 
 $('DOMContentLoaded', function() {
 
-    var colorBoutonInscription = $("#bouton_send_incription").css("background-color");
     var marginInscriptionDiv = $("#formulaire-saisie-inscription").css("margin-left");
 
 
@@ -27,12 +26,15 @@ $('DOMContentLoaded', function() {
     $("#motDePasse2").focusout(function (){
         verrifierMotDePasseEgal();});
 
+    $("#username").focusout(function(){
+        verifierUtilisateurExistePas();
+    });
+
     function verrifierMotDePasseEgalSaisie1() {
         if($("#motDePasse2").val() != ""){
             verrifierMotDePasseEgal();
         }
     }
-
     function verrifierMotDePasseEgal() {
 
         if ($("#motDePasse1").val() != $("#motDePasse2").val()) {
@@ -46,19 +48,6 @@ $('DOMContentLoaded', function() {
         
 
     }
-
-    function activerBoutonInscription(){
-        $("#bouton_send_incription").enabled;
-        //$("#bouton_send_incription").css("background-color", colorBoutonInscription);
-        $("#bouton_send_incription").css("opacity", "1");
-    }
-
-    function desactiverBoutonInscription() {
-        //$("#bouton_send_incription").disabled;
-        //$("#bouton_send_incription").css("background-color", "grey");
-        //$("#bouton_send_incription").css("opacity", "0.5");
-    }
-
     function verifierForceMotPasse(){
         var parfait = true;
         //Taille
@@ -104,5 +93,27 @@ $('DOMContentLoaded', function() {
         return parfait;
     }
 
+    function verifierUtilisateurExistePas(){
+        $.ajax({
+            type: "POST",
+            url: "./api/controleur_requetes_bd.php?module=connection&action=verifUtilisateurExiste",
+            data: {username:$("#username").val()},
+            dataType: "json"
+        }).done(function(retour){
+            console.log("fin de la requette BD");
+            alert("Reponse : " + retour);
+        });
+    }
+
+
+    function activerBoutonInscription(){
+        $("#bouton_send_incription").enabled;
+        $("#bouton_send_incription").css("opacity", "1");
+    }
+
+    function desactiverBoutonInscription() {
+        //$("#bouton_send_incription").disabled;
+        //$("#bouton_send_incription").css("opacity", "0.5");
+    }
 
 });

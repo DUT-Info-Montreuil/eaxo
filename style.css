@@ -123,6 +123,8 @@ body {
 }
 
 .inscriptionErreur{
+    margin: 0px;
+    padding: 0px;
     color: red;
     display: none;
 }

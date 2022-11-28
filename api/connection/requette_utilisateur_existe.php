@@ -4,11 +4,19 @@
         $reponsse = $sth->prepare('SELECT username FROM users WHERE username=:userTest');
         $reponsse->execute(array(':userTest' => $user));
         $resultat=$reponsse->fetch();
-        reponsse($resultat['username']);
+        if($resultat){
+            reponsseUser($resultat['username']);
+        }else{
+            reponsseUser(null);
+        }
     }
 
-    function reponsse($tuple){
+    function reponsseUser($tuple){
         header('Content-Type: application/json; charset=utf-8');
+
+        if($tuple == null){
+            $tuple = "";
+        }
 
         $reponse = [
             "username" => $tuple

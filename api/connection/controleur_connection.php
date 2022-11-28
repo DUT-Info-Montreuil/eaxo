@@ -1,7 +1,8 @@
 <?php
 
 require_once __DIR__ . "/requette_utilisateur_existe.php";
-require_once __DIR__ . "/../connexion.php";
+require_once __DIR__ . "/requette_utilisateur_mail_existe.php";
+require_once __DIR__ . "/../../connexion.php";
 
 class controleur_connection extends Connexion
 {
@@ -16,6 +17,10 @@ class controleur_connection extends Connexion
             case "verifUtilisateurExiste":
                 if (isset($_POST["username"]))
                     verifUtilisateurExiste(Connexion::$bdd, $_POST["username"]);
+                break;
+            case "verifMailExiste":
+                if(isset($_POST["mail"]))
+                    verifMailExiste(Connexion::$bdd, $_POST["mail"]);
                 break;
         }
     }

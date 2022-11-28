@@ -30,6 +30,10 @@ $('DOMContentLoaded', function() {
         verifierUtilisateurExistePas();
     });
 
+    $("#email").focusout(function (){
+        verifierMailExiste();
+    })
+
     function verrifierMotDePasseEgalSaisie1() {
         if($("#motDePasse2").val() != ""){
             verrifierMotDePasseEgal();
@@ -94,17 +98,23 @@ $('DOMContentLoaded', function() {
     }
 
     function verifierUtilisateurExistePas(){
-        $.ajax({
-            type: "POST",
-            url: "./api/controleur_requetes_bd.php?module=connection&action=verifUtilisateurExiste",
-            data: {username:$("#username").val()},
-            dataType: "json"
-        }).done(function(retour){
-            console.log("fin de la requette BD");
-            alert("Reponse : " + retour);
-        });
+        if($("#username").val() != "") {
+            $.ajax({
+                type: "POST",
+                url: "./api/controleur_requetes_bd.php?module=connection&action=verifUtilisateurExiste",
+                data: {username: $("#username").val()},
+                dataType: "json"
+            }).done(function(retour) {
+                if (retour['username'] != "") {
+                    desactiverBoutonInscription();
+                    $("#UsernamePris").css("display", "block");
+                }else {
+                    activerBoutonInscription();
+                    $("#UsernamePris").css("display", "none");
+                }
+            });
+        }
     }
-
 
     function activerBoutonInscription(){
         $("#bouton_send_incription").enabled;
@@ -112,8 +122,26 @@ $('DOMContentLoaded', function() {
     }
 
     function desactiverBoutonInscription() {
-        //$("#bouton_send_incription").disabled;
-        //$("#bouton_send_incription").css("opacity", "0.5");
+        $("#bouton_send_incription").disabled;
+        $("#bouton_send_incription").css("opacity", "0.5");
     }
 
+    function verifierMailExiste(){
+        if($("#email").val() != "") {
+            $.ajax({
+                type: "POST",
+                url: "./api/controleur_requetes_bd.php?module=connection&action=verifMailExiste",
+                data: {mail: $("#email").val()},
+                dataType: "json"
+            }).done(function(retour) {
+                if (retour['mail'] != "") {
+                    desactiverBoutonInscription();
+                    $("#eMailUtiliser").css("display", "block");
+                }else{
+                    activerBoutonInscription();
+                    $("#eMailUtiliser").css("display", "none");
+                }
+            });
+        }
+    }
 });

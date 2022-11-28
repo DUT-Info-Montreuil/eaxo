@@ -33,8 +33,12 @@ CREATE TABLE IF NOT EXISTS exercices(
     id serial,
     userID bigint(20) UNSIGNED,
     name varchar(100),
+    folderParent bigint(20) UNSIGNED,
     FOREIGN KEY (userID)
         REFERENCES users(id)
+        ON DELETE CASCADE,
+    FOREIGN KEY (folderParent)
+        REFERENCES gallery_folders(id)
         ON DELETE CASCADE
 );
 

@@ -29,34 +29,35 @@ class VueHome extends VueGenerique
         <?php
     }
 
-    public function generate_divs($names)
+    public function generate_divs($exercices) #Array of arrays which contains: [name,id]
     {
-
         $ligne = 1;
         $colonne = 0;
-        $names = array('page1', 'page2', 'page3', 'page4', 'page5');
-        if (isset($names) && count($names) > 0) {
+        $exercicesName = array(array('page1', 25), array('page2', 85), array('page3', 78), array('page4', 45), array('page5', 32));
+        if (isset($exercicesName) && count($exercicesName) > 0) {
             echo '<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mt-3">';
         }
-        foreach ($names as $name) {
+        foreach ($exercicesName as $name_id) {
                 ?>
                 <div class="col">
-                    <div class="card shadow-sm">
-                    <svg class="bd-placeholder-img card-img-top" width="100%" height="225" role="img" preserveAspectRatio="xMidYMid slice">
-                </svg>
-                        <div class="card-body">
-                            <div class="card-text">
-                                <?php
-                                echo $name;
-                                ?>
+                    <a href="#">
+                        <div class="card shadow-sm">
+                            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" role="img" preserveAspectRatio="xMidYMid slice">
+                            </svg>
+                            <div class="card-body">
+                                <div class="card-text">
+                                    <?php
+                                    echo $name_id[0];
+                                    ?>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <?php
                 $colonne++;
         }
-        if (isset($names) && count($names) > 0) {
+        if (isset($exercicesName) && count($exercicesName) > 0) {
             echo '</div>';
         }
         }

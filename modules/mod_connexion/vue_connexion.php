@@ -108,7 +108,6 @@ class VueConnexion extends VueGenerique
                                     </div>
                                 </div>
 
-                                <p id="UsernameIncorect" class="pt-0 mt-0 mb-0, inscriptionErreur">*Nom d'utilisateur incorrect</p>
                                 <p id="UsernamePris" class="pt-0 mt-0 mb-0, inscriptionErreur">*Nom d'utilisateur déja pris</p>
 
                                 <div class="col-12">

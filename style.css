@@ -1,19 +1,16 @@
-@font-face {
-  font-family: "Cursive";
-  src: url("./resources/fonts/Cursive_standard.ttf");
-}
-
 @media print {
+
     nav {
-      display: none;
+        display: none;
     }
+
     .apercu {
-      width: 210mm;
-      height: 297mm;
+        width: 210mm;
+        height: 297mm;
     }
 
     .displaynone {
-      display: none;
+        display: none;
     }
 
     body > * {
@@ -23,66 +20,102 @@
     .container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl{
       margin-left: 0;
       padding-right: 0;
+      width: 100%;
     }
+
+    .hideForPrint {
+      display: none;
+    }
+
 
 
     @page {
       size: auto;  margin: 0mm; 
+      position: absolute;
     }
 
     
 }
 
 #pageContainer {
-  display: block;
-  margin: 0 auto;
-  margin-bottom: 0.5cm;
-  box-shadow: 0 0 0.5cm rgba(0,0,0,0.1);
+    background: white;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 0.5cm;
+    box-shadow: 0 0 0.5cm rgba(0, 0, 0, 0.5);
 }
 
-#pageContainer[size="A4"] {  
-  width: 21cm;
-  height: 29.7cm; 
+#pageContainer[size="A4"] {
+    width: 21cm;
+    height: 29.7cm;
 }
 
 .textInBox {
-  text-align: center;
-  background-color: aquamarine;
+    text-align: center;
+    background-color: aquamarine;
 }
 
 
 /* Custom */
 body {
-  height: 100%;
+    height: 100%;
 }
 
+/*Page de connection au compte*/
 #Div_Connection {
-  display: flex;
-  align-items: center;
-  padding-top: 40px;
-  padding-bottom: 100%;
-  background-color: #f8f8f8;
+    display: flex;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 100%;
+    background-color: #f8f8f8;
 }
+
+#bouton_send {
+    color: black;
+    background-color: #f3d503;
+    border-color: #f3d503;
+
+}
+
+#bouton_send_connection {
+    color: black;
+    background-color: #f3d503;
+    border-color: #f3d503;
+
+}
+
+/*Page de creation de compte*/
+#formulaire-saisie-inscription {
+    margin-left: 400px;
+}
+
+#bouton_send_incription {
+    color: black;
+    margin-top: 50px;
+    background-color: #f3d503;
+    border-color: #f3d503;
+}
+
 
 .form-signin {
-  max-width: 385px;
-  padding: 15px;
+    max-width: 385px;
+    padding: 15px;
 }
 
 .form-signin .form-floating:focus-within {
-  z-index: 2;
+    z-index: 2;
 }
 
 .form-signin input[type="email"] {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
 }
 
 .form-signin input[type="password"] {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 }
 
 #bouton_send {
@@ -134,4 +167,53 @@ body {
 /*Temporary*/
 .bd-placeholder-img {
   background-color: gray;
+}
+.eaxoInput {
+  border:none;
+  background: none;
+}
+
+.eaxoInput:focus {
+  outline: none;
+}
+
+.blackIcon {
+  color:black
+}
+
+#spinnerLoading {
+  position :absolute;
+  right: 20%;
+  top:100px;
+  opacity: 0;
+}
+
+.exoID {
+  display: inline-block;
+  border-radius: 50%;
+  border: 1px solid;
+  width:calc(2em);
+  text-align: center;
+}
+
+h3 {
+  display: inline;
+}
+
+.elementPreview {
+  width: 300px;
+  height: 30px;
+}
+
+
+/*
+Components style css
+*/
+
+.accordion-body ul {
+  list-style: none;
+}
+
+.eaxoResizable  {
+  border: 1px dashed black;
 }

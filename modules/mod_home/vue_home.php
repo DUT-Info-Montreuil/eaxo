@@ -33,11 +33,10 @@ class VueHome extends VueGenerique
     {
         $ligne = 1;
         $colonne = 0;
-        $exercicesName = array(array('page1', 25), array('page2', 85), array('page3', 78), array('page4', 45), array('page5', 32));
-        if (isset($exercicesName) && count($exercicesName) > 0) {
+        if (isset($exercices) && count($exercices) > 0) {
             echo '<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mt-3">';
         }
-        foreach ($exercicesName as $name_id) {
+        foreach ($exercices as $name_id) {
                 ?>
                 <div class="col">
                     <a href="#">
@@ -57,13 +56,14 @@ class VueHome extends VueGenerique
                 <?php
                 $colonne++;
         }
-        if (isset($exercicesName) && count($exercicesName) > 0) {
+        if (isset($exercices) && count($exercices) > 0) {
             echo '</div>';
         }
         }
 
         public function generate_pages_a($number_of_pages, $current_page) {
-            $number_of_pages = 5 ;
+            if ($number_of_pages <= 1)
+                $number_of_pages = 1;
             echo '<div class="paginationbis">';
             echo '<div class="pagination">';
             echo '<a href="#">&laquo;</a>';

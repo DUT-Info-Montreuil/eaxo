@@ -6,5 +6,7 @@
     require_once ("controleur.php");
     
     $c = new Controleur();
-    require_once "./template.php";
+    if($c->showTemplate()) {
+        require_once "./template.php";
+    }
 ?>

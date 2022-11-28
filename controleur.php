@@ -1,5 +1,7 @@
 <?php
-class Controleur {
+
+class Controleur
+{
     private $module;
     private $m;
     private $mod;
@@ -7,16 +9,18 @@ class Controleur {
 
     public function __construct() {
         require_once ("modele.php");
+
         $this->m = new Modele();
         $this->module = isset($_GET['module']) ? $_GET['module'] : "mod_home";
         $this->exec();
     }
 
-    public function exec() {
-        if(!isset($_SESSION["newsession"])) {
+    public function exec()
+    {
+        if (!isset($_SESSION["newsession"])) {
             $this->module = "mod_connexion";
         }
-        switch($this->module) {
+        switch ($this->module) {
             case "mod_connexion":
                 require_once "./modules/mod_connexion/mod_connexion.php";
                 $this->mod = new ModConnexion();
@@ -31,7 +35,12 @@ class Controleur {
                 break;
 
         }
+
         $this->result = $this->mod->getCont()->v->getAffichage();
+    }
+
+    public function showTemplate() {
+        return $this->module != "mod_saveexo";
     }
 }
 ?>

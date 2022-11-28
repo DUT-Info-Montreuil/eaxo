@@ -1,15 +1,14 @@
 <?php
 require_once __DIR__ . "/modele_connexion.php";
 require_once __DIR__ . "/vue_connexion.php";
-require_once __DIR__ . "/vue_creation_compte.php";
 require_once "./guardian.php";
 
-class ContConnexion {
+class ContConnexion
+{
     public function __construct()
     {
         $this->m = new ModeleConnexion();
         $this->v = new VueConnexion();
-        $this->vI = new VueInscription();
         $this->action = isset($_GET['action']) ? $_GET['action'] : "form_connexion";
         $this->exec();
     }
@@ -24,18 +23,19 @@ class ContConnexion {
         $this->vI->formInscription();
     }
 
-    public function inscrit() {
+    public function inscrit()
+    {
         if ($this->m->form_ajout()) {
             $this->action = "form_connexion";
             $this->exec();
-        }
-        else {
+        } else {
             $this->action = "form_inscription";
             $this->exec();
         }
     }
 
-    public function connexion() {
+    public function connexion()
+    {
         if ($this->m->verif_connexion()) {
             header('Location: ./index.php');
         }
@@ -56,12 +56,13 @@ class ContConnexion {
         echo "connected";
     }
 
-    public function exec() {
-        switch($this->action) {
+    public function exec()
+    {
+        switch ($this->action) {
             case "form_connexion":
                 $this->form_connexion();
                 break;
-            case "form_register":
+            case "form_inscription":
                 $this->form_inscription();
                 break;
             case "connected":
@@ -72,7 +73,26 @@ class ContConnexion {
             case "deconnexion":
                 $this->deconnexion();
                 break;
+            case "new_inscription":
+                if ($this->m->form_ajout()) {
+                    echo "tout c'est bien passer";
+                    $this->action = "form_connexion";
+                    $this->exec();
+                } else {
+                    echo "tout c'est mal passer";
+                }
+                break;
+            case "new_inscription":
+                if ($this->m->form_ajout()) {
+                    echo "tout c'est bien passer";
+                    $this->action = "form_connexion";
+                    $this->exec();
+                } else {
+                    echo "tout c'est mal passer";
+                }
+                break;
         }
     }
 }
+
 ?>

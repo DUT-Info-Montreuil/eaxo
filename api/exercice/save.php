@@ -31,7 +31,7 @@
 
 
                     $jsonCss =  is_object($element->style) ? json_encode($element->style) : "";
-                    $jsonContent =  property_exists($element, "textContent") ? json_encode($element->textContent) : "{}";
+                    $jsonContent =  property_exists($element, "textContent") ? json_encode($element->textContent) : "";
 
 
                     //var_dump($jsonContent);

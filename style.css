@@ -31,6 +31,10 @@
       display: none;
     }
 
+    .eaxoResizable {
+      border: none;
+    }
+
 
 
     @page {

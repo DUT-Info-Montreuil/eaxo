@@ -2,7 +2,6 @@ import widget_c from "./widgets_controller.js";
 
 function changeFontSize(size) {
     if(widget_c.getSelectedElement()) {
-        //console.log(widget_c.getSelectedElement())
         $(widget_c.getSelectedElement()).css({"font-size" : size})
     }
 }

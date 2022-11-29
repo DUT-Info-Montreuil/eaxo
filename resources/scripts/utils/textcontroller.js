@@ -58,7 +58,6 @@ export function enableEdit(widgetController, node) {
         let target = handler.target;
 
         if(widget_c.getSelectedElement() && (target.nodeName == "PAGE")) {
-            console.log(target)
             if(target.nodeName == "PAGE" || $(target) != $(widget_c.getSelectedElement())) {
                 saveContent(node, input)
             }

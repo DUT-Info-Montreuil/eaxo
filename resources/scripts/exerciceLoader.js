@@ -1,4 +1,5 @@
 import jqueryLoader from "./loader/jqueryLoader.js";
+import {createLinesElement} from './elements/lines.js'
 
 class ExerciceLoader {
     constructor() {
@@ -15,7 +16,7 @@ class ExerciceLoader {
     findOrCreatElement(id) {
         let found = $("#" + id);
         if(!found) {
-            console.log("ok")
+
         } else {
             //return $()
         }
@@ -31,10 +32,24 @@ class ExerciceLoader {
             let elementData = object[arr];
             let jElement = $("<" + elementData.wType + ">");
             jElement.attr('id', elementData.htmlID);
+
+            //Append to the parent first
+            if(elementData.parentId == null) {
+                jElement.appendTo($("#pageContainer"));
+            } else {
+                
+                jElement.appendTo($("#" + elementData.parentId));
+            }
         
             let objectCSS = JSON.parse(elementData.css);
+            let dataset = JSON.parse(elementData.dataset);
 
-            //console.log(jElement)
+            for(let ind in dataset) {
+                jElement[0].dataset[ind] =  dataset[ind];
+                if(ind == "lines") {
+                    createLinesElement(jElement[0])
+                }
+            }
             //Load css
             for(let ind in objectCSS) {
                 if(CSS.supports(ind, objectCSS[ind])) {
@@ -48,20 +63,13 @@ class ExerciceLoader {
             for(let ind in elementClass) {
                 jElement.addClass(elementClass[ind]);
             }
-            
 
             //Set content
             if (elementData.content) {
-                console.log(elementData.content);
                 jElement.text(elementData.content.replace(/['"]+/g, ''));
             } 
 
-            if(elementData.parentId == null) {
-                jElement.appendTo($("#pageContainer"));
-            } else {
-                
-                jElement.appendTo($("#" + elementData.parentId));
-            }
+            
             
             jqueryLoader.loadElement(jElement);
         }

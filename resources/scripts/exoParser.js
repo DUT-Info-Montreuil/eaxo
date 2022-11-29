@@ -37,51 +37,52 @@ class ExoParser {
     }
 
     stringifySub(element, parent, array) {
-        if(element.nodeName == "H3") {
-            //console.log(element);
-        }
+
         let jQueryElement = $(element);
+        let dataValues = jQueryElement.data();
         let arrayObj;
 
-        
-        
-        jQueryElement.attr("id", widget_c.getNewID(element));
-
-        array[jQueryElement.attr("id")] = array[jQueryElement.attr("id")] ? array[jQueryElement.attr("id")] : {}
-        arrayObj = array[jQueryElement.attr("id")];
-        arrayObj.dataset = {}
-
-        let dataValues = jQueryElement.data();
-
-        for(var dataAttr in dataValues) {
-            //console.log(dataAttr + " " + dataValues[dataAttr])
-            if(typeof(dataAttr) == "string" && typeof(dataValues[dataAttr]) != "object") {
-                arrayObj.dataset.dataAttr = dataValues[dataAttr];
-            }
-        }
-
-        
-        arrayObj.nodeName = element.nodeName;
-        arrayObj.nodeID = jQueryElement.attr("id");
-        arrayObj.parent = parent.attr("id")
-
-        if(element.innerText != "" && element.nodeName != "DIV") {
-            arrayObj.textContent = element.innerText
-        }
-        
-        arrayObj.classList = element.classList
-        arrayObj.children = {length:0}
-        
-        arrayObj.style = this.clearArray(jQueryElement[0].style)
-
-        //Only div can include html element,so just extends tree when we found new div
-        if(element.nodeName == "DIV") {
+        if(!dataValues["nosave"]) {
+    
+            jQueryElement.attr("id", widget_c.getNewID(element));
             
 
-            for(var i = 0; i < jQueryElement.children().length; i++) {
 
-                this.stringifySub(jQueryElement.children()[i], jQueryElement, arrayObj.children)
-                arrayObj.children.length++
+            array[jQueryElement.attr("id")] = array[jQueryElement.attr("id")] ? array[jQueryElement.attr("id")] : {}
+            arrayObj = array[jQueryElement.attr("id")];
+            arrayObj.dataset = {}
+
+            
+
+            for(var dataAttr in dataValues) {
+                if(typeof(dataAttr) == "string" && typeof(dataValues[dataAttr]) != "object") {
+                    arrayObj.dataset[dataAttr] = dataValues[dataAttr];
+                }
+            }
+
+            
+            arrayObj.nodeName = element.nodeName;
+            arrayObj.nodeID = jQueryElement.attr("id");
+            arrayObj.parent = parent.attr("id")
+
+            if(element.innerText != "" && element.nodeName != "DIV") {
+                arrayObj.textContent = element.innerText
+            }
+            
+            arrayObj.classList = element.classList
+            arrayObj.children = {length:0}
+            
+            arrayObj.style = this.clearArray(jQueryElement[0].style)
+
+            //Only div can include html element,so just extends tree when we found new div
+            if(element.nodeName == "DIV") {
+                
+
+                for(var i = 0; i < jQueryElement.children().length; i++) {
+
+                    this.stringifySub(jQueryElement.children()[i], jQueryElement, arrayObj.children)
+                    arrayObj.children.length++
+                }
             }
         }
 
@@ -131,7 +132,6 @@ class ExoParser {
 
         //Load custom css style
         this.loadStyles(nodeElement, child)
-        console.log(this.exoArray)
 
         for(var objElement in child.children) {
             let subChild = child.children[objElement]
@@ -146,9 +146,7 @@ class ExoParser {
             let data = {
                 exoJson : json
             }
-            //console.log(json)
             $.post("./api/exercice/save.php", data, function(result) {
-                console.log(result);
                 setTimeout(function() {
                     $("#spinnerLoading").css({"opacity":0} );
                 }, 300)

@@ -1,5 +1,5 @@
 import * as txt from './utils/textcontroller.js'
-import * as cp from './copypaste.js'
+import * as cp from './shortcuts.js'
 
 class WidgetController {
     constructor() {
@@ -13,6 +13,8 @@ class WidgetController {
             var target = handler.target;
             if(self.canEditNode(target)) {
                 self.enableEdit(target)
+                //Set
+                self.setSelectedElement(target)
             }
         });
 
@@ -25,7 +27,12 @@ class WidgetController {
     }
 
     setSelectedElement(element) {
+        if(this.selectedElement != null) {
+            $(this.selectedElement).css("background-color","none");
+        }
+
         this.selectedElement = element;
+        $(this.selectedElement).css("background-color", "aliceblue");
         
     }
 

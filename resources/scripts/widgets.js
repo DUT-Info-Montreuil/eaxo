@@ -47,7 +47,7 @@ $( function() {
     }) 
 
     $(".eaxoText", function() {
-        console.log("ok")
+
     })
 
     //exoParser.stringify();

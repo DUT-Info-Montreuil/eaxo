@@ -29,6 +29,7 @@ class VuePages extends VueGenerique
                     </div>
                 </div>
             </div>
+
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingTwo">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
@@ -147,13 +148,54 @@ class VuePages extends VueGenerique
                     </div>
 
                 </div>
-                
+
+                //philippe modif
+                 <script src="/resources/scripts/modules/composants_images/vue_images.js" type="module"></script>
+                <!-- Button trigger modal -->
+                <button type="button" id="ouvertureVolet" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  Volet d'images
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Mes Images</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                      <?php
+                        $this->contenuImages();
+                      ?>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
             </div>
 
             
             <?php
 
             $this->test();
+        }
+
+        public function contenuImages(){
+        ?>
+
+            <div id="divImagesHome">
+
+                <p>texte dans truc</p>
+
+            </div>
+
+        <?php
+
         }
     }
             ?>

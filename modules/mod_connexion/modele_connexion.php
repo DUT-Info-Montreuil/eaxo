@@ -17,10 +17,21 @@ class ModeleConnexion extends Connexion{
         $sth = self::$bdd->prepare('INSERT INTO users (email, username, passwd) values(:email, :username, :password)');
         if (!$this->verif_username($_POST['username'])) {
             if (!$this->verif_email($_POST['emailAdress'])) {
-                $sth->execute(array(':username' => $_POST['username'], ':password' => password_hash($_POST['passwd'], PASSWORD_DEFAULT), ':email' => $_POST['emailAdress']));
-                return true;
+                if($this->verifierMotDePasseFormAjout($_POST['passwd']) === TRUE && $this->verif_email($_POST['email']) === TRUE && $this->verif_username($_POST['username']) === TRUE){
+                    $sth->execute(array(':username' => $_POST['username'], ':password' => password_hash($_POST['passwd'], PASSWORD_DEFAULT), ':email' => $_POST['emailAdress']));
+                    return true;
+                }else{
+                    return false;
+                }
             }
         }
+        return false;
+    }
+
+    //Vérification du mot de passe
+    public function verifierMotDePasseFormAjout($var){
+        if (strlen($var) >=8 && strtoupper($var) != $var && preg_replace('/[^0-9]/', '', $var) != '')
+            return true;
         return false;
     }
 
@@ -51,7 +62,9 @@ class ModeleConnexion extends Connexion{
         $sth = self::$bdd->prepare($sql);
         $sth->execute(array(':login' => $username));
         $tab = $sth->fetch();
-        return $tab;
+        if($tab['user'] == $username)
+            return false;
+        return true;
     }
 
     //Checks if the email adress exists in the database, returns True if it does, False otherwise
@@ -61,8 +74,12 @@ class ModeleConnexion extends Connexion{
         $sth = self::$bdd->prepare($sql);
         $sth->execute(array(':email' => $email));
         $tab = $sth->fetch();
-        return $tab;
+        if($tab['email'] == $email)
+            return false;
+        return true;
     }
+
+
 }
 
 ?>

@@ -83,13 +83,12 @@ class ContConnexion
                 }
                 break;
             case "new_inscription":
-                if ($this->m->form_ajout()) {
-                    echo "tout c'est bien passer";
-                    $this->action = "form_connexion";
-                    $this->exec();
-                } else {
-                    echo "tout c'est mal passer";
+                $ajouter = FALSE;
+                while ($ajouter === FALSE){
+                    $ajouter = $this->m->form_ajout();
                 }
+                $this->action = "form_connexion";
+                $this->exec();
                 break;
         }
     }

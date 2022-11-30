@@ -80,7 +80,7 @@ body {
 #bouton_send_connection {
     color: black;
     background-color: #f3d503;
-    border-color: #f3d503;
+    border-style: none;
 
 }
 
@@ -93,9 +93,41 @@ body {
     color: black;
     margin-top: 50px;
     background-color: #f3d503;
-    border-color: #f3d503;
+    border-style: none;
 }
 
+#bouton_send_incription_grey{
+    color: grey;
+    margin-top: 50px;
+    background-color: #f3d503;
+    border-style: none;
+}
+
+#forceMotPasseMinimal{
+    border-style: dashed;
+    width: 350px;
+    height: 110px;
+    border: 2px;
+    border-radius: 30px;
+    border-color: black;
+    display: inline-block;
+    color: red;
+    margin-top: 90px;
+    padding-right: 0px;
+    padding-left: 0px;
+    display: none;
+
+}
+#specMotPasse{
+    color: black;
+}
+
+.inscriptionErreur{
+    margin: 0px;
+    padding: 0px;
+    color: red;
+    display: none;
+}
 
 .form-signin {
     max-width: 385px;

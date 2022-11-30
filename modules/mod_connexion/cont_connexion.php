@@ -20,7 +20,7 @@ class ContConnexion
 
     public function form_inscription() {
         create_token();
-        $this->vI->formInscription();
+        $this->v->formInscription();
     }
 
     public function inscrit()

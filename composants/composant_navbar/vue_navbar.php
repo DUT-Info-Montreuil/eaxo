@@ -31,7 +31,7 @@ class VueNavbar
                             ?>
                             <a href="./index.php?module=mod_connexion&action=form_connexion" type="button"
                                class="btn btn-outline-light me-2">Connexion</a>
-                            <a href="/index.php?module=mod_connexion&action=&action=form_inscription" type="button"
+                            <a href="./index.php?module=mod_connexion&action=form_inscription" type="button"
                                class="btn btn-warning">Creer un compte</a>
                             <?php
                         } else {

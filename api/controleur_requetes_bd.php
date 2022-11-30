@@ -1,7 +1,7 @@
 <?php
 
-require_once __DIR__ . "./connection/controleur_connection.php";
-require_once __DIR__ . "./../connexion.php";
+require_once __DIR__ . "/connection/controleur_connection.php";
+require_once __DIR__ . "/../connexion.php";
 
 class controleur_requetes_bd extends Connexion
 {

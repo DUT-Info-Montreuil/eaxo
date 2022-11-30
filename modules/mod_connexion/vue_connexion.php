@@ -120,7 +120,7 @@ class VueConnexion extends VueGenerique
                                 </div>
 
                                 <p id="eMailIncorect" class="pt-0 mt-0 mb-0, inscriptionErreur">*L'adresse e-mail utiliser n'existe pas</p>
-                                <p id="eMailUtiliser" class="pt-0 mt-0 mb-0, inscriptionErreur">*Cette adresse e-mail est déja utiliser</p>
+                                <p id="eMailUtiliser" class="pt-0 mt-0 mb-0, inscriptionErreur">*Cette adresse e-mail est déjà utilisée</p>
 
                                 <button id="bouton_send_incription" class="w-100 btn btn-primary btn-lg" type="submit">
                                     Inscription

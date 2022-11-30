@@ -8,16 +8,17 @@ class ModeleHome extends Connexion{
     }
 
     public function get_pages_name($page, $folderParent) {
-        $nbpage = $page * 12;
+        $limit = $page*12;
+        $offset = $limit - 12;
         if (is_null($folderParent)) {
-            $sth = self::$bdd->prepare("SELECT name FROM exercices WHERE folderParent IS NULL AND userID =".$_SESSION['newsession']);
+            $sth = self::$bdd->prepare("SELECT name, exoNumber FROM exercices WHERE folderParent IS NULL AND userID =".$_SESSION['newsession']. " LIMIT ".$offset.",".$limit);
         }
         else {
-            $sth = self::$bdd->prepare("SELECT name FROM exercices WHERE folderParent=".$folderParent." AND userID =".$_SESSION['newsession']);
+            $sth = self::$bdd->prepare("SELECT name, exoNumber FROM exercices WHERE folderParent=".$folderParent." AND userID =".$_SESSION['newsession']. " LIMIT ".$offset.",".$limit);
         }
         $sth->execute();
         $exercicesNames = $sth->fetchAll();
-        $sth = self::$bdd->prepare("SELECT f.pName FROM gallery_folders f JOIN exercices e ON f.id=e.folderParent WHERE e.userID=".$_SESSION['newsession']);
+        $sth = self::$bdd->prepare("SELECT f.pName FROM gallery_folders f JOIN exercices e ON f.id=e.folderParent WHERE e.userID=".$_SESSION['newsession']. " LIMIT ".$offset.",".$limit);
         $sth->execute();
         $folderNames = $sth->fetchAll();
         $result = array_merge($folderNames, $exercicesNames);
@@ -34,7 +35,7 @@ class ModeleHome extends Connexion{
         $sth->execute();
         $result = $sth->fetch();
         
-        $nbpage = intval($result[0])/12;
+        $nbpage = intval($result[0])/12+1;
         return $nbpage;
     }
 }

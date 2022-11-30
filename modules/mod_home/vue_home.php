@@ -11,7 +11,6 @@ class VueHome extends VueGenerique
     {
 ?>
 
-        <body>
             <div class="album py-5 bg-light ml-50">
                 <div class="container text-center">
                     <?php
@@ -23,8 +22,6 @@ class VueHome extends VueGenerique
                 $this->generate_pages_a($nb_pages, $current_page);
             ?>
         </body>
-
-        </html>
 
         <?php
     }
@@ -39,14 +36,14 @@ class VueHome extends VueGenerique
         foreach ($exercices as $name_id) {
                 ?>
                 <div class="col">
-                    <a href="#">
+                    <a href='./index.php?module=mod_pages&action=formEdit&exo=<?php echo $name_id["exoNumber"]?>'>
                         <div class="card shadow-sm">
                             <svg class="bd-placeholder-img card-img-top" width="100%" height="225" role="img" preserveAspectRatio="xMidYMid slice">
                             </svg>
                             <div class="card-body">
                                 <div class="card-text">
                                     <?php
-                                    echo $name_id[0];
+                                    echo $name_id["name"];
                                     ?>
                                 </div>
                             </div>

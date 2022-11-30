@@ -4,7 +4,7 @@ require_once "./connexion.php";
 class ModeleHome extends Connexion{
     public function __construct()
     {
-        
+
     }
 
     public function get_pages_name($page, $folderParent) {
@@ -28,6 +28,7 @@ class ModeleHome extends Connexion{
     public function get_number_of_pages($folderParent) {
         if (is_null($folderParent)) {
             $sth = self::$bdd->prepare("SELECT COUNT(*) FROM exercices WHERE folderParent IS NULL AND userID =".$_SESSION['newsession']);
+            $sth2 = self::$bdd->prepare("SELECT COUNT(*) FROM exercices WHERE folderParent IS NULL AND userID =".$_SESSION['newsession']);
         }
         else {
             $sth = self::$bdd->prepare("SELECT COUNT(*) FROM exercices WHERE folderParent=".$folderParent." AND userID =".$_SESSION['newsession']);

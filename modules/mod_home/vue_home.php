@@ -12,6 +12,7 @@ class VueHome extends VueGenerique
 ?>
 
             <div class="album py-5 bg-light ml-50">
+            <a href=""><button style="background: url(./resources/images/bouton-ajouter-un-fichier.png.png)"></a>
                 <div class="container text-center">
                     <?php
                     $this->generate_divs($names);

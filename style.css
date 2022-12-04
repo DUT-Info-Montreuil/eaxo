@@ -219,3 +219,33 @@ Components style css
 .eaxoResizable  {
   border: 1px dashed black;
 }
+
+/*
+
+/*
+API Images
+*/
+
+#divImagesHome{
+    display: inline;
+
+}
+
+.divDossierApiImages{
+    display: inline;
+    float: left;
+    padding: 20px;
+}
+
+.vueDossierApiImages{
+    width: 80px;
+}
+
+.titreDossiers{
+    font-size: 13px;
+    color: deeppink;
+}
+
+#dossier_4{
+    color: #f3d503;
+}

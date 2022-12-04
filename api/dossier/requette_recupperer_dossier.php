@@ -5,7 +5,6 @@
         $reponsse->execute(array(':ownerid' => $ownerid));
         $resultat=$reponsse->fetchAll();
         reponsseArchitecture($resultat);
-
     }
 
     function reponsseArchitecture($tuples){

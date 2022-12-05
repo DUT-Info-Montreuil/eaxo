@@ -39,5 +39,15 @@ class ModeleHome extends Connexion{
         $nbpage = intval($result[0])/12+1;
         return $nbpage;
     }
+
+    public function create_exercice() {
+        if (strlen($_POST['exerciceName']) > 0) {
+            $sth = self::$bdd->prepare("INSERT INTO exercices (userID, name, exoNumber) VALUES(?, ?, ?)");
+            if ($sth->execute(array($_SESSION['newsession'], $_POST['exerciceName'], rand(1,10000)))) {
+                return True;
+            }
+        }
+        return false;
+    }
 }
 ?>

@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS groups(
     PRIMARY KEY(id)
 );
 
-INSERT INTO groups (gname) VALUES ("user");
+INSERT INTO groups (gname) VALUES ('user');
 
 
 CREATE TABLE IF NOT EXISTS users(
@@ -122,4 +122,4 @@ CREATE TABLE IF NOT EXISTS permissions(
 
 
 
-INSERT INTO users (email, username, passwd) VALUES("prof@gmail.com", "proftest", "$2y$10$CRsZddHPQ66oc8fE2l6VEOL4epL8P2XT7KIqacSR.ZfGA8TJ/WWea");
+INSERT INTO users (email, username, passwd) VALUES('prof@gmail.com', 'proftest', '$2y$10$CRsZddHPQ66oc8fE2l6VEOL4epL8P2XT7KIqacSR.ZfGA8TJ/WWea');

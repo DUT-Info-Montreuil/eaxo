@@ -5,6 +5,9 @@ require_once "./guardian.php";
 
 class ContConnexion
 {
+    public $m;
+    public $v;
+    public $action;
     public function __construct()
     {
         $this->m = new ModeleConnexion();

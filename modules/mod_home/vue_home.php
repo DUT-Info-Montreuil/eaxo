@@ -11,14 +11,41 @@ class VueHome extends VueGenerique
     {
 ?>
 
-            <div class="album py-5 bg-light ml-50">
-            <a href=""><button style="background: url(./resources/images/bouton-ajouter-un-fichier.png.png)"></a>
-                <div class="container text-center">
-                    <?php
-                    $this->generate_divs($names);
-                    ?>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Ajouter une nouvelle page d'exercice
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <form action="./index.php?module=mod_home&action=create_exercice" method="POST"> 
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Créer un exercice</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="floatingInput" name="exerciceName"
+                                    placeholder="Nom">
+                            <label for="floatingPassword">Nom de l'exercice</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                        <button class="btn btn-primary" type="submit">Créer</button>
+                    </div>
                 </div>
+            </form>
             </div>
+            </div>
+            <div class="container text-center">
+                <?php
+                $this->generate_divs($names);
+                ?>
+            </div>
+        </div>
             <?php
                 $this->generate_pages_a($nb_pages, $current_page);
             ?>
@@ -37,10 +64,12 @@ class VueHome extends VueGenerique
         foreach ($exercices as $name_id) {
                 ?>
                 <div class="col">
-                    <a href='./index.php?module=mod_pages&action=formEdit&exo=<?php echo $name_id["exoNumber"]?>'>
                         <div class="card shadow-sm">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <a style="text-decoration: none" href='./index.php?module=mod_pages&action=formEdit&exo=<?php echo $name_id["exoNumber"]?>'>
                             <svg class="bd-placeholder-img card-img-top" width="100%" height="225" role="img" preserveAspectRatio="xMidYMid slice">
                             </svg>
+                            
                             <div class="card-body">
                                 <div class="card-text">
                                     <?php

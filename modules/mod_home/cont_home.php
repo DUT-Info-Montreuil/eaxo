@@ -3,6 +3,11 @@ require_once __DIR__ . "/modele_home.php";
 require_once __DIR__ . "/vue_home.php";
 
 class ContHome {
+    public $m;
+    public $v;
+    public $action;
+    public $location;
+    public $page;
     public function __construct()
     {
         $this->m = new ModeleHome();
@@ -16,11 +21,19 @@ class ContHome {
     public function homepage() {
         $this->v->homepage($this->m->get_pages_name(intval($this->page), $this->location), $this->m->get_number_of_pages($this->location), intval($this->page));
     }
+
+    public function create_exercice() {
+        $this->m->create_exercice();
+        $this->homepage();
+    }
     
     public function exec() {
         switch($this->action) {
             case "homepage":
                 $this->homepage();
+                break;
+            case "create_exercice":
+                $this->create_exercice();
                 break;
         }
     }

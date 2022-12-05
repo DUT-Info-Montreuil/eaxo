@@ -2,12 +2,12 @@
 
 
 //variables BD
-var dossierIMG;
+var dossiers = new listeDossiers();
 recuperrerDossiers();
 var listeImages;
 recuperrerImages();
 
-var dossierObj = new listeDossiers();
+
 
 
 //variables affichage
@@ -17,16 +17,11 @@ var dossierObj = new listeDossiers();
 $('DOMContentLoaded', function() {
 
     $("#ouvertureVolet").click(function(){
-        afficherDossier(null);
+        dossiers.afficher(null);
         });
 
 
 });
-
-function afficherDossier(racine){
-    //console.log(dossierObj.filtrer(g => g.parent == null));
-    dossierObj.afficher(racine);
-}
 
 function recuperrerDossiers(){
     $.ajax({
@@ -36,8 +31,7 @@ function recuperrerDossiers(){
         dataType: "json"
     }).done(function(retour) {
         console.log("Fin de recuperation des dossier\n");
-        dossierIMG = retour;
-        indexerDossiers();
+        indexerDossiers(retour);
     });
 }
 
@@ -52,9 +46,9 @@ function recuperrerImages(){
     });
 }
 
-function indexerDossiers(){
+function indexerDossiers(dossierIMG){
     for (var racineElement of dossierIMG) {
-        dossierObj.add(new Dossier(racineElement["id"], racineElement["pName"], racineElement["folderParent"]));
+        dossiers.add(new Dossier(racineElement["id"], racineElement["pName"], racineElement["folderParent"]));
     }
 }
 
@@ -77,7 +71,6 @@ function listeDossiers(){
         this.cacher();
         var dossierFiltrer = this.filtrer(dossier => dossier.parent == niveau);
         for (var dossier of dossierFiltrer) {
-            console.log("Affichon le niveau " + niveau + " :" + dossierFiltrer + "\n");
             dossier.afficher();
         }
         this.niveauAfficher = niveau;
@@ -96,23 +89,19 @@ function Dossier(id, nom, parent){
     this.id = id;
     this.nom = nom;
     this.parent = parent;
-    this.vue = "<div id='dossier_'" + this.id + " class='divDossierApiImages'> <img class='vueDossierApiImages' src= \"resources/images/api_images/dossier.png\"/> <p class='titreDossiers'>" + this.nom + "</p> </div>";
+    this.vue = "<div id='dossier_" + this.id + "' class='divDossierApiImages'> <img class='vueDossierApiImages' src= \"resources/images/api_images/dossier.png\"/> <p class='titreDossiers'>" + this.nom + "</p> </div>";
     this.afficher = function (){
-        var idBaliseVue = "dossier_" + this.id;
-        $.idBaliseVue.css("display", "block");
+        $("#dossier_" + this.id).css("display", "block");
     }
     this.cacher = function (){
-        var idBaliseVue = "dossier_"+this.id;
-        idBaliseVue.style.setProperty("display", "none");
+        $("#dossier_" + this.id).css("display", "none");
     }
     this.toString = function (){
         console.log("Affichage du dossier " + this.id + "\nnom: " + this.nom + "\nparent: " + this.parent + "\n");
     }
 
-
     $("#divImagesHome").append(this.vue);
     this.cacher();
-
 }
 
 

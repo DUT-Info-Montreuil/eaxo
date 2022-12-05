@@ -192,6 +192,8 @@ class VuePages extends VueGenerique
 
                 <p>texte dans truc</p>
 
+                <img id='Dossier_Back' src="resources/images/api_images/back.png">
+
             </div>
 
         <?php

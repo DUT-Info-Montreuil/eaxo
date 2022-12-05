@@ -1,20 +1,21 @@
 
 
 
-//variables BD
+//Initialisation des variables
 var dossiers = new listeDossiers();
-recuperrerDossiers();
 var listeImages;
+
+//Recuperation de la BD
+recuperrerDossiers();
 recuperrerImages();
 
 
 
-
-//variables affichage
-
-
-
 $('DOMContentLoaded', function() {
+
+    $("#Dossier_Back").click(function (){
+        dossiers.afficherPrecedent();
+    });
 
     $("#ouvertureVolet").click(function(){
         dossiers.afficher(null);
@@ -52,6 +53,13 @@ function indexerDossiers(dossierIMG){
     }
 }
 
+function actualiserBoutonBack(id){
+    if(id == null)
+        $("#Dossier_Back").css("opacity", 0.3);
+    else
+        $("#Dossier_Back").css("opacity", 1);
+}
+
 function listeDossiers(){
     this.dossiers = new Array();
     this.niveauAfficher = -1;
@@ -70,11 +78,19 @@ function listeDossiers(){
     this.afficher = function (niveau){
         this.cacher();
         var dossierFiltrer = this.filtrer(dossier => dossier.parent == niveau);
+        console.log("Affichons le niveau " + niveau + "\n");
+        console.log(dossierFiltrer);
         for (var dossier of dossierFiltrer) {
             dossier.afficher();
         }
         this.niveauAfficher = niveau;
+        actualiserBoutonBack(this.niveauAfficher);
     }
+    this.afficherPrecedent = function (){
+        var id = this.filtrer(y => y.parent == this.niveauAfficher).id;
+        this.afficher(id);
+        this.actualiserBoutonBack(id);
+    };
     this.cacher = function (){
         if (this.niveauAfficher != -1) {
             var dossierFiltrer = this.filtrer(t => t.parent == this.niveauAfficher);
@@ -90,11 +106,12 @@ function Dossier(id, nom, parent){
     this.nom = nom;
     this.parent = parent;
     this.vue = "<div id='dossier_" + this.id + "' class='divDossierApiImages'> <img class='vueDossierApiImages' src= \"resources/images/api_images/dossier.png\"/> <p class='titreDossiers'>" + this.nom + "</p> </div>";
+    this.vueId =  "#dossier_" + this.id;
     this.afficher = function (){
-        $("#dossier_" + this.id).css("display", "block");
+        $(this.vueId).css("display", "block");
     }
     this.cacher = function (){
-        $("#dossier_" + this.id).css("display", "none");
+        $(this.vueId).css("display", "none");
     }
     this.toString = function (){
         console.log("Affichage du dossier " + this.id + "\nnom: " + this.nom + "\nparent: " + this.parent + "\n");
@@ -102,6 +119,11 @@ function Dossier(id, nom, parent){
 
     $("#divImagesHome").append(this.vue);
     this.cacher();
+    console.log("creation du dossier avec id = " + this.id);
+    $(this.vueId).click(function (){
+        console.log("Click sur id = " + this.id.substr(8));
+        dossiers.afficher(this.id.substr(8));
+    });
 }
 
 

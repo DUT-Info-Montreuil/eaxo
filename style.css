@@ -246,6 +246,10 @@ API Images
     color: deeppink;
 }
 
-#dossier_4{
-    color: #f3d503;
+#Dossier_Back{
+    width: 30px;
+    border: 2px;
+    border-radius: 5px;
+    border-color: deeppink;
+    opacity: 0.3;
 }

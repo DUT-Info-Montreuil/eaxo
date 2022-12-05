@@ -26,6 +26,11 @@ class ContHome {
         $this->m->create_exercice();
         $this->homepage();
     }
+
+    public function delete_exercice() {
+        $this->m->delete_exercice();
+        $this->homepage();
+    }
     
     public function exec() {
         switch($this->action) {
@@ -34,6 +39,9 @@ class ContHome {
                 break;
             case "create_exercice":
                 $this->create_exercice();
+                break;
+            case "delete_exercice":
+                $this->delete_exercice();
                 break;
         }
     }

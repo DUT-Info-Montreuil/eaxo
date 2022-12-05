@@ -11,35 +11,13 @@ class VueHome extends VueGenerique
     {
 ?>
 
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <!-- Button trigger modal Create Exo-->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCreateExo">
             Ajouter une nouvelle page d'exercice
             </button>
 
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-            <form action="./index.php?module=mod_home&action=create_exercice" method="POST"> 
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Créer un exercice</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="floatingInput" name="exerciceName"
-                                    placeholder="Nom">
-                            <label for="floatingPassword">Nom de l'exercice</label>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                        <button class="btn btn-primary" type="submit">Créer</button>
-                    </div>
-                </div>
-            </form>
-            </div>
-            </div>
+            
+
             <div class="container text-center">
                 <?php
                 $this->generate_divs($names);
@@ -49,6 +27,33 @@ class VueHome extends VueGenerique
             <?php
                 $this->generate_pages_a($nb_pages, $current_page);
             ?>
+
+            <!-- Modal Create Exo-->
+            <div class="modal" id="modalCreateExo" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="false">
+                
+            <div class="modal-dialog">
+            <form action="./index.php?module=mod_home&action=create_exercice" method="POST"> 
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="floatingInput" name="exerciceName"
+                                placeholder="Nom">
+                        <label for="floatingPassword">Nom de l'exercice</label>
+                     </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button class="btn btn-primary" type="submit">Créer</button>
+                </div>
+                </div>
+            </form>
+            </div>
+            </div>
+            
         </body>
 
         <?php
@@ -65,7 +70,8 @@ class VueHome extends VueGenerique
                 ?>
                 <div class="col">
                         <div class="card shadow-sm">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <!-- Button trigger modal Delete Exo-->
+                        <button type="button" class="btn-close" data-bs-toggle="modal" data-bs-target="#modalDeleteExo"></button>
                         <a style="text-decoration: none" href='./index.php?module=mod_pages&action=formEdit&exo=<?php echo $name_id["exoNumber"]?>'>
                             <svg class="bd-placeholder-img card-img-top" width="100%" height="225" role="img" preserveAspectRatio="xMidYMid slice">
                             </svg>
@@ -80,12 +86,37 @@ class VueHome extends VueGenerique
                         </div>
                     </a>
                 </div>
+        <!-- Modal Delete Exo-->
+        <div class="modal" id="modalDeleteExo" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="false">
+                
+                <div class="modal-dialog">
+                <form action="./index.php?module=mod_home&action=delete_exercice" method="POST"> 
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-floating">
+                            <p>Êtes-vous sûr de voulez supprimer l'exercice :</p><?php echo $name_id["name"]?>
+                            <input type="hidden" value="<?php echo $name_id["exoNumber"]?>" name="exoNumber">
+                         </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                        <button class="btn btn-primary" type="submit">Supprimer</button>
+                    </div>
+                    </div>
+                </form>
+                </div>
+                </div>
                 <?php
                 $colonne++;
         }
         if (isset($exercices) && count($exercices) > 0) {
             echo '</div>';
         }
+       
         }
 
         public function generate_pages_a($number_of_pages, $current_page) {

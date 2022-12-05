@@ -288,3 +288,8 @@ Components style css
   text-decoration: none;
   cursor: pointer;
 }
+
+.modal-backdrop {
+  /* bug fix - no overlay */    
+  display: none;    
+}

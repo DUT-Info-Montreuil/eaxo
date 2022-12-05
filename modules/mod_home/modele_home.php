@@ -49,5 +49,10 @@ class ModeleHome extends Connexion{
         }
         return false;
     }
+
+    public function delete_exercice() {
+        $sth = self::$bdd->prepare("DELETE FROM exercices WHERE exoNumber=?");
+        $sth->execute(array($_POST['exoNumber']));
+    }
 }
 ?>

@@ -4,6 +4,7 @@ import {getFontProperty} from './elements/fonts.js';
 import {cloneElement} from './cloneelement.js'
 import exoParser from './exoParser.js'
 import {createLinesElement} from './elements/lines.js'
+import * as ok from './utils/selector';
 
 import exoLoader from './exerciceLoader.js'
 

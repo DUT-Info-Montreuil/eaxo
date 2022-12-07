@@ -21,7 +21,7 @@ class VuePages extends VueGenerique
                 <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
                         <?php
-                            require_once(SITE_ROOT . "/widgets/components/box.php");
+                            require_once(SITE_ROOT . "/widgets/components/surrounded.php");
                             require_once(SITE_ROOT . "/widgets/components/trueorfalse.php");
                             require_once(SITE_ROOT . "/widgets/components/write.php");
                         ?> 

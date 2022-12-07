@@ -36,7 +36,6 @@
     }
 
 
-
     @page {
       size: auto;  margin: 0mm; 
       position: absolute;
@@ -165,4 +164,15 @@ Components style css
 
 .eaxoResizable  {
   border: 1px dashed black;
+}
+
+
+.surrounded {
+  border:1px solid black;
+  padding: 5px;
+}
+
+.subsurrounded {
+  margin-right: 10px;
+  margin-left: 10px;
 }

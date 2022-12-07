@@ -1,10 +1,9 @@
-//import exo  from './surronded.js'
 //We can't get folder content, then we need to manually declare files which we want to load
 const allWidgets = ["surronded", "trueorfalse", "write"];
 const allElements = ["text", "lines"];
 import previewLoader from './loadPreview.js'
 
-class WidgetElementLoader {
+class ExoRegisterManager {
     constructor() {
         this.list = {}
         this.elementList = {}
@@ -18,7 +17,7 @@ class WidgetElementLoader {
             })
         }
 
-        //Load all widgets
+        //Load all exercices
         for(var i = 0; i < allWidgets.length; i++) {
             import("./exercices/" + allWidgets[i] + ".js").then(module => {
                 
@@ -51,5 +50,5 @@ class WidgetElementLoader {
 }
 
 
-const widgetElementLoader = new WidgetElementLoader();
+const widgetElementLoader = new ExoRegisterManager();
 export default widgetElementLoader;

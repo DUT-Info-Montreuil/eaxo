@@ -14,7 +14,6 @@ class ExoParser {
            if(array[key] && array[key] != "" && typeof(array[key]) != "function") {
             style[key] = array[key]
            }
-           
         }
 
         return style
@@ -45,14 +44,10 @@ class ExoParser {
         if(!dataValues["nosave"]) {
     
             jQueryElement.attr("id", widget_c.getNewID(element));
-            
-
 
             array[jQueryElement.attr("id")] = array[jQueryElement.attr("id")] ? array[jQueryElement.attr("id")] : {}
             arrayObj = array[jQueryElement.attr("id")];
             arrayObj.dataset = {}
-
-            
 
             for(var dataAttr in dataValues) {
                 if(typeof(dataAttr) == "string" && typeof(dataValues[dataAttr]) != "object") {
@@ -60,7 +55,6 @@ class ExoParser {
                 }
             }
 
-            
             arrayObj.nodeName = element.nodeName;
             arrayObj.nodeID = jQueryElement.attr("id");
             arrayObj.parent = parent.attr("id")
@@ -76,8 +70,6 @@ class ExoParser {
 
             //Only div can include html element,so just extends tree when we found new div
             if(element.nodeName == "DIV") {
-                
-
                 for(var i = 0; i < jQueryElement.children().length; i++) {
 
                     this.stringifySub(jQueryElement.children()[i], jQueryElement, arrayObj.children)
@@ -85,14 +77,11 @@ class ExoParser {
                 }
             }
         }
-
-        
         
     }
 
     stringify(callback) {
         this.exoArray.children = {}
-        //for(var i = 0; i < this.page.children().length; i++) {
 
         if(this.page.children().length > 0) {
             for(var i = 0; i < this.page.children().length; i++) {
@@ -127,7 +116,6 @@ class ExoParser {
         }
         
         //Add to parent
-        
         nodeElement.appendTo($(parent))
 
         //Load custom css style

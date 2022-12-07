@@ -4,6 +4,8 @@ import {createLinesElement} from './elements/lines.js'
 class ExerciceLoader {
     constructor() {
         this.loadExercice(1);
+        this.loaderFunction = {}
+        this.loaderFunction["lines"] = createLinesElement;
     }
 
     loadExercice(exoID) {
@@ -45,9 +47,12 @@ class ExerciceLoader {
             let dataset = JSON.parse(elementData.dataset);
 
             for(let ind in dataset) {
-                jElement[0].dataset[ind] =  dataset[ind];
+                jElement[0].dataset[ind] = dataset[ind];
                 if(ind == "lines") {
                     createLinesElement(jElement[0])
+                }
+                if(dataset[ind] == "surrounded") {
+
                 }
             }
             //Load css

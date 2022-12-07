@@ -9,15 +9,8 @@
             $this->con = $cont;
         }
 
-        public function fetchExercice2() {
-            $_SESSION["exoID"] = intval($_GET["exo"]);
-            var_dump($_SESSION["exoID"]);
-
-            
-        }
-
         public function fetchExercice() {
-            $this->fetchExercice2();
+            $_SESSION["exoID"] = intval($_GET["exo"]);
             
             $this->con->getView()->formEdit();
             

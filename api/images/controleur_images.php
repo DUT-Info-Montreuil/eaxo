@@ -13,10 +13,12 @@ class controleur_images extends Connexion
 
     public function exec(){
         switch ($this->action){
-            case "images":
-                recupererArchitectureIMG(Connexion::$bdd, $_SESSION['newsession']);
+            case "getImages":
+                if(isset($_POST['folderParent']))
+                    recupererArchitectureIMG(Connexion::$bdd, $_SESSION['newsession'], $_POST['folderParent']);
+                else
+                    echo ("probleme de ptn de post !!");
                 break;
-
         }
     }
 }

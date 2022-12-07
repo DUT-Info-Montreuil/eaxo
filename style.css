@@ -241,7 +241,24 @@ API Images
     width: 80px;
 }
 
+.vueImageApiImages{
+    height: 80px;
+    width: 80px;
+
+}
+.divImageApiImages{
+    display: inline;
+    float: left;
+    padding: 20px;
+    height: 80px;
+}
+
 .titreDossiers{
+    font-size: 13px;
+    color: deeppink;
+}
+
+.titreImages{
     font-size: 13px;
     color: deeppink;
 }

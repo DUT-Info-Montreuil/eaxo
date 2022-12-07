@@ -3,13 +3,11 @@
 
 //Initialisation des variables
 var dossiers = new listeDossiers();
-var listeImages;
+var Images = new listeImages();
+var niveauAfficher = -1;
 
 //Recuperation de la BD
 recuperrerDossiers();
-recuperrerImages();
-
-
 
 $('DOMContentLoaded', function() {
 
@@ -25,6 +23,7 @@ $('DOMContentLoaded', function() {
 });
 
 function recuperrerDossiers(){
+
     $.ajax({
         type: "POST",
         url: "./api/controleur_requetes_bd.php?module=dossiers&action=architecture",
@@ -36,20 +35,30 @@ function recuperrerDossiers(){
     });
 }
 
-function recuperrerImages(){
+function recuperrerImages(parent){
+    Images.detruire();
     $.ajax({
         type: "POST",
-        url: "./api/controleur_requetes_bd.php?module=images&action=images",
-        data: {},
+        url: "./api/controleur_requetes_bd.php?module=images&action=getImages",
+        //processData: false,
+        data: {folderParent: parent},
         dataType: "json"
     }).done(function(retour) {
-        listeImages = retour;
+        console.log("Fin de récupération des images du niveau " + parent + ".");
+        indexerImages(retour);
     });
 }
 
-function indexerDossiers(dossierIMG){
-    for (var racineElement of dossierIMG) {
+function indexerDossiers(images){
+    for (var racineElement of images) {
         dossiers.add(new Dossier(racineElement["id"], racineElement["pName"], racineElement["folderParent"]));
+    }
+}
+
+function indexerImages(resultat){
+    Images = new listeImages();
+    for (var resultatElement of resultat) {
+        Images.add(new Image(resultatElement["id"], resultatElement["pName"], resultatElement["folderParent"], resultatElement["Img64"]));
     }
 }
 
@@ -60,9 +69,59 @@ function actualiserBoutonBack(id){
         $("#Dossier_Back").css("opacity", 1);
 }
 
+function listeImages(){
+    this.Images = new Array();
+    this.add = function (image){
+        this.Images.push(image);
+    }
+    this.afficher = function (niveau){
+        var dossierFiltrer = this.filtrer(dossier => dossier.parent == niveau);
+        for (var dossier of dossierFiltrer) {
+            dossier.afficher();
+        }
+        niveauAfficher = niveau;
+        actualiserBoutonBack(niveauAfficher);
+    }
+    this.cacher = function (){
+        if (niveauAfficher != -1) {
+            for (var img of this.Images) {
+                img.cacher();
+            }
+        }
+    }
+     this.detruire = function (){
+        this.cacher();
+        for (var img of this.Images) {
+            img.detruire();
+        }
+     }
+}
+function Image(id, nom, parent, img){
+    this.id = id;
+    this.nom = nom;
+    this.parent = parent;
+    this.vueId =  "image_" + this.id;
+    this.imageEncoder = img;
+    this.vue = "<div id='" + this.vueId + "' class='divImageApiImages'> <img class='vueImageApiImages' src='data:image/jpeg;base64," + this.imageEncoder + "'/> <p class='titreImages'>" + this.nom + "</p> </div>";
+    this.afficher = function (){
+        $("#" + this.vueId).css("display", "block");
+    }
+    this.cacher = function (){
+        $("#" + this.vueId).css("display", "none");
+    }
+    this.detruire = function (){
+        $("#" + this.vueId).remove();
+    }
+    this.toString = function (){
+        console.log("Affichage du dossier " + this.id + "\nnom: " + this.nom + "\nparent: " + this.parent + "\n");
+    }
+
+    $("#divImagesHome").append(this.vue);
+    //this.cacher();
+}
+
 function listeDossiers(){
     this.dossiers = new Array();
-    this.niveauAfficher = -1;
     this.add = function (dossier){
         this.dossiers.push(dossier);
     }
@@ -77,23 +136,27 @@ function listeDossiers(){
     }
     this.afficher = function (niveau){
         this.cacher();
+        recuperrerImages(niveau);
         var dossierFiltrer = this.filtrer(dossier => dossier.parent == niveau);
-        console.log("Affichons le niveau " + niveau + "\n");
-        console.log(dossierFiltrer);
         for (var dossier of dossierFiltrer) {
             dossier.afficher();
         }
-        this.niveauAfficher = niveau;
-        actualiserBoutonBack(this.niveauAfficher);
+        actualiserBoutonBack(niveau);
+        niveauAfficher = niveau;
     }
     this.afficherPrecedent = function (){
-        var id = this.filtrer(y => y.parent == this.niveauAfficher).id;
+        var dossier = this.filtrer(y => y.id == niveauAfficher);
+        if(dossier.length != 1){
+            console.log("Impossible de retrouver le dossier ...");
+            return;
+        }
+        var id = dossier[0].parent;
         this.afficher(id);
-        this.actualiserBoutonBack(id);
+        actualiserBoutonBack(id);
     };
     this.cacher = function (){
-        if (this.niveauAfficher != -1) {
-            var dossierFiltrer = this.filtrer(t => t.parent == this.niveauAfficher);
+        if (niveauAfficher != -1) {
+            var dossierFiltrer = this.filtrer(t => t.parent == niveauAfficher);
             for (var dossier of dossierFiltrer) {
                 dossier.cacher();
             }
@@ -105,7 +168,7 @@ function Dossier(id, nom, parent){
     this.id = id;
     this.nom = nom;
     this.parent = parent;
-    this.vue = "<div id='dossier_" + this.id + "' class='divDossierApiImages'> <img class='vueDossierApiImages' src= \"resources/images/api_images/dossier.png\"/> <p class='titreDossiers'>" + this.nom + "</p> </div>";
+    this.vue = "<div id='dossier_" + this.id + "' class='divDossierApiImages'> <img class='vueDossierApiImages' src=\"resources/images/api_images/dossier.png\"/> <p class='titreDossiers'>" + this.nom + "</p> </div>";
     this.vueId =  "#dossier_" + this.id;
     this.afficher = function (){
         $(this.vueId).css("display", "block");
@@ -116,13 +179,10 @@ function Dossier(id, nom, parent){
     this.toString = function (){
         console.log("Affichage du dossier " + this.id + "\nnom: " + this.nom + "\nparent: " + this.parent + "\n");
     }
-
     $("#divImagesHome").append(this.vue);
     this.cacher();
-    console.log("creation du dossier avec id = " + this.id);
     $(this.vueId).click(function (){
-        console.log("Click sur id = " + this.id.substr(8));
-        dossiers.afficher(this.id.substr(8));
+        dossiers.afficher(id);
     });
 }
 

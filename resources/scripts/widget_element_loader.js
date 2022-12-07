@@ -1,5 +1,5 @@
 //We can't get folder content, then we need to manually declare files which we want to load
-const allWidgets = ["surronded", "trueorfalse", "write"];
+const allWidgets = ["surrounded", "trueorfalse", "write"];
 const allElements = ["text", "lines"];
 import previewLoader from './loadPreview.js'
 

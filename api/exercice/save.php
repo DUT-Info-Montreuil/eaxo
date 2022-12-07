@@ -63,7 +63,7 @@
         public function getExercice($exoId, $userID) {
             $params = array(":userID" => $userID, ":exoID" => $exoId);
 
-            $sql = "SELECT e.exoNumber as exoID, e.userID FROM exercices as e WHERE e.exoNumber = :exoID AND e.userID = :userID";
+            $sql = "SELECT e.id as exoID, e.userID FROM exercices as e WHERE e.exoNumber = :exoID AND e.userID = :userID";
             $sth = self::$bdd->prepare($sql);
             $sth->execute($params);
             $result = $sth->fetch();
@@ -73,7 +73,7 @@
                 $sth = self::$bdd->prepare($insertSQL);
                 $sth->execute($params);
 
-                //Get exoID
+                //Get exo database ID
                 $sth2 = self::$bdd->prepare("SELECT id as exerciceId FROM exercices as ex WHERE ex.userID = :userID AND ex.exoNumber = :exoID");
                 $sth2->execute($params);
                 return array("userID" => $userID, "exoID" => $sth2->fetch()["exerciceId"]);
@@ -86,13 +86,8 @@
             }
         }
 
-        /*public function createNewExercice($exoId) {
-
-        }*/
-
-
         public function save() {
-
+            
             if(isset($_SESSION["newsession"])) {
                 $this->userID = $_SESSION["newsession"];
                 $exerciceID = $_SESSION["exoID"];
@@ -102,7 +97,7 @@
                 //Check if we need to insert new exercice into database
                 $dataExo = $this->getExercice($exerciceID, $this->userID);
                 
-                //var_dump($dataExo);
+                
                 try {
                     
                     self::$bdd->beginTransaction();
@@ -128,6 +123,7 @@
 
         public function isOk($ok) {
             if($ok) {
+                
                 echo json_encode("oui");
                 
             } else {

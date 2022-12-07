@@ -2,15 +2,16 @@ import jqueryLoader from "./loader/jqueryLoader.js";
 import {createLinesElement} from './elements/lines.js'
 
 class ExerciceLoader {
-    constructor() {
-        this.loadExercice(1);
+    constructor() { 
+        let exoID = $("#pageContainer")[0].dataset.exoid;
+        this.loadExercice(exoID);
         this.loaderFunction = {}
         this.loaderFunction["lines"] = createLinesElement;
     }
 
     loadExercice(exoID) {
         let self = this;
-        $.get("./api/exercice/get.php", {}, function(result) {
+        $.get("./api/exercice/get.php?exoID=" + exoID, {}, function(result) {
             self.createExercice(JSON.parse(result));
         })
     }

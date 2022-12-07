@@ -135,6 +135,7 @@ class ExoParser {
                 exoJson : json
             }
             $.post("./api/exercice/save.php", data, function(result) {
+                console.log(result)
                 setTimeout(function() {
                     $("#spinnerLoading").css({"opacity":0} );
                 }, 300)

@@ -10,7 +10,8 @@
         }
 
         public function fetchExercice2() {
-            $_SESSION["exoID"] = 1;
+            $_SESSION["exoID"] = intval($_GET["exo"]);
+            var_dump($_SESSION["exoID"]);
 
             
         }

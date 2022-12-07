@@ -1,20 +1,16 @@
-@font-face {
-  font-family: "Cursive";
-  src: url("./resources/fonts/Cursive_standard.ttf");
-}
-
 @media print {
 
     nav {
-      display: none;
+        display: none;
     }
+
     .apercu {
-      width: 210mm;
-      height: 297mm;
+        width: 210mm;
+        height: 297mm;
     }
 
     .displaynone {
-      display: none;
+        display: none;
     }
 
     body > * {
@@ -45,55 +41,116 @@
 }
 
 #pageContainer {
-  display: block;
-  margin: 0 auto;
-  margin-bottom: 0.5cm;
-  box-shadow: 0 0 0.5cm rgba(0,0,0,0.1);
+    background: white;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 0.5cm;
+    box-shadow: 0 0 0.5cm rgba(0, 0, 0, 0.5);
 }
 
-#pageContainer[size="A4"] {  
-  width: 21cm;
-  height: 29.7cm; 
+#pageContainer[size="A4"] {
+    width: 21cm;
+    height: 29.7cm;
 }
 
 .textInBox {
-  text-align: center;
-  background-color: aquamarine;
+    text-align: center;
+    background-color: aquamarine;
 }
 
 
 /* Custom */
 body {
-  height: 100%;
+    height: 100%;
 }
 
+/*Page de connection au compte*/
 #Div_Connection {
-  display: flex;
-  align-items: center;
-  padding-top: 40px;
-  padding-bottom: 100%;
-  background-color: #f8f8f8;
+    display: flex;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 100%;
+    background-color: #f8f8f8;
+}
+
+#bouton_send {
+    color: black;
+    background-color: #f3d503;
+    border-color: #f3d503;
+
+}
+
+#bouton_send_connection {
+    color: black;
+    background-color: #f3d503;
+    border-style: none;
+
+}
+
+/*Page de creation de compte*/
+#formulaire-saisie-inscription {
+    margin-left: 400px;
+}
+
+#bouton_send_incription {
+    color: black;
+    margin-top: 50px;
+    background-color: #f3d503;
+    border-style: none;
+}
+
+#bouton_send_incription_grey{
+    color: grey;
+    margin-top: 50px;
+    background-color: #f3d503;
+    border-style: none;
+}
+
+#forceMotPasseMinimal{
+    border-style: dashed;
+    width: 350px;
+    height: 110px;
+    border: 2px;
+    border-radius: 30px;
+    border-color: black;
+    display: inline-block;
+    color: red;
+    margin-top: 90px;
+    padding-right: 0px;
+    padding-left: 0px;
+    display: none;
+
+}
+#specMotPasse{
+    color: black;
+}
+
+.inscriptionErreur{
+    margin: 0px;
+    padding: 0px;
+    color: red;
+    display: none;
 }
 
 .form-signin {
-  max-width: 385px;
-  padding: 15px;
+    max-width: 385px;
+    padding: 15px;
 }
 
 .form-signin .form-floating:focus-within {
-  z-index: 2;
+    z-index: 2;
 }
 
 .form-signin input[type="email"] {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
 }
 
 .form-signin input[type="password"] {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 }
 
 #bouton_send {
@@ -116,6 +173,36 @@ body {
   
 }
 
+.pagination {
+  display: inline-block;
+  align-items: center;
+}
+
+.paginationbis {
+  text-align: center;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 1px solid #ddd;
+}
+
+.pagination a.active {
+  background-color: #ffc107;
+  color: white;
+  border: 1px solid #ffc107;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+
+/*Temporary*/
+.bd-placeholder-img {
+  background-color: gray;
+}
 .eaxoInput {
   border:none;
   background: none;
@@ -175,4 +262,48 @@ Components style css
 .subsurrounded {
   margin-right: 10px;
   margin-left: 10px;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-backdrop {
+  /* bug fix - no overlay */    
+  display: none;    
 }

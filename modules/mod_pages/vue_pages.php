@@ -88,10 +88,8 @@ class VuePages extends VueGenerique
         public function formEdit()
         {
             $this->fontTools();
-
+            $exoid = isset($_GET["exo"]) ? $_GET["exo"] : 0;
             ?>
-
-            
                 <div class ="container mt-2">
                     <div class="row">
                         <div class="widgets col-3 displaynone">
@@ -99,7 +97,7 @@ class VuePages extends VueGenerique
                         </div>
 
                         <div class="apercu col-sm-9">
-                            <page id="pageContainer" size="A4"></page>
+                            <page id="pageContainer" size="A4" data-exoID=<?php echo $exoid ?>></page>
                         </div>
                     </div>
 

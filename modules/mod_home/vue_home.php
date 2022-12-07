@@ -97,7 +97,7 @@ class VueHome extends VueGenerique
                 <div class="col">
                         <div class="card shadow-sm">
                         <!-- Button trigger modal Delete Exo-->
-                        <a type="button" class="open-DeletePageDialog btn-close" data-bs-toggle="modal" data-id=<?php echo $name_id["exoNumber"]?> data-name=<?php echo $name_id["name"]?> data-bs-target="#modalDeleteExo" href="#addBookDialog"></a>
+                        <a type="button" class="open-DeletePageDialog btn-close" data-bs-toggle="modal" data-id=<?php echo $name_id["exoNumber"]?> data-name=<?php echo $name_id["name"]?> data-bs-target="#modalDeleteExo"></a>
                         <a style="text-decoration: none" href='./index.php?module=mod_pages&action=formEdit&exo=<?php echo $name_id["exoNumber"]?>'>
                             <svg class="bd-placeholder-img card-img-top" width="100%" height="225" role="img" preserveAspectRatio="xMidYMid slice">
                             </svg>

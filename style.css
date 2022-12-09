@@ -231,41 +231,84 @@ API Images
 
 }
 
+#controleurImages{
+    width: auto;
+    margin: 13px;
+}
+
 .divDossierApiImages{
     display: inline;
     float: left;
-    padding: 20px;
+    width: 120px;
+    height: 150px;
+    border: solid;
+    border-color: gray;
+    border-radius: 20px;
+    border-width: 2px;
+    border-shadow: 10px;
+    margin-right: 20px;
+    margin-bottom: 30px;
+
 }
 
 .vueDossierApiImages{
     width: 80px;
+    margin-left: 19px;
 }
 
 .vueImageApiImages{
     height: 80px;
-    width: 80px;
+    width: auto;
+    max-width: 80px;
+    margin-left: 18px;
 
 }
 .divImageApiImages{
     display: inline;
     float: left;
-    padding: 20px;
-    height: 80px;
+    width: 120px;
+    height: 150px;
+    margin-right: auto;
+    margin-left: auto;
+    border: solid;
+    border-width: 3px;
 }
 
 .titreDossiers{
     font-size: 13px;
     color: deeppink;
+    white-space: normal;
+    text-align: center;
 }
 
 .titreImages{
     font-size: 13px;
     color: deeppink;
+    text-align: center;
+    white-space: normal;
+    text-align: center;
 }
 
 #Dossier_Back{
-    width: 30px;
+    width: 40px;
+    padding: 4px;
+    height: 40px;
     border: 2px;
+    border: solid;
+    border-radius: 5px;
+    border-color: deeppink;
+    opacity: 0.3;
+    float: right;
+}
+
+#Dossier_Home{
+    width: 40px;
+    padding: 4px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    height: 40px;
+    border: 2px;
+    border: solid;
     border-radius: 5px;
     border-color: deeppink;
     opacity: 0.3;

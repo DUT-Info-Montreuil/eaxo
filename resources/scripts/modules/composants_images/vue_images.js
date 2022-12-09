@@ -15,12 +15,20 @@ $('DOMContentLoaded', function() {
         dossiers.afficherPrecedent();
     });
 
+    $("#Dossier_Home").click(function (){
+        dossiers.afficher(null);
+    });
+
     $("#ouvertureVolet").click(function(){
         dossiers.afficher(null);
         });
 
 
 });
+
+function zoomer(){
+
+}
 
 function recuperrerDossiers(){
 
@@ -102,7 +110,7 @@ function Image(id, nom, parent, img){
     this.parent = parent;
     this.vueId =  "image_" + this.id;
     this.imageEncoder = img;
-    this.vue = "<div id='" + this.vueId + "' class='divImageApiImages'> <img class='vueImageApiImages' src='data:image/jpeg;base64," + this.imageEncoder + "'/> <p class='titreImages'>" + this.nom + "</p> </div>";
+    this.vue = "<div id='" + this.vueId + "' class='divImageApiImages' class='divContenu'> <img class='vueImageApiImages' src='data:image/jpeg;base64," + this.imageEncoder + "'/> <p class='titreImages'>" + this.nom + "</p> </div>";
     this.afficher = function (){
         $("#" + this.vueId).css("display", "block");
     }
@@ -142,6 +150,10 @@ function listeDossiers(){
             dossier.afficher();
         }
         actualiserBoutonBack(niveau);
+        if(niveau != null)
+            $("#Dossier_Home").css("opacity", 1);
+        else
+            $("#Dossier_Home").css("opacity", 0.3);
         niveauAfficher = niveau;
     }
     this.afficherPrecedent = function (){
@@ -168,7 +180,7 @@ function Dossier(id, nom, parent){
     this.id = id;
     this.nom = nom;
     this.parent = parent;
-    this.vue = "<div id='dossier_" + this.id + "' class='divDossierApiImages'> <img class='vueDossierApiImages' src=\"resources/images/api_images/dossier.png\"/> <p class='titreDossiers'>" + this.nom + "</p> </div>";
+    this.vue = "<div id='dossier_" + this.id + "' class='divDossierApiImages' class='divContenu'> <img class='vueDossierApiImages' src=\"resources/images/api_images/dossier.png\"/> <p class='titreDossiers'>" + this.nom + "</p> </div>";
     this.vueId =  "#dossier_" + this.id;
     this.afficher = function (){
         $(this.vueId).css("display", "block");
@@ -184,6 +196,14 @@ function Dossier(id, nom, parent){
     $(this.vueId).click(function (){
         dossiers.afficher(id);
     });
+    $(this.vueId).mouseenter(function (){
+        console.log("fucus in");
+       $(this.vueId).css("zoom", "1.6");
+    });
+    $(this.vueId).mouseout(function (){
+        $(this.vueId).css("zoom", "1");
+    });
+
 }
 
 

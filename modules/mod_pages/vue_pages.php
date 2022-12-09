@@ -190,9 +190,12 @@ class VuePages extends VueGenerique
 
             <div id="divImagesHome">
 
-                <p>texte dans truc</p>
+                <div id="controleurImages">
 
-                <img id='Dossier_Back' src="resources/images/api_images/back.png">
+                    <img id='Dossier_Home' src="resources/images/api_images/home.png">
+                    <img id='Dossier_Back' src="resources/images/api_images/back.png">
+
+                </div>
 
             </div>
 

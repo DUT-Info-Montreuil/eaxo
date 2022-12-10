@@ -192,10 +192,14 @@ class VuePages extends VueGenerique
 
                 <div id="controleurImages">
 
-                    <img id='Dossier_Home' src="resources/images/api_images/home.png">
-                    <img id='Dossier_Back' src="resources/images/api_images/back.png">
+                    <img id='Dossier_Home' class='Dossier_Controleurs' src="resources/images/api_images/home.png">
+                    <img id='Dossier_Add_Folder' class='Dossier_Controleurs' src="resources/images/api_images/folder_add.png">
+                    <img id='Dossier_Add_Picture' class='Dossier_Controleurs' src="resources/images/api_images/picture_add.png">
+                    <img id='Dossier_Back' class='Dossier_Controleurs' src="resources/images/api_images/back.png">
 
                 </div>
+
+                <p id="Dossiers_Chemin"></p>
 
             </div>
 

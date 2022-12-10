@@ -26,8 +26,19 @@ $('DOMContentLoaded', function() {
 
 });
 
-function zoomer(){
-
+function actualiserChemin(niveau){
+    var chemin = "";
+    var dossier;
+    if(niveau != null) {
+        while (niveau != null) {
+            dossier = dossiers.getElementById(niveau);
+            chemin = "/" + dossier.nom + chemin;
+            niveau = dossier.parent;
+        }
+        $("#Dossiers_Chemin").text("Chemin: " + chemin);
+    }else{
+        $("#Dossiers_Chemin").text("Chemin: /");
+    }
 }
 
 function recuperrerDossiers(){
@@ -70,25 +81,29 @@ function indexerImages(resultat){
     }
 }
 
-function actualiserBoutonBack(id){
-    if(id == null)
+function actualiserCommandes(id){
+    actualiserChemin(id);
+    if(id == null) {
         $("#Dossier_Back").css("opacity", 0.3);
-    else
+        $("#Dossier_Back").css("background-color", "#F4F4F4");
+
+        $("#Dossier_Home").css("opacity", 0.3);
+        $("#Dossier_Home").css("background-color", "#F4F4F4");
+    }
+    else {
         $("#Dossier_Back").css("opacity", 1);
+        $("#Dossier_Back").css("background-color", "unset");
+
+        $("#Dossier_Home").css("opacity", 1);
+        $("#Dossier_Home").css("background-color", "unset");
+    }
+    //#EBF5FB
 }
 
 function listeImages(){
     this.Images = new Array();
     this.add = function (image){
         this.Images.push(image);
-    }
-    this.afficher = function (niveau){
-        var dossierFiltrer = this.filtrer(dossier => dossier.parent == niveau);
-        for (var dossier of dossierFiltrer) {
-            dossier.afficher();
-        }
-        niveauAfficher = niveau;
-        actualiserBoutonBack(niveauAfficher);
     }
     this.cacher = function (){
         if (niveauAfficher != -1) {
@@ -125,7 +140,6 @@ function Image(id, nom, parent, img){
     }
 
     $("#divImagesHome").append(this.vue);
-    //this.cacher();
 }
 
 function listeDossiers(){
@@ -135,6 +149,12 @@ function listeDossiers(){
     }
     this.get = function (numero){
         return this.dossiers.at(numero);
+    }
+    this.getElementById = function (id){
+      var dossier = this.filtrer(dossier => dossier.id == id);
+      if(dossier.length != 1)
+          return null;
+      return dossier[0];
     }
     this.remove = function (numero){
         this.dossiers.splice(0, numero);
@@ -149,11 +169,7 @@ function listeDossiers(){
         for (var dossier of dossierFiltrer) {
             dossier.afficher();
         }
-        actualiserBoutonBack(niveau);
-        if(niveau != null)
-            $("#Dossier_Home").css("opacity", 1);
-        else
-            $("#Dossier_Home").css("opacity", 0.3);
+        actualiserCommandes(niveau);
         niveauAfficher = niveau;
     }
     this.afficherPrecedent = function (){
@@ -164,7 +180,7 @@ function listeDossiers(){
         }
         var id = dossier[0].parent;
         this.afficher(id);
-        actualiserBoutonBack(id);
+        actualiserCommandes(id);
     };
     this.cacher = function (){
         if (niveauAfficher != -1) {
@@ -180,7 +196,7 @@ function Dossier(id, nom, parent){
     this.id = id;
     this.nom = nom;
     this.parent = parent;
-    this.vue = "<div id='dossier_" + this.id + "' class='divDossierApiImages' class='divContenu'> <img class='vueDossierApiImages' src=\"resources/images/api_images/dossier.png\"/> <p class='titreDossiers'>" + this.nom + "</p> </div>";
+    this.vue = "<div id='dossier_" + this.id + "' class='divDossierApiImages' class='divContenu'> <img id ='vueDossier_" + this.id + "' class='vueDossierApiImages' src=\"resources/images/api_images/dossier.png\"/> <p class='titreDossiers'>" + this.nom + "</p> </div>";
     this.vueId =  "#dossier_" + this.id;
     this.afficher = function (){
         $(this.vueId).css("display", "block");
@@ -193,15 +209,18 @@ function Dossier(id, nom, parent){
     }
     $("#divImagesHome").append(this.vue);
     this.cacher();
-    $(this.vueId).click(function (){
+    $("#dossier_" + this.id).click(function (){
         dossiers.afficher(id);
     });
-    $(this.vueId).mouseenter(function (){
-        console.log("fucus in");
-       $(this.vueId).css("zoom", "1.6");
+    $("#dossier_" + this.id).mouseenter(function (){
+        //console.log("fucus in");
+       //$("#vueDossier_" + id).css("height", "97");
+       //$("#vueDossier_" + id).css("width", "90");
     });
-    $(this.vueId).mouseout(function (){
-        $(this.vueId).css("zoom", "1");
+    $("#dossier_" + this.id).mouseout(function (){
+        //console.log("mouse out");
+        //$("#vueDossier_" + id).css("height", "67");
+        //$("#vueDossier_" + id).css("width", "70");
     });
 
 }

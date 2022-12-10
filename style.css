@@ -241,26 +241,26 @@ API Images
     float: left;
     width: 120px;
     height: 150px;
-    border: solid;
-    border-color: gray;
+    background-color: unset;
     border-radius: 20px;
-    border-width: 2px;
-    border-shadow: 10px;
-    margin-right: 20px;
-    margin-bottom: 30px;
+    margin-right: 30px;
+    margin-bottom: 15px;
 
 }
 
 .vueDossierApiImages{
-    width: 80px;
-    margin-left: 19px;
+    width: 70px;
+    margin-top: 13px;
+    margin-left: 25px;
 }
 
 .vueImageApiImages{
-    height: 80px;
+    height: 67px;
     width: auto;
-    max-width: 80px;
-    margin-left: 18px;
+    max-width: 70px;
+    margin-left: 25px;
+    margin-top: 13px;
+    border-radius: 30px;
 
 }
 .divImageApiImages{
@@ -268,48 +268,72 @@ API Images
     float: left;
     width: 120px;
     height: 150px;
-    margin-right: auto;
-    margin-left: auto;
-    border: solid;
-    border-width: 3px;
+    background-color: unset;
+    border-radius: 20px;
+    margin-right: 30px;
+    margin-bottom: 15px;
 }
 
 .titreDossiers{
     font-size: 13px;
-    color: deeppink;
+    color: black;
     white-space: normal;
     text-align: center;
 }
 
 .titreImages{
     font-size: 13px;
-    color: deeppink;
+    color: black;
     text-align: center;
     white-space: normal;
     text-align: center;
 }
 
-#Dossier_Back{
+.Dossier_Controleurs{
     width: 40px;
-    padding: 4px;
     height: 40px;
-    border: 2px;
+    /*
+    border: 1px;
     border: solid;
+    border-color: black;
+     */
     border-radius: 5px;
-    border-color: deeppink;
+    //background-color: ;
+}
+
+#Dossier_Back{
+    padding: 4px;
     opacity: 0.3;
     float: right;
 }
 
 #Dossier_Home{
-    width: 40px;
     padding: 4px;
     padding-top: 5px;
     padding-bottom: 5px;
-    height: 40px;
-    border: 2px;
-    border: solid;
-    border-radius: 5px;
-    border-color: deeppink;
     opacity: 0.3;
+}
+
+#Dossiers_Chemin{
+    width: auto;
+    border: 2px solid;
+    border-color: black;
+    border-radius: 15px;
+    font-size: 15px;
+    font-style: oblique;
+    color: gray;
+    padding: 3px;
+    text-align: center;
+
+}
+
+#Dossier_Add_Picture{
+    margin-left: 20px;
+    padding: 2px;
+}
+
+#Dossier_Add_Folder{
+   padding: 5px;
+    margin-left: 20px;
+
 }

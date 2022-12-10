@@ -25,21 +25,15 @@
 <body>
 <?php
 
+require_once __DIR__ ."/composant_admin/composant_navbar.php";
 
-$usergrp = $c->groupUser();
-if ($usergrp == 2) {
-    require_once "./admin/composants_admin/composant_navbar/composant_navbar.php";
-    $nb = new ComposantNavBarAdmin();  
-} else {
-    require_once "./composants/composant_navbar/composant_navbar.php";
-    $nb = new ComposantNavBar();
-}
+$nb = new ComposantNavBarAdmin();
 
 $nb->affichage();
 if (isset($c))
     echo $c->result;
 else
-    echo "Erreur lor de la lecture d'une variable ligne 32 fichier template.php";
+    echo "Erreur lor de la lecture d'une variable ligne 32 fichier template.php"
 
 
 ?>

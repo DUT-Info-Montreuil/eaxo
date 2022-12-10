@@ -15,6 +15,10 @@ class Controleur
         $this->exec();
     }
 
+    public function groupUser() {
+        return $this->m->userGroup();
+    }
+
     public function exec()
     {
         if (!isset($_SESSION["newsession"])) {
@@ -30,8 +34,13 @@ class Controleur
                 $this->mod = new ModPages();
                 break;
             case "mod_home":
-                require_once "./modules/mod_home/mod_home.php";
-                $this->mod = new ModHome();
+                if ($this->groupUser() == 2) {
+                    require_once "./admin/modules_admin/mod_userList/mod_userList.php"; // pour les Faille include 
+                    $this->mod = new ModUserList();
+                } else {
+                    require_once "./modules/mod_home/mod_home.php";
+                    $this->mod = new ModHome();
+                }
                 break;
 
         }

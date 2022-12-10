@@ -1,18 +1,14 @@
 <?php
 require_once __DIR__ . "/vue_navbar.php";
 
-class ContNavbar {
+class ContNavbarAdmin {
     public function __construct()
     {
-        $this->v = new VueNavbar();
+        $this->v = new VueNavbarAdmin();
     }
 
     public function exec() {
         $this->v->vueNavbar();
-    }
-
-    public function getVue() {
-        return $this->v;
     }
 }
 ?>

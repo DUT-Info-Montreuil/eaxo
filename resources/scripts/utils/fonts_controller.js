@@ -1,4 +1,4 @@
-import widget_c from "./widgets_controller.js";
+import widget_c from "../widgets_controller.js";
 
 function changeFontSize(size) {
     if(widget_c.getSelectedElement()) {
@@ -23,8 +23,9 @@ function toggleFontBold() {
 
 function toggleItalic() {
     if(widget_c.getSelectedElement()) {
-        let parent = widget_c.getSelectedElement().parentElement;
+        let parent = widget_c.getSelectedElement();
         let value = $(parent).css("font-style");
+
         if(value != "italic") {
             $(parent).css({"font-style" : "italic"});
         } else {

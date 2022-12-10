@@ -43,9 +43,9 @@ export function cloneElement(original, id) {
         }
 
     }
-    clone.resizable({
+    /*clone.resizable({
         containment:"#pageContainer"
-    });
+    });*/
 
     clone.on("drag", function() {
         clone.position({

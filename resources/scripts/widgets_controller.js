@@ -1,24 +1,21 @@
 import * as txt from './utils/textcontroller.js'
 import * as cp from './shortcuts.js'
 
+
 class WidgetController {
     constructor() {
         this.id = 0;
         this.selectedElement = null;
         this.exoIDList = []
-
-
         let self = this;
+        
         $("#pageContainer").on("click", function(handler) {
             var target = handler.target;
             if(self.canEditNode(target)) {
                 self.enableEdit(target)
-                //Set
                 self.setSelectedElement(target)
             }
         });
-
-    
     }
 
     //Next step : find better function to generate new unique id
@@ -32,7 +29,7 @@ class WidgetController {
         }
 
         this.selectedElement = element;
-        $(this.selectedElement).css("background-color", "aliceblue");
+        
         
     }
 

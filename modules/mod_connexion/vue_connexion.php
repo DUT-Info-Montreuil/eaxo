@@ -33,7 +33,7 @@ class VueConnexion extends VueGenerique
                             <label for="floatingPassword">Mot de passe</label>
                         </div>
 
-                        <a id="TextePasEncoreDeCompte" href="https://example.com">pas encore de compte ?</a>
+                        <a id="TextePasEncoreDeCompte" href="./index.php?module=mod_connexion&action=form_inscription">Pas encore de compte ?</a>
 
                         <div class="checkbox mt-2 mb-2">
                             <label>
@@ -58,6 +58,7 @@ class VueConnexion extends VueGenerique
     {
         ?>
         <form action="./index.php?module=mod_connexion&action=new_inscription" method="POST">
+            <input type="hidden" name="token" value='<?php echo $_SESSION['token']?>'>
             <div class="container">
                 <main>
                     <div class="pt-5 text-center">
@@ -115,7 +116,7 @@ class VueConnexion extends VueGenerique
                                 <div class="col-12">
                                     <label for="email" class="form-label">Email <span class="text-muted"></span></label>
                                     <input type="email" class="form-control" id="email"
-                                           placeholder="utilisateur@example.com" name="emailAdress">
+                                           placeholder="utilisateur@example.com" name="email">
                                     <div class="invalid-feedback">adresse e-mail invalide</div>
                                 </div>
 

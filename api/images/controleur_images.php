@@ -1,6 +1,7 @@
 <?php
 require_once "./images/controleur_images.php";
 require_once "./images/requette_recupperer_images.php";
+require_once "./images/requette_ajouter_image.php";
 
 class controleur_images extends Connexion
 {
@@ -14,10 +15,12 @@ class controleur_images extends Connexion
     public function exec(){
         switch ($this->action){
             case "getImages":
-                if(isset($_POST['folderParent']))
+                if(isset($_SESSION['newsession']) && isset($_POST['folderParent']))
                     recupererArchitectureIMG(Connexion::$bdd, $_SESSION['newsession'], $_POST['folderParent']);
-                else
-                    echo ("probleme de ptn de post !!");
+                break;
+            case "addImage":
+                if(isset($_SESSION['newsession']) && isset($_POST['pName']) && isset($_POST['folderParent']) && isset($_POST['Img64']))
+                    ajouterImage(Connexion::$bdd, $_SESSION['newsession'], $_POST['Img64'], $_POST['pName'], $_POST['folderParent']);
                 break;
         }
     }

@@ -233,7 +233,12 @@ API Images
 
 #controleurImages{
     width: auto;
+    height: 50px;
     margin: 13px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    border-bottom: 2px dashed;
+    border-color: #D68910;
 }
 
 .divDossierApiImages{
@@ -243,9 +248,9 @@ API Images
     height: 150px;
     background-color: unset;
     border-radius: 20px;
-    margin-right: 30px;
-    margin-bottom: 15px;
-
+    margin-right: 15px;
+    margin-bottom: 0px;
+    overflow: hidden;
 }
 
 .vueDossierApiImages{
@@ -256,8 +261,7 @@ API Images
 
 .vueImageApiImages{
     height: 67px;
-    width: auto;
-    max-width: 70px;
+    width: 70px;
     margin-left: 25px;
     margin-top: 13px;
     border-radius: 30px;
@@ -270,8 +274,9 @@ API Images
     height: 150px;
     background-color: unset;
     border-radius: 20px;
-    margin-right: 30px;
-    margin-bottom: 15px;
+    margin-right: 15px;
+    margin-bottom: 0px;
+    overflow: hidden;
 }
 
 .titreDossiers{
@@ -287,6 +292,8 @@ API Images
     text-align: center;
     white-space: normal;
     text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .Dossier_Controleurs{
@@ -316,20 +323,23 @@ API Images
 
 #Dossiers_Chemin{
     width: auto;
-    border: 2px solid;
-    border-color: black;
-    border-radius: 15px;
     font-size: 15px;
     font-style: oblique;
     color: gray;
     padding: 3px;
-    text-align: center;
-
+    /*text-align: center;*/
+    margin-left: 10px;
+    margin-top: 3px;
+    margin-bottom: 5px;
 }
 
 #Dossier_Add_Picture{
     margin-left: 20px;
     padding: 2px;
+}
+
+#Dossier_Add_Picture_Input{
+    display:none;
 }
 
 #Dossier_Add_Folder{

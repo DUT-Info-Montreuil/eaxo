@@ -10,27 +10,131 @@ var niveauAfficher = -1;
 recuperrerDossiers();
 
 $('DOMContentLoaded', function() {
+    ajouterEvents();
+});
 
+function ajouterEvents(){
     $("#Dossier_Back").click(function (){
         dossiers.afficherPrecedent();
     });
+    $("#Dossier_Back").mouseenter(function (){
+        if($("#Dossier_Back").css("opacity") == 1) {
+            $("#Dossier_Back").css("width", "45px");
+            $("#Dossier_Back").css("height", "45px");
+            $("#Dossier_Back").css("background-color", "#F8C471");
+        }
+    });
+    $("#Dossier_Back").mouseleave(function (){
+        $("#Dossier_Back").css("width", "40px");
+        $("#Dossier_Back").css("height", "40px");
+        $("#Dossier_Back").css("background-color", "unset");
+    });
 
     $("#Dossier_Home").click(function (){
-        dossiers.afficher(null);
+        dossiers.afficher(0);
+    });
+    $("#Dossier_Home").mouseenter(function (){
+        if($("#Dossier_Home").css("opacity") == 1) {
+            $("#Dossier_Home").css("width", "45px");
+            $("#Dossier_Home").css("height", "45px");
+            $("#Dossier_Home").css("background-color", "#F8C471");
+        }
+    });
+    $("#Dossier_Home").mouseleave(function (){
+        $("#Dossier_Home").css("width", "40px");
+        $("#Dossier_Home").css("height", "40px");
+        $("#Dossier_Home").css("background-color", "unset");
+    });
+
+    $("#Dossier_Add_Folder").click(function (){
+        ajouterDossierAPI_Dossier("Default");
+    });
+    $("#Dossier_Add_Folder").mouseenter(function (){
+        if($("#Dossier_Add_Folder").css("opacity") == 1) {
+            $("#Dossier_Add_Folder").css("width", "45px");
+            $("#Dossier_Add_Folder").css("height", "45px");
+            $("#Dossier_Add_Folder").css("background-color", "#F8C471");
+        }
+    });
+    $("#Dossier_Add_Folder").mouseleave(function (){
+        $("#Dossier_Add_Folder").css("width", "40px");
+        $("#Dossier_Add_Folder").css("height", "40px");
+        $("#Dossier_Add_Folder").css("background-color", "unset");
+    });
+
+    $("#Dossier_Add_Picture_Input").change(function (){
+        toBase64($("#Dossier_Add_Picture_Input").get(0).files[0]);
+    });
+
+    $("#Dossier_Add_Picture").click(function (){
+        $("#Dossier_Add_Picture_Input").click();
+    });
+
+    $("#Dossier_Add_Picture").mouseenter(function (){
+        if($("#Dossier_Add_Picture").css("opacity") == 1) {
+            $("#Dossier_Add_Picture").css("width", "45px");
+            $("#Dossier_Add_Picture").css("height", "45px");
+            $("#Dossier_Add_Picture").css("background-color", "#F8C471");
+        }
+    });
+    $("#Dossier_Add_Picture").mouseleave(function (){
+        $("#Dossier_Add_Picture").css("width", "40px");
+        $("#Dossier_Add_Picture").css("height", "40px");
+        $("#Dossier_Add_Picture").css("background-color", "unset");
     });
 
     $("#ouvertureVolet").click(function(){
-        dossiers.afficher(null);
-        });
+        dossiers.afficher(0);
+    });
+}
 
+function ajouterImageAPI_Images(image, nom) {
+    $.ajax({
+        type: "POST",
+        url: "./api/controleur_requetes_bd.php?module=images&action=addImage",
+        //processData: false,
+        data: {folderParent:niveauAfficher, pName:nom, Img64:image},
+        dataType: "json"
+    }).done(function(retour){
+        if(retour)
+            dossiers.afficher(niveauAfficher);
+        else
+            alert("Erreur lors de l'insertion de l'image");
+    });
+}
 
-});
+function ajouterDossierAPI_Dossier(nom){
+    $.ajax({
+        type: "POST",
+        url: "./api/controleur_requetes_bd.php?module=dossiers&action=addFolder",
+        //processData: false,
+        data: {folderParent:niveauAfficher, pName:nom},
+        dataType: "json"
+    }).done(function(retour){
+        if(retour){
+            dossiers.add(new Dossier())
+        }
+        else
+            alert("Erreur lors de l'insertion de l'image");
+    });
+}
+
+function toBase64(image){
+    if(false){
+        console.log("haa ba l'image est incorecte");
+        return null;
+    }
+    var fichier = new FileReader();
+    fichier.readAsDataURL(image);
+    fichier.onload = () => ajouterImageAPI_Images(fichier.result, image.name.slice(0, (image.name.length-image.name.lastIndexOf("."))));
+}
+
 
 function actualiserChemin(niveau){
     var chemin = "";
     var dossier;
-    if(niveau != null) {
-        while (niveau != null) {
+    if(niveau != 0) {
+        while (niveau != 0) {
             dossier = dossiers.getElementById(niveau);
             chemin = "/" + dossier.nom + chemin;
             niveau = dossier.parent;
@@ -42,10 +146,9 @@ function actualiserChemin(niveau){
 }
 
 function recuperrerDossiers(){
-
     $.ajax({
         type: "POST",
-        url: "./api/controleur_requetes_bd.php?module=dossiers&action=architecture",
+        url: "./api/controleur_requetes_bd.php?module=dossiers&action=getArchitecture",
         data: {},
         dataType: "json"
     }).done(function(retour) {
@@ -97,7 +200,6 @@ function actualiserCommandes(id){
         $("#Dossier_Home").css("opacity", 1);
         $("#Dossier_Home").css("background-color", "unset");
     }
-    //#EBF5FB
 }
 
 function listeImages(){
@@ -123,23 +225,45 @@ function Image(id, nom, parent, img){
     this.id = id;
     this.nom = nom;
     this.parent = parent;
-    this.vueId =  "image_" + this.id;
     this.imageEncoder = img;
-    this.vue = "<div id='" + this.vueId + "' class='divImageApiImages' class='divContenu'> <img class='vueImageApiImages' src='data:image/jpeg;base64," + this.imageEncoder + "'/> <p class='titreImages'>" + this.nom + "</p> </div>";
+    this.vue = "<div id='image_" + this.id + "' class='divImageApiImages' class='divContenu'> <img id='vueImage_" + this.id + "'class='vueImageApiImages' src='" + this.imageEncoder + "'/> <p id='titre_Images_" + this.id + "' class='titreImages'>" + this.nom + "</p> </div>";
     this.afficher = function (){
-        $("#" + this.vueId).css("display", "block");
+        $("#image_" + this.id).css("display", "block");
     }
     this.cacher = function (){
-        $("#" + this.vueId).css("display", "none");
+        $("#image_" + this.id).css("display", "none");
     }
     this.detruire = function (){
-        $("#" + this.vueId).remove();
+        $("#image_" + this.id).remove();
     }
     this.toString = function (){
         console.log("Affichage du dossier " + this.id + "\nnom: " + this.nom + "\nparent: " + this.parent + "\n");
     }
 
     $("#divImagesHome").append(this.vue);
+    $("#image_" + this.id).click(function (){
+        //dossiers.afficher(id);
+    })
+
+    $("#image_" + this.id).mouseenter(function (){
+        $("#vueImage_" + id).css("height", "97");
+        $("#vueImage_" + id).css("width", "100");
+        $("#vueImage_" + id).css("margin-left", "10px");
+        $("#vueImage_" + id).css("border-radius", "10px");
+        $("#image_" + id).css("background-color", "#EBF5FB");
+        $("#titre_Images_" + id).css("font-weight", "bold");
+        $("#titre_Images_" + id).css("color", "#AF7AC5");
+    });
+    $("#image_" + this.id).mouseleave(function (){
+        $("#vueImage_" + id).css("height", "67");
+        $("#vueImage_" + id).css("width", "70");
+        $("#vueImage_" + id).css("margin-left", "25px");
+        $("#vueImage_" + id).css("border-radius", "20px");
+        $("#image_" + id).css("background-color", "unset");
+        $("#titre_Images_" + id).css("font-weight", "normal");
+        $("#titre_Images_" + id).css("color", "black");
+    });
+
 }
 
 function listeDossiers(){
@@ -164,13 +288,13 @@ function listeDossiers(){
     }
     this.afficher = function (niveau){
         this.cacher();
+        niveauAfficher = niveau;
         recuperrerImages(niveau);
         var dossierFiltrer = this.filtrer(dossier => dossier.parent == niveau);
         for (var dossier of dossierFiltrer) {
             dossier.afficher();
         }
         actualiserCommandes(niveau);
-        niveauAfficher = niveau;
     }
     this.afficherPrecedent = function (){
         var dossier = this.filtrer(y => y.id == niveauAfficher);
@@ -196,13 +320,12 @@ function Dossier(id, nom, parent){
     this.id = id;
     this.nom = nom;
     this.parent = parent;
-    this.vue = "<div id='dossier_" + this.id + "' class='divDossierApiImages' class='divContenu'> <img id ='vueDossier_" + this.id + "' class='vueDossierApiImages' src=\"resources/images/api_images/dossier.png\"/> <p class='titreDossiers'>" + this.nom + "</p> </div>";
-    this.vueId =  "#dossier_" + this.id;
+    this.vue = "<div id='dossier_" + this.id + "' class='divDossierApiImages' class='divContenu'> <img id ='vueDossier_" + this.id + "' class='vueDossierApiImages' src=\"resources/images/api_images/dossier.png\"/> <p id='titre_Dossier_" + this.id + "' class='titreDossiers'>" + this.nom + "</p> </div>";
     this.afficher = function (){
-        $(this.vueId).css("display", "block");
+        $("#dossier_" + this.id).css("display", "block");
     }
     this.cacher = function (){
-        $(this.vueId).css("display", "none");
+        $("#dossier_" + this.id).css("display", "none");
     }
     this.toString = function (){
         console.log("Affichage du dossier " + this.id + "\nnom: " + this.nom + "\nparent: " + this.parent + "\n");
@@ -213,14 +336,20 @@ function Dossier(id, nom, parent){
         dossiers.afficher(id);
     });
     $("#dossier_" + this.id).mouseenter(function (){
-        //console.log("fucus in");
-       //$("#vueDossier_" + id).css("height", "97");
-       //$("#vueDossier_" + id).css("width", "90");
+        $("#vueDossier_" + id).css("height", "97");
+        $("#vueDossier_" + id).css("width", "90");
+        $("#vueDossier_" + id).css("margin-left", "15px");
+        $("#dossier_" + id).css("background-color", "#EBF5FB");
+        $("#titre_Dossier_" + id).css("font-weight", "bold");
+        $("#titre_Dossier_" + id).css("color", "#AF7AC5");
     });
-    $("#dossier_" + this.id).mouseout(function (){
-        //console.log("mouse out");
-        //$("#vueDossier_" + id).css("height", "67");
-        //$("#vueDossier_" + id).css("width", "70");
+    $("#dossier_" + this.id).mouseleave(function (){
+        $("#vueDossier_" + id).css("height", "67");
+        $("#vueDossier_" + id).css("width", "70");
+        $("#vueDossier_" + id).css("margin-left", "25px");
+        $("#dossier_" + id).css("background-color", "unset");
+        $("#titre_Dossier_" + id).css("font-weight", "normal");
+        $("#titre_Dossier_" + id).css("color", "black");
     });
 
 }

@@ -1,0 +1,15 @@
+<?php
+
+function ajouterImage($sth, $ownerid, $image, $pName, $folderParent){
+    $insert = $sth->prepare('INSERT INTO gallery_images (folderParent, pName, Img64, ownerId) VALUES (:folderParent, :pName, :Img64 ,:ownerid)');
+    $insert->execute(array(':ownerid' => $ownerid, ':pName' => $pName, ':Img64' => $image, ':folderParent' => $folderParent));
+    reponsseInsertIMG($insert);
+}
+
+function reponsseInsertIMG($insert){
+    header('Content-Type: application/json; charset=utf-8');
+    if($insert)
+        echo json_encode(true);
+    else
+        echo json_encode(false);
+}

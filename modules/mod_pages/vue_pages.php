@@ -197,6 +197,8 @@ class VuePages extends VueGenerique
                     <img id='Dossier_Add_Picture' class='Dossier_Controleurs' src="resources/images/api_images/picture_add.png">
                     <img id='Dossier_Back' class='Dossier_Controleurs' src="resources/images/api_images/back.png">
 
+                    <input type="file" id="Dossier_Add_Picture_Input" accept="image/*">
+
                 </div>
 
                 <p id="Dossiers_Chemin"></p>

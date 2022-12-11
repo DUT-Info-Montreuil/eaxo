@@ -6,6 +6,7 @@ var dossiers = new listeDossiers();
 var Images = new listeImages();
 var niveauAfficher = -1;
 var selectionner = null;
+var ajoutImage = false;
 
 //Recuperation de la BD
 recuperrerDossiers();
@@ -16,7 +17,8 @@ $('DOMContentLoaded', function() {
 
 function ajouterEvents(){
     $("#Dossier_Back").click(function (){
-        dossiers.afficherPrecedent();
+        if($("#Dossier_Back").css("opacity") != "0.3")
+            dossiers.afficherPrecedent();
     });
     $("#Dossier_Back").mouseenter(function (){
         if($("#Dossier_Back").css("opacity") == 1) {
@@ -32,7 +34,8 @@ function ajouterEvents(){
     });
 
     $("#Dossier_Home").click(function (){
-        dossiers.afficher(0);
+        if($("#Dossier_Home").css("opacity") != "0.3")
+            dossiers.afficher(0);
     });
     $("#Dossier_Home").mouseenter(function (){
         if($("#Dossier_Home").css("opacity") == 1) {
@@ -64,10 +67,14 @@ function ajouterEvents(){
     });
 
     $("#Dossier_Add_Picture_Input").change(function (){
-        toBase64($("#Dossier_Add_Picture_Input").get(0).files[0]);
+        if(ajoutImage) {
+            ajoutImage = false;
+            toBase64($("#Dossier_Add_Picture_Input").get(0).files[0]);
+        }
     });
 
     $("#Dossier_Add_Picture").click(function (){
+        ajoutImage = true;
         $("#Dossier_Add_Picture_Input").click();
     });
 
@@ -220,6 +227,7 @@ function toBase64(image){
     var fichier = new FileReader();
     fichier.readAsDataURL(image);
     fichier.onload = () => ajouterImageAPI_Images(fichier.result, image.name.slice(0, (image.name.length-image.name.lastIndexOf("."))));
+    fichier.onerror = error => reject(error);
 }
 
 
@@ -351,6 +359,7 @@ function Image(id, nom, parent, img){
 
         $("#Dossier_delete_Div").click(function (){
             $("#image_" + id).css("display", "none");
+            $("#Dossier_Contextuel_Menu").mouseleave();
             $("#image_" + id).remove();
             supprimerImageAPI_Image(id);
         });
@@ -399,6 +408,9 @@ function listeDossiers(){
     this.get = function (numero){
         return this.dossiers.at(numero);
     }
+    this.removeByIndex = function (position){
+        this.dossiers.splice(position, 1);
+    }
     this.getElementById = function (id){
       var dossier = this.filtrer(dossier => dossier.id == id);
       if(dossier.length != 1)
@@ -408,14 +420,14 @@ function listeDossiers(){
     this.remove = function (id){
         var dossier;
         for (var i=0; i<this.dossiers.length; i++) {
-            dossier = this.get(i)
+            dossier = this.get(i);
             if(dossier.id == id){
-                this.dossiers.splice(0, i);
+                this.removeByIndex(i);
                 dossier.cacher();
                 dossier.detruire();
             }
         }
-    }
+    };
     this.filtrer = function (filtre){
         return this.dossiers.filter(filtre);
     }
@@ -432,12 +444,11 @@ function listeDossiers(){
     this.afficherPrecedent = function (){
         var dossier = this.filtrer(y => y.id == niveauAfficher);
         if(dossier.length != 1){
-            console.log("Impossible de retrouver le dossier ...");
+            console.log("Impossible de retrouver le dossier précédent ... ");
             return;
         }
         var id = dossier[0].parent;
         this.afficher(id);
-        actualiserCommandes(id);
     };
     this.cacher = function (){
         if (niveauAfficher != -1) {
@@ -445,6 +456,8 @@ function listeDossiers(){
             for (var dossier of dossierFiltrer) {
                 dossier.cacher();
             }
+        }else {
+            console.log("le niveau actuelle n'est pas encore définit");
         }
     }
 }
@@ -473,6 +486,7 @@ function Dossier(id, nom, parent){
         $("#dossier_" + this.id).css("display", "none");
     }
     this.detruire = function (){
+        $("#dossier_" + this.id).off();
         $("#dossier_" + this.id).remove();
     }
     this.toString = function (){
@@ -496,6 +510,9 @@ function Dossier(id, nom, parent){
         $("#Dossier_Contextuel_Menu").css("left", x-702);
 
         $("#Dossier_delete_Div").click(function (){
+            $("#Dossier_Contextuel_Menu").mouseleave();
+            $("#dossier_" + id).css("display", "none");
+            $("#dossier_" + id).remove();
             supprimerDossiersAPI_Dossier(id);
         });
         $("#Dossier_download_Div").click(function (){
@@ -507,7 +524,6 @@ function Dossier(id, nom, parent){
 
         $("#Dossier_Contextuel_Menu").mouseleave(function (){
             $("#Dossier_Contextuel_Menu").css("display", "none");
-            $("#dossier_" + id).mouseleave();
             $("#Dossier_Contextuel_Menu").off();
         });
         return false;

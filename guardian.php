@@ -8,9 +8,7 @@ function create_token() {
 }
 
 function token_verification() {
-    var_dump($_SESSION['token']);
-    var_dump($_POST['token']);
-    return strcmp($_POST['token'], $_SESSION['token']) == 0 && time() - $_SESSION['token_date'] < 4000;
+    return isset($_SESSION['token']) && isset($_POST['token']) && strcmp($_POST['token'], $_SESSION['token']) == 0 && time() - $_SESSION['token_date'] < 4000;
 }
 
 ?>

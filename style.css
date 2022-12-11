@@ -1,3 +1,5 @@
+
+
 @media print {
 
     nav {
@@ -62,6 +64,7 @@
 /* Custom */
 body {
     height: 100%;
+    background-color: #f8f8f8;
 }
 
 /*Page de connection au compte*/
@@ -69,7 +72,6 @@ body {
     display: flex;
     align-items: center;
     padding-top: 40px;
-    padding-bottom: 100%;
     background-color: #f8f8f8;
 }
 

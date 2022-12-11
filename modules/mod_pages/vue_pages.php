@@ -103,7 +103,6 @@ class VuePages extends VueGenerique
 
                 
                 <script src="./resources/scripts/widgets.js" type="module"></script>
-                <script src="./resources/scripts/fonts_controller.js"  type="module"></script>
 
             <?php
         }

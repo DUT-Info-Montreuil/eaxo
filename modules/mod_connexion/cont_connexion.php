@@ -13,22 +13,24 @@ class ContConnexion
         $this->m = new ModeleConnexion();
         $this->v = new VueConnexion();
         $this->action = isset($_GET['action']) ? $_GET['action'] : "form_connexion";
+        if($this->action != "new_inscription") {
+            create_token();
+        }
         $this->exec();
     }
 
     public function form_connexion() {
-        create_token();
+        
         $this->v->formConnexion();
     }
 
     public function form_inscription() {
-        create_token();
         $this->v->formInscription();
     }
 
     public function inscrit()
     {
-        if ($this->m->form_ajout()) {
+        if ($this->m->ajouterUtilisateur()) {
             $this->action = "form_connexion";
             $this->exec();
         } else {
@@ -39,7 +41,9 @@ class ContConnexion
 
     public function connexion()
     {
+        
         if ($this->m->verif_connexion()) {
+            
             header('Location: ./index.php');
         }
         else {
@@ -77,21 +81,10 @@ class ContConnexion
                 $this->deconnexion();
                 break;
             case "new_inscription":
-                if ($this->m->form_ajout()) {
-                    echo "tout c'est bien passer";
+                if ($this->m->ajouterUtilisateur()) {
                     $this->action = "form_connexion";
                     $this->exec();
-                } else {
-                    echo "tout c'est mal passer";
                 }
-                break;
-            case "new_inscription":
-                $ajouter = FALSE;
-                while ($ajouter === FALSE){
-                    $ajouter = $this->m->form_ajout();
-                }
-                $this->action = "form_connexion";
-                $this->exec();
                 break;
         }
     }

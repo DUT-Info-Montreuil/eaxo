@@ -22,8 +22,6 @@ function createTrueOrFalseTxt(parent)
 }
 
 function createTrueOrFalse(parent) {
-    //$(parent).collision(".eaxoResizable");
-    
     createBtnAction(function(btn) {
         btn.on("click", function() {
             createTrueOrFalseTxt(parent)

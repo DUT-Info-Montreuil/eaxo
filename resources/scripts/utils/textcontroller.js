@@ -5,6 +5,7 @@
 import widget_c from "../widgets_controller.js";
 
 export function enableEdit(widgetController, node) {
+    $(node).css("background-color", "aliceblue");
     $("#fontSizeInput").val($(node).css("font-size"));
     widgetController.setSelectedElement(node);
     var oldTxt = node.textContent;
@@ -38,6 +39,8 @@ export function enableEdit(widgetController, node) {
             node.textContent = input.val()
             input.remove()
         }
+
+        $(node).css("background-color", "");
     }
 
     

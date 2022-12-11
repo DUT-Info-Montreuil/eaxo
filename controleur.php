@@ -13,6 +13,8 @@ class Controleur
         $this->m = new Modele();
         $this->module = isset($_GET['module']) ? $_GET['module'] : "mod_home";
         $this->exec();
+
+
     }
 
     public function groupUser() {

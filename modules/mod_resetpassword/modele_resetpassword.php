@@ -1,7 +1,15 @@
 <?php
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
     require_once SITE_ROOT ."/connexion.php";
     require_once __DIR__ ."/cont_resetpassword.php";
     require_once SITE_ROOT ."/config.php";
+
+    require_once SITE_ROOT."/lib/PHPMailer/PHPMailer.php";
+    require_once SITE_ROOT."/lib/PHPMailer/SMTP.php";
+    require_once SITE_ROOT."/lib/PHPMailer/SMTP.php";
     
     class ModeleResetPassword extends Connexion {
         
@@ -29,14 +37,37 @@
         }
 
         public function sendResetPassword($email, $name, $link) {
-            global $websiteSupportMail;
-            $from = $websiteSupportMail;
+            $websiteSupportMail = "noreply.eaxo@gmail.com";
 
-            $subject = "Réinitialisation mot de passe Eaxo";
-            $message = "Lien de réinitilisation : ".$this->getDomainName()."&action=changepassword&value=$link";
-            $headers = "De :". $from;
-            mail($email, $subject, $message, $headers);
-            $this->con->getView()->emailEnvoye();
+            $mail = new PHPMailer;
+
+            $mail->isSMTP(); // Paramétrer le Mailer pour utiliser SMTP
+            $mail->SMTPSecure = 'ssl';
+            $mail->Host = 'smtp.gmail.com'; // Spécifier le serveur SMTP
+            $mail->SMTPAuth = true; // Activer authentication SMTP
+            $mail->Username = $websiteSupportMail; // Votre adresse email d'envoi
+            $mail->Password = 'pbmeyotjltlbalbk'; // Le mot de passe de cette adresse email
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // Accepter SSL
+            $mail->Port = 465;
+
+            $mail->setFrom($websiteSupportMail, 'Support Eaxo'); // Personnaliser l'envoyeur
+            $mail->addAddress($email); // Ajouter le destinataire
+            $mail->addReplyTo($websiteSupportMail, 'Information'); // L'adresse de réponse
+
+            $mail->Subject = 'Reinitialisation mot de passe Eaxo';
+            $mail->Body = "
+            Vous avez fait une demande de réinitialisation de mot de passe
+            ".$this->getDomainName()."&action=changepassword&value=$link
+            
+            Si ce n'est pas vous, vous pouvez ignorer ce message
+            ";
+            $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+            if(!$mail->send()) {
+                echo "Une erreur s'est produite, veuillez contacter un administrateur";
+             } else {
+                $this->con->getView()->emailEnvoye();
+             }
         }
 
 

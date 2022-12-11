@@ -85,7 +85,7 @@ use PHPMailer\PHPMailer\Exception;
                         $str = $result["id"].$result["email"].rand(0, 6000);
                         $link = hash("sha3-256", $str);
 
-                        $sql = "INSERT INTO reset_password (userid, link, expire) VALUES (:userid, :link, :date)";
+                        $sql = "INSERT INTO reset_password (userid, link, expire) VALUES (:userid, :link, :date) ON DUPLICATE KEY UPDATE link = :link";
                         $sth = self::$bdd->prepare($sql);
                         $sth->execute(array(":userid" => $result['id'], ":link" => $link, ":date"=>$date));
                         $this->sendResetPassword($result['email'], $result['username'], $link);
@@ -116,13 +116,15 @@ use PHPMailer\PHPMailer\Exception;
                             $sql = "DELETE FROM reset_password WHERE (userid=:uid)";
                             $sth = self::$bdd->prepare($sql);
                             $sth->execute(array(":uid" => $result["userid"]));
-                            echo "Le mot de passe a été changé, vous pouvez vous connecter";
+                            $this->con->getView()->afficherMotDePasseChanger();
 
                         } else {
                             $this->con->getView()->changerMdp($_GET["value"]);
                         }
                     } else {
-                        echo "lien expiré";
+                        
+                        $this->con->getView()->afficherLienExpire();
+                        
                     }
                 }
             } catch (Exception $ex) {

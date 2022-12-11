@@ -11,8 +11,8 @@ class ModeleConnexion extends Connexion{
     //Inserts the data (emailAdress, username and password) in the database, returns True if it worked, False otherwise
     public function ajouterUtilisateur()
     {
-        if (!token_verification()) {
-            return 0;
+        if(!isset($_POST["username"]) || !isset($_POST["passwd"]) || !isset($_POST["email"]) || !token_verification()) {
+            return false;
         }
         $sth = self::$bdd->prepare('INSERT INTO users (email, username, passwd) values(:email, :username, :password)');
         if ($this->verif_username($_POST['username'])) {

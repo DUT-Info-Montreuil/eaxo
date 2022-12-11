@@ -8,7 +8,6 @@
 
         public function __construct()
         {
-            echo "ok";
             //$this->action = $_POST[""];
             $this->m = new ModeleSaveExo();
             $this->v = new VueSaveExo();

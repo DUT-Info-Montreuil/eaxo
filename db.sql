@@ -124,7 +124,7 @@ CREATE TABLE IF NOT EXISTS permissions(
 
 CREATE TABLE IF NOT EXISTS reset_password(
     id serial,
-    userid bigint(20) UNSIGNED,
+    userid bigint(20) UNSIGNED UNIQUE,
     link varchar(255),
     expire timestamp,
     FOREIGN KEY (userid)

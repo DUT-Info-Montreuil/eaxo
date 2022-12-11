@@ -141,6 +141,60 @@ function ajouterImageAPI_Images(image, nom) {
     });
 }
 
+function supprimerDossiersAPI_Dossier(id){
+    var idTemps = id;
+    var doss = new Array();
+    var i = 0;
+
+    doss.push(dossiers.filtrer(dossiers => dossiers.parent == idTemps));
+
+    while(doss[i++].length > 0){
+      idTemps = doss.at(doss.length-1)[0].id;
+      doss.push(dossiers.filtrer(dossiers => dossiers.parent == idTemps));
+    }
+
+    for (var doss1 of doss) {
+        for (var doss2 of doss1) {
+            dossiers.remove(doss2.id);
+            supprimerDossierAPI_Dossier(doss2.id);
+        }
+    }
+    dossiers.remove(id);
+    supprimerDossierAPI_Dossier(id);
+};
+
+//function
+
+function supprimerDossierAPI_Dossier(id){
+    $.ajax({
+        type: "POST",
+        url: "./api/controleur_requetes_bd.php?module=dossiers&action=delFolder",
+        data: {id: id},
+        dataType: "json"
+    }).done(function(retour) {
+        if (retour){
+            //
+        }
+        else
+            console.log("erreur de suppresion");
+    });
+}
+
+function supprimerImageAPI_Image(id){
+    $.ajax({
+        type: "POST",
+        url: "./api/controleur_requetes_bd.php?module=images&action=delImage",
+        data: {id: id},
+        dataType: "json"
+    }).done(function(retour) {
+        if (retour){
+            //
+        }
+        else
+            console.log("erreur de suppresion");
+    });
+}
+
 function ajouterDossierAPI_Dossier(nom){
     $.ajax({
         type: "POST",
@@ -286,7 +340,34 @@ function Image(id, nom, parent, img){
         else
             return;
     })
+    $("#image_" + this.id).contextmenu(function (event){
+        selection("#image_" + id);
+        var x = event.clientX;
+        var y = event.clientY;
+        console.log("X=" + event.clientX + ", Y=" + event.clientY);
+        $("#Dossier_Contextuel_Menu").css("display", "block");
+        $("#Dossier_Contextuel_Menu").css("top", y-93);
+        $("#Dossier_Contextuel_Menu").css("left", x-702);
 
+        $("#Dossier_delete_Div").click(function (){
+            $("#image_" + id).css("display", "none");
+            $("#image_" + id).remove();
+            supprimerImageAPI_Image(id);
+        });
+        $("#Dossier_download_Div").click(function (){
+            console.log("nous devons telecharger");
+        });
+        $("#Dossier_rename_Div").click(function (){
+            console.log("renomon le");
+        });
+
+        $("#Dossier_Contextuel_Menu").mouseleave(function (){
+            $("#Dossier_Contextuel_Menu").css("display", "none");
+            $("#image_" + id).mouseleave();
+            $("#Dossier_Contextuel_Menu").off();
+        });
+        return false;
+    });
     $("#image_" + this.id).mouseenter(function (){
         $("#titre_Images_" + id).css("font-weight", "600");
         if($("#image_" + id).css("border") != "1px solid rgb(153, 209, 255)"){
@@ -324,8 +405,16 @@ function listeDossiers(){
           return null;
       return dossier[0];
     }
-    this.remove = function (numero){
-        this.dossiers.splice(0, numero);
+    this.remove = function (id){
+        var dossier;
+        for (var i=0; i<this.dossiers.length; i++) {
+            dossier = this.get(i)
+            if(dossier.id == id){
+                this.dossiers.splice(0, i);
+                dossier.cacher();
+                dossier.detruire();
+            }
+        }
     }
     this.filtrer = function (filtre){
         return this.dossiers.filter(filtre);
@@ -383,6 +472,9 @@ function Dossier(id, nom, parent){
     this.cacher = function (){
         $("#dossier_" + this.id).css("display", "none");
     }
+    this.detruire = function (){
+        $("#dossier_" + this.id).remove();
+    }
     this.toString = function (){
         console.log("Affichage du dossier " + this.id + "\nnom: " + this.nom + "\nparent: " + this.parent + "\n");
     }
@@ -396,12 +488,27 @@ function Dossier(id, nom, parent){
     });
     $("#dossier_" + this.id).contextmenu(function (event){
         selection("#dossier_" + id);
-        $("#Dossier_Contextuel_Menu").css("top", $("#dossier_" + id).css("top"));
-        $("#Dossier_Contextuel_Menu").css("left", $("#dossier_" + id).css("left"));
+        var x = event.clientX;
+        var y = event.clientY;
+        console.log("X=" + event.clientX + ", Y=" + event.clientY);
         $("#Dossier_Contextuel_Menu").css("display", "block");
+        $("#Dossier_Contextuel_Menu").css("top", y-93);
+        $("#Dossier_Contextuel_Menu").css("left", x-702);
+
+        $("#Dossier_delete_Div").click(function (){
+            supprimerDossiersAPI_Dossier(id);
+        });
+        $("#Dossier_download_Div").click(function (){
+            console.log("nous devons telecharger");
+        });
+        $("#Dossier_rename_Div").click(function (){
+            console.log("renomon le");
+        });
 
         $("#Dossier_Contextuel_Menu").mouseleave(function (){
+            $("#Dossier_Contextuel_Menu").css("display", "none");
             $("#dossier_" + id).mouseleave();
+            $("#Dossier_Contextuel_Menu").off();
         });
         return false;
     });
@@ -409,21 +516,16 @@ function Dossier(id, nom, parent){
         $("#titre_Dossier_" + id).css("font-weight", "600");
         if($("#dossier_" + id).css("border") != "1px solid rgb(153, 209, 255)"){
             $("#dossier_" + id).css("background-color", "#e5f3ff");//#EBF5FB
-            //$("#vueDossier_" + id).css("height", "97");
-            //$("#vueDossier_" + id).css("width", "90");
-            //$("#titre_Dossier_" + id).css("color", "#AF7AC5");
-            //$("#vueDossier_" + id).css("margin-left", "15px");
         }
 
     });
     $("#dossier_" + this.id).mouseleave(function (){
-        //$("#vueDossier_" + id).css("height", "67");
-        //$("#vueDossier_" + id).css("margin-left", "25px");
         $("#titre_Dossier_" + id).css("font-weight", "normal");
-        //$("#titre_Dossier_" + id).css("color", "black");
+        //$("#Dossier_Contextuel_Menu").mouseleave();
         if($("#dossier_" + id).css("border") != "1px solid rgb(153, 209, 255)"){
             $("#dossier_" + id).css("background-color", "unset");
         }
+        //$("#Dossier_Contextuel_Menu").off();
 
     });
 

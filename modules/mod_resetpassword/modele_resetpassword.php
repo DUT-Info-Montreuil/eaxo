@@ -5,7 +5,6 @@ use PHPMailer\PHPMailer\Exception;
 
     require_once SITE_ROOT ."/connexion.php";
     require_once __DIR__ ."/cont_resetpassword.php";
-    require_once SITE_ROOT ."/config.php";
 
     require_once SITE_ROOT."/lib/PHPMailer/PHPMailer.php";
     require_once SITE_ROOT."/lib/PHPMailer/SMTP.php";

@@ -199,6 +199,35 @@ class VuePages extends VueGenerique
 
                     <input type="file" id="Dossier_Add_Picture_Input" accept="image/*">
 
+                    <div id='Dossier_Contextuel_Menu'>
+                        <table id='Dossier_Contextuel_Menu_Tab'>
+                            <tr>
+                                <td>
+                                    <div id='Dossier_rename_Div' class='Dossier_Div_Menu_Contextuel'>
+                                        <img id='Dossier_rename' class='Dossier_Icone_Menu_Contextuel' src='resources/images/api_images/rename.png'>
+                                        <p id='Dossier_rename_text' class='Dossier_Icone_Menu_Contextuel_text'>Renomer</p>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div id='Dossier_download_Div' class='Dossier_Div_Menu_Contextuel'>
+                                         <img id='Dossier_download' class='Dossier_Icone_Menu_Contextuel' src='resources/images/api_images/download.png'>
+                                         <p id='Dossier_download_text' class='Dossier_Icone_Menu_Contextuel_text'>Télécharger</p>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div id='Dossier_delete_Div' class='Dossier_Div_Menu_Contextuel'>
+                                        <img id='Dossier_delete' class='Dossier_Icone_Menu_Contextuel' src='resources/images/api_images/delete.png'>
+                                        <p id='Dossier_delete_text' class='Dossier_Icone_Menu_Contextuel_text'>Supprimer</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
                 </div>
 
                 <p id="Dossiers_Chemin"></p>

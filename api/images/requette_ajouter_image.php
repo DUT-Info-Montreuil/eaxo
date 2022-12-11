@@ -8,8 +8,5 @@ function ajouterImage($sth, $ownerid, $image, $pName, $folderParent){
 
 function reponsseInsertIMG($insert){
     header('Content-Type: application/json; charset=utf-8');
-    if($insert)
-        echo json_encode(true);
-    else
-        echo json_encode(false);
+    echo json_encode($insert);
 }

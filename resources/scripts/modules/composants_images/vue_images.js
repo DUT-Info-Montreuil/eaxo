@@ -5,6 +5,7 @@
 var dossiers = new listeDossiers();
 var Images = new listeImages();
 var niveauAfficher = -1;
+var selectionner = null;
 
 //Recuperation de la BD
 recuperrerDossiers();
@@ -83,6 +84,43 @@ function ajouterEvents(){
         $("#Dossier_Add_Picture").css("background-color", "unset");
     });
 
+    $("#Dossier_rename_Div").mouseenter(function (){
+        $("#Dossier_rename_text").css("font-size", 15);
+        $("#Dossier_rename").css("width", 20);
+        $("#Dossier_rename").css("height", 20);
+    });
+    $("#Dossier_rename_Div").mouseleave(function (){
+        $("#Dossier_rename_text").css("font-size", 12);
+        $("#Dossier_rename").css("width", 15);
+        $("#Dossier_rename").css("height", 15);
+    })
+
+    $("#Dossier_download_Div").mouseenter(function (){
+        $("#Dossier_download_text").css("font-size", 14);
+        $("#Dossier_download").css("width", 20);
+        $("#Dossier_download").css("height", 20);
+    });
+    $("#Dossier_download_Div").mouseleave(function (){
+        $("#Dossier_download_text").css("font-size", 12);
+        $("#Dossier_download").css("width", 15);
+        $("#Dossier_download").css("height", 15);
+    });
+
+    $("#Dossier_delete_Div").mouseenter(function (){
+        $("#Dossier_delete_text").css("font-size", 14);
+        $("#Dossier_delete").css("width", 20);
+        $("#Dossier_delete").css("height", 20);
+    });
+    $("#Dossier_delete_Div").mouseleave(function (){
+        $("#Dossier_delete_text").css("font-size", 12);
+        $("#Dossier_delete").css("height", 15);
+        $("#Dossier_delete").css("width", 15);
+    })
+
+    $("#Dossier_Contextuel_Menu").mouseleave(function (){
+        $("#Dossier_Contextuel_Menu").css("display", "none");
+    });
+
     $("#ouvertureVolet").click(function(){
         dossiers.afficher(0);
     });
@@ -112,7 +150,8 @@ function ajouterDossierAPI_Dossier(nom){
         dataType: "json"
     }).done(function(retour){
         if(retour){
-            dossiers.add(new Dossier())
+            dossiers.add(new Dossier(retour['id'], nom, niveauAfficher));
+            dossiers.filtrer(dossier => dossier.id == retour['id'])[0].afficher();
         }
         else
             alert("Erreur lors de l'insertion de l'image");
@@ -186,7 +225,7 @@ function indexerImages(resultat){
 
 function actualiserCommandes(id){
     actualiserChemin(id);
-    if(id == null) {
+    if(id == 0) {
         $("#Dossier_Back").css("opacity", 0.3);
         $("#Dossier_Back").css("background-color", "#F4F4F4");
 
@@ -242,26 +281,31 @@ function Image(id, nom, parent, img){
 
     $("#divImagesHome").append(this.vue);
     $("#image_" + this.id).click(function (){
-        //dossiers.afficher(id);
+        if(selectionner != "#image_" + id)
+            selection("#image_" + id);
+        else
+            return;
     })
 
     $("#image_" + this.id).mouseenter(function (){
-        $("#vueImage_" + id).css("height", "97");
-        $("#vueImage_" + id).css("width", "100");
-        $("#vueImage_" + id).css("margin-left", "10px");
-        $("#vueImage_" + id).css("border-radius", "10px");
-        $("#image_" + id).css("background-color", "#EBF5FB");
-        $("#titre_Images_" + id).css("font-weight", "bold");
-        $("#titre_Images_" + id).css("color", "#AF7AC5");
+        $("#titre_Images_" + id).css("font-weight", "600");
+        if($("#image_" + id).css("border") != "1px solid rgb(153, 209, 255)"){
+            $("#vueImage_" + id).css("height", "97");
+            $("#vueImage_" + id).css("width", "100");
+            $("#vueImage_" + id).css("margin-left", "10px");
+            $("#vueImage_" + id).css("border-radius", "10px");
+            $("#image_" + id).css("background-color", "#e5f3ff");
+        }
     });
     $("#image_" + this.id).mouseleave(function (){
+        $("#titre_Images_" + id).css("font-weight", "normal");
         $("#vueImage_" + id).css("height", "67");
         $("#vueImage_" + id).css("width", "70");
         $("#vueImage_" + id).css("margin-left", "25px");
         $("#vueImage_" + id).css("border-radius", "20px");
-        $("#image_" + id).css("background-color", "unset");
-        $("#titre_Images_" + id).css("font-weight", "normal");
-        $("#titre_Images_" + id).css("color", "black");
+        if($("#image_" + id).css("border") != "1px solid rgb(153, 209, 255)"){
+            $("#image_" + id).css("background-color", "unset");
+        }
     });
 
 }
@@ -316,6 +360,18 @@ function listeDossiers(){
     }
 }
 
+function selection(id){
+        if(selectionner != null){
+            $(selectionner).css("border", "none");
+            $(selectionner).css("background-color", "unset");
+        }
+        $(id).css("border", "1px solid");
+        $(id).css("border-color", "#99d1ff");
+        $(id).css("background-color", "#cce8ff");
+        $(id).mouseleave();
+        selectionner = id;
+}
+
 function Dossier(id, nom, parent){
     this.id = id;
     this.nom = nom;
@@ -333,25 +389,45 @@ function Dossier(id, nom, parent){
     $("#divImagesHome").append(this.vue);
     this.cacher();
     $("#dossier_" + this.id).click(function (){
-        dossiers.afficher(id);
+        if(selectionner != "#dossier_" + id)
+            selection("#dossier_" + id);
+        else
+            dossiers.afficher(id);
+    });
+    $("#dossier_" + this.id).contextmenu(function (event){
+        selection("#dossier_" + id);
+        $("#Dossier_Contextuel_Menu").css("top", $("#dossier_" + id).css("top"));
+        $("#Dossier_Contextuel_Menu").css("left", $("#dossier_" + id).css("left"));
+        $("#Dossier_Contextuel_Menu").css("display", "block");
+
+        $("#Dossier_Contextuel_Menu").mouseleave(function (){
+            $("#dossier_" + id).mouseleave();
+        });
+        return false;
     });
     $("#dossier_" + this.id).mouseenter(function (){
-        $("#vueDossier_" + id).css("height", "97");
-        $("#vueDossier_" + id).css("width", "90");
-        $("#vueDossier_" + id).css("margin-left", "15px");
-        $("#dossier_" + id).css("background-color", "#EBF5FB");
-        $("#titre_Dossier_" + id).css("font-weight", "bold");
-        $("#titre_Dossier_" + id).css("color", "#AF7AC5");
+        $("#titre_Dossier_" + id).css("font-weight", "600");
+        if($("#dossier_" + id).css("border") != "1px solid rgb(153, 209, 255)"){
+            $("#dossier_" + id).css("background-color", "#e5f3ff");//#EBF5FB
+            //$("#vueDossier_" + id).css("height", "97");
+            //$("#vueDossier_" + id).css("width", "90");
+            //$("#titre_Dossier_" + id).css("color", "#AF7AC5");
+            //$("#vueDossier_" + id).css("margin-left", "15px");
+        }
+
     });
     $("#dossier_" + this.id).mouseleave(function (){
-        $("#vueDossier_" + id).css("height", "67");
-        $("#vueDossier_" + id).css("width", "70");
-        $("#vueDossier_" + id).css("margin-left", "25px");
-        $("#dossier_" + id).css("background-color", "unset");
+        //$("#vueDossier_" + id).css("height", "67");
+        //$("#vueDossier_" + id).css("margin-left", "25px");
         $("#titre_Dossier_" + id).css("font-weight", "normal");
-        $("#titre_Dossier_" + id).css("color", "black");
+        //$("#titre_Dossier_" + id).css("color", "black");
+        if($("#dossier_" + id).css("border") != "1px solid rgb(153, 209, 255)"){
+            $("#dossier_" + id).css("background-color", "unset");
+        }
+
     });
 
 }
+
 
 

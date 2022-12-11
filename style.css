@@ -347,3 +347,39 @@ API Images
     margin-left: 20px;
 
 }
+
+/*Menu Contextuel*/
+.Dossier_Icone_Menu_Contextuel{
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
+    margin-left: 5px;
+    display: inline-block;
+}
+
+.Dossier_Div_Menu_Contextuel{
+
+}
+
+.Dossier_Icone_Menu_Contextuel_text{
+    display: inline-block;
+    text-align: center;
+    font-size: 12px;
+    margin: 0px;
+}
+
+#Dossier_delete_text{
+    color: red;
+    font-weight: bold;
+}
+
+#Dossier_Contextuel_Menu{
+    overflow: hidden;
+    position: absolute;
+    display: none;
+    border-radius: 10px;
+    box-shadow: 6px 6px 25px rgba(0, 0, 0, 1);
+    background-color: white;
+    width: 110px;
+    height: 85px;
+}

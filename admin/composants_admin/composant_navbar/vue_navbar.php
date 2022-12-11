@@ -22,7 +22,7 @@ class VueNavbarAdmin
                         Outils
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark">
-                        <li><a class="dropdown-item" href="#">Gestion des utilisateurs professeurs</a></li>
+                        <li><a class="dropdown-item" href="./index.php?module=mod_home">Gestion des utilisateurs professeurs</a></li>
                     </ul>
                     </li>
                 </ul>

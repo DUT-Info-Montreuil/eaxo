@@ -35,7 +35,7 @@ class VueHome extends VueGenerique
             <form action="./index.php?module=mod_home&action=create_exercice" method="POST"> 
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Création d'exercice</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -96,15 +96,15 @@ class VueHome extends VueGenerique
                 <div class="col">
                         <div class="card shadow-sm">
                         <!-- Button trigger modal Delete Exo-->
-                        <a type="button" class="open-idNameToModal btn-close" data-bs-toggle="modal" data-id=<?php echo $name_id["exoNumber"]?> data-name=<?php echo $name_id["name"]?> data-bs-target="#modalDeleteExo"></a>
-                        <a style="text-decoration: none" href='./index.php?module=mod_pages&action=formEdit&exo=<?php echo $name_id["exoNumber"]?>'>
+                        <a type="button" class="open-idNameToModal btn-close" data-bs-toggle="modal" data-id=<?php echo $name_id["exoNumber"]?> data-name=<?php echo htmlspecialchars($name_id["name"])?> data-bs-target="#modalDeleteExo"></a>
+                        <a class="text-decoration-none fw-bold" href='./index.php?module=mod_pages&action=formEdit&exo=<?php echo $name_id["exoNumber"]?>'>
                             <svg class="bd-placeholder-img card-img-top" width="100%" height="225" role="img" preserveAspectRatio="xMidYMid slice">
                             </svg>
                             
                             <div class="card-body">
                                 <div class="card-text">
                                     <?php
-                                    echo $name_id["name"];
+                                    echo htmlspecialchars($name_id["name"]);
                                     ?>
                                 </div>
                             </div>

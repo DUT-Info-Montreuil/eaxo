@@ -53,7 +53,7 @@ class VueUserList extends VueGenerique
         foreach ($users as $name_id) {
             ?>
             
-            <li class="list-group-item"><?php echo $name_id["username"]?> <a type="button" class="open-idNameToModal btn-close" data-bs-toggle="modal" data-id=<?php echo $name_id["id"]?> data-name=<?php echo $name_id["username"]?> data-bs-target="#modalDeleteUser"></a></li>
+            <li class="list-group-item"><?php echo htmlspecialchars($name_id["username"])?> <a type="button" class="open-idNameToModal btn-close" data-bs-toggle="modal" data-id=<?php echo $name_id["id"]?> data-name=<?php echo htmlspecialchars($name_id["username"])?> data-bs-target="#modalDeleteUser"></a></li>
         <?php
         }
         if (isset($users) && count($users) > 0) {

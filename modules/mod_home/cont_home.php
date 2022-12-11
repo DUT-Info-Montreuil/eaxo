@@ -24,7 +24,7 @@ class ContHome {
 
     public function create_exercice() {
         $this->m->create_exercice();
-        $this->homepage();
+        header("Location: ./index.php?module=mod_home&action=homepage");
     }
 
     public function delete_exercice() {

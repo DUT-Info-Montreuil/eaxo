@@ -23,6 +23,7 @@ class ContUserList
     public function delete_user()
     {
         $this->m->delete_user();
+        $this->usersList();
     }
 
     public function exec() {

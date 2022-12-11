@@ -48,6 +48,7 @@ class ModeleConnexion extends Connexion{
             if ($result) {
                 if (password_verify($_POST['password'], $result['passwd'])) {
                     $_SESSION['newsession'] = $result['id'];
+                    $_SESSION["remember"] = isset($_POST["remember"]);
                     return true;
                 }
             }

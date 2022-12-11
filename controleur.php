@@ -23,7 +23,7 @@ class Controleur
 
     public function exec()
     {
-        if (!isset($_SESSION["newsession"])) {
+        if (!isset($_SESSION["newsession"]) && $this->module != "mod_resetpassword") {
             $this->module = "mod_connexion";
         }
         switch ($this->module) {
@@ -43,6 +43,11 @@ class Controleur
                     require_once "./modules/mod_home/mod_home.php";
                     $this->mod = new ModHome();
                 }
+                break;
+            case "mod_resetpassword":
+                require_once "./modules/mod_resetpassword/mod_resetpassword.php";
+
+                $this->mod = new ModResetPassword();
                 break;
 
         }

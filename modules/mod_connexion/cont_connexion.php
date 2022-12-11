@@ -16,6 +16,7 @@ class ContConnexion
         if($this->action != "new_inscription") {
             create_token();
         }
+
         $this->exec();
     }
 

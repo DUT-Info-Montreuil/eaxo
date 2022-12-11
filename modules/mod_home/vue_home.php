@@ -111,7 +111,7 @@ class VueHome extends VueGenerique
                         </div>
                     </a>
                 </div>
-        
+                <script src="./resources/scripts/widgets.js" type="module"></script>
                 <?php
                 $colonne++;
         }

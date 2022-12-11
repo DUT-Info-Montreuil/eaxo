@@ -40,7 +40,7 @@ class VueUserList extends VueGenerique
                 </form>
                 </div>
                 </div>
-
+                <script src="./resources/scripts/widgets.js" type="module"></script>
         <?php
     }
 

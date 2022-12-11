@@ -33,11 +33,13 @@ class VueConnexion extends VueGenerique
                             <label for="floatingPassword">Mot de passe</label>
                         </div>
 
-                        <a id="TextePasEncoreDeCompte" href="./index.php?module=mod_connexion&action=form_inscription">Pas encore de compte ?</a>
+                        <a id="TextePasEncoreDeCompte" href="./index.php?module=mod_connexion&action=form_inscription">S'inscrire</a>
+                        <a id="TextePasEncoreDeCompte" href="./index.php?module=mod_resetpassword">Mot de passe oublié ?</a>
 
                         <div class="checkbox mt-2 mb-2">
                             <label>
-                                <input id="test" type="checkbox" value="remember-me" checked> Se souvenir de moi
+                                <input id="test" type="checkbox" value="remember-me" checked name="remember"> Se souvenir de moi
+                                
                             </label>
                         </div>
                         <button id="bouton_send" class="w-100 btn btn-lg btn-warning" type="submit">Connexion</button>

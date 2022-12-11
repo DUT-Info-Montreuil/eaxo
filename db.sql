@@ -6,18 +6,19 @@ DROP TABLE IF EXISTS widgets_exercices_list;
 DROP TABLE IF EXISTS exercice_elements;
 DROP TABLE IF EXISTS gallery_folders;
 DROP TABLE IF EXISTS gallery_images;
-DROP TABLE IF EXISTS groups;
+DROP TABLE IF EXISTS `groups`;
 DROP TABLE IF EXISTS permissions;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS widgets;
+DROP TABLE IF EXISTS reset_password;
 
-CREATE TABLE IF NOT EXISTS groups(
+CREATE TABLE IF NOT EXISTS `groups`(
     id serial,
     gname varchar(255),
     PRIMARY KEY(id)
 );
 
-INSERT INTO groups (gname) VALUES ('user');
+INSERT INTO `groups` (gname) VALUES ('user');
 
 
 CREATE TABLE IF NOT EXISTS users(
@@ -121,6 +122,14 @@ CREATE TABLE IF NOT EXISTS permissions(
     PRIMARY KEY(id)
 );
 
+CREATE TABLE IF NOT EXISTS reset_password(
+    id serial,
+    userid bigint(20) UNSIGNED,
+    link varchar(255),
+    expire timestamp,
+    FOREIGN KEY (userid)
+        REFERENCES users(id)
+);
 
 
 INSERT INTO users (email, username, passwd) VALUES('prof@gmail.com', 'proftest', '$2y$10$CRsZddHPQ66oc8fE2l6VEOL4epL8P2XT7KIqacSR.ZfGA8TJ/WWea');

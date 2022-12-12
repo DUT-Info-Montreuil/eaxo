@@ -10,6 +10,6 @@ function ajouterDossier($sth, $ownerid, $pName, $folderParent){
 
 function reponsseInserFolder($id){
     header('Content-Type: application/json; charset=utf-8');
-    $insert =  array('id' => $id);
+    $insert = array('id' => $id);
     echo json_encode($insert);
 }

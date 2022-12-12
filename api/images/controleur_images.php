@@ -5,6 +5,7 @@ require_once "./images/requette_ajouter_image.php";
 require_once "./images/requette_supprimer_image.php";
 require_once "./images/requette_renomer_image.php";
 
+
 class controleur_images extends Connexion
 {
     private $action;
@@ -33,6 +34,11 @@ class controleur_images extends Connexion
                 if(isset($_POST['nom']) && isset($_POST['id']))
                     renomerImage(Connexion::$bdd, $_SESSION['newsession'], $_POST['nom'], $_POST['id']);
                 break;
+            case "getImage":
+                require_once __DIR__ ."/getImage.php";
+                getImage(Connexion::$bdd);
+                break;
+            
         }
     }
 }

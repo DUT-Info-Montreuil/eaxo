@@ -147,7 +147,6 @@ class VuePages extends VueGenerique
                 </div>
 
 
-                 <script src="/resources/scripts/modules/composants_images/vue_images.js" type="module"></script>
                 <!-- Button trigger modal -->
                 <button type="button" id="ouvertureVolet" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                   Mes images

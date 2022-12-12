@@ -39,6 +39,11 @@
       position: absolute;
     }
 
+    .ui-icon-gripsmall-diagonal-se {
+      display: none;
+    }
+    
+
     
 }
 
@@ -341,7 +346,6 @@ API Images
     border-color: black;
      */
     border-radius: 5px;
-    //background-color: ;
 }
 
 #Dossier_Back{
@@ -491,4 +495,13 @@ API Images
 
   border: 1px dashed black;
 
+}
+
+.imageLoaded {
+  height:100%;
+  width: 100%;
+  border-radius:none;
+  border:none;
+  margin:0;
+  padding: 0;
 }

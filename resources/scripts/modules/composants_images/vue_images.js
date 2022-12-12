@@ -1,3 +1,4 @@
+import widget_c from "../../widgets_controller.js";
 
 
 
@@ -171,7 +172,6 @@ function supprimerDossiersAPI_Dossier(id){
             supprimerDossierAPI_Dossier(doss2.id);
         }
     }
-    console.log(doss);
     dossiers.remove(id);
     supprimerDossierAPI_Dossier(id);
 };
@@ -240,7 +240,6 @@ function ajouterDossierAPI_Dossier(nom){
 
 function toBase64(image){
     if(false){
-        console.log("haa ba l'image est incorecte");
         return null;
     }
     var fichier = new FileReader();
@@ -272,7 +271,6 @@ function recuperrerDossiers(){
         data: {},
         dataType: "json"
     }).done(function(retour) {
-        //console.log("Fin de recuperation des dossier\n");
         indexerDossiers(retour);
     });
 }
@@ -312,7 +310,6 @@ function recuperrerImages(parent){
         data: {folderParent: parent},
         dataType: "json"
     }).done(function(retour) {
-        //console.log("Fin de récupération des images du niveau " + parent + ".");
         indexerImages(retour);
     });
 }
@@ -395,6 +392,12 @@ function Image(id, nom, parent, img) {
 
     $("#divImagesHome").append(this.vue);
 
+    $("#vueImage_" + this.id).on("click", function() {
+        widget_c.cloneImage(this, id);
+    })
+
+
+
     $("#image_" + this.id).click(function () {
         if (selectionner != "#image_" + id)
             selection("#image_" + id);
@@ -409,7 +412,6 @@ function Image(id, nom, parent, img) {
         selection("#image_" + id);
         var x = event.clientX;
         var y = event.clientY;
-        //console.log("X=" + event.clientX + ", Y=" + event.clientY);
         $("#Dossier_Contextuel_Menu").css("display", "block");
         $("#Dossier_Contextuel_Menu").css("top", y - 215);
         $("#Dossier_Contextuel_Menu").css("left", x - 670);
@@ -532,8 +534,6 @@ function listeDossiers(){
             for (var dossier of dossierFiltrer) {
                 dossier.cacher();
             }
-        }else {
-            //console.log("le niveau actuelle n'est pas encore définit");
         }
     }
 }
@@ -589,7 +589,6 @@ function Dossier(id, nom, parent){
         selection("#dossier_" + id);
         var x = event.clientX;
         var y = event.clientY;
-        //console.log("X=" + event.clientX + ", Y=" + event.clientY);
         $("#Dossier_Contextuel_Menu").css("display", "block");
         $("#Dossier_Contextuel_Menu").css("top", y-215);
         $("#Dossier_Contextuel_Menu").css("left", x-670);
@@ -602,7 +601,6 @@ function Dossier(id, nom, parent){
             supprimerDossiersAPI_Dossier(id);
         });
         $("#Dossier_download_Div").click(function (){
-            //console.log("nous devons telecharger");
         });
         $("#Dossier_rename_Div").click(function (){
             $("#Dossier_Contextuel_Menu").mouseleave();
@@ -650,7 +648,3 @@ function Dossier(id, nom, parent){
     });
 
 }
-
-
-
-

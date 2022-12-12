@@ -4,6 +4,7 @@ class ExoParser {
     constructor() {
         this.page = $("#pageContainer")
         this.exoArray = {}
+
         
     }
 

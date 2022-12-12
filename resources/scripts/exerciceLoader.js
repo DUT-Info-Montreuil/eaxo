@@ -55,7 +55,6 @@ class ExerciceLoader {
 
             for(let ind in dataset) {
                 jElement[0].dataset[ind] = dataset[ind];
-                console.log(ind)
                 if(ind == "lines") {
                     this.loaderFunction[ind](jElement[0])
                 } else if (ind == "widget" && this.loaderFunction[dataset[ind]]) {
@@ -81,6 +80,26 @@ class ExerciceLoader {
             if (elementData.content) {
                 jElement.text(elementData.content.replace(/['"]+/g, ''));
             } 
+            
+            //Load image
+            if (jElement.data("imageid")) {
+
+                $.get("./api/controleur_requetes_bd.php?module=images&action=getImage&imageid=" + jElement.data("imageid"), {}, function(result) {
+                    if(result.code == 1) {
+                        var content = result.content;
+                        var image = new Image()
+                        image.src = content;
+                        
+                        
+                        $(image).addClass("imageLoaded")
+                        $(image).appendTo(jElement)
+
+                        jElement.resizable({
+                            containment:"#pageContainer"
+                        });
+                    }
+                })
+            }
 
             
             

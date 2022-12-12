@@ -19,40 +19,38 @@
 
         public function loadChildren($exoID, $element, $parent, $callback, $continue) {
             if($continue) {
-                if(!is_int($element)) {
-                    $parentID = isset($parent) ? $parent->nodeID : null;
+                if(isset($element->nodeName) && $element->nodeName != "IMG") {
+                    if(!is_int($element)) {
+                        $parentID = isset($parent) ? $parent->nodeID : null;
 
-                    if($parent != null) {
+                        if($parent != null) {
+                            
+                        }
                         
-                    }
-                    
-                    $jsonClass = is_object($element->classList) ?  json_encode($element->classList) : "{}";
-                    $nodeID = isset($element->nodeID) ? intval($element->nodeID) : null;
-                    $dataset = isset($element->dataset) ? json_encode($element->dataset) : "";
+                        $jsonClass = is_object($element->classList) ?  json_encode($element->classList) : "{}";
+                        $nodeID = isset($element->nodeID) ? intval($element->nodeID) : null;
+                        $dataset = isset($element->dataset) ? json_encode($element->dataset) : "";
 
 
-                    $jsonCss =  is_object($element->style) ? json_encode($element->style) : "";
-                    $jsonContent =  property_exists($element, "textContent") ? json_encode($element->textContent) : "";
+                        $jsonCss =  is_object($element->style) ? json_encode($element->style) : "";
+                        $jsonContent =  property_exists($element, "textContent") ? json_encode($element->textContent) : "";
 
 
-                    //var_dump($jsonContent);
-                    $nodeName = isset($element->nodeName) ? $element->nodeName : "";
-                    if($nodeName == "") {
-                        var_dump($element);
-                    }
-                    
-                    $sth = self::$bdd->prepare('INSERT INTO exercice_elements (exerciceId, parentId, htmlID, wType, dataset, class, content, css)'
-                    . 'values(:exoID, :parentID, :htmlID, :nodeName, :dataset, :jsonClass, :jsonContent, :jsonCss)');
-
-                    $sth->execute(array(":exoID" => $exoID, ":parentID" => $parentID, ":htmlID" => $nodeID, ":dataset" => $dataset, ":nodeName" => $nodeName, ":jsonClass" => $jsonClass,
-                    ":jsonContent" => $jsonContent, ":jsonCss" => $jsonCss));
-                    
-                }   
-                //var_dump($sth);
-                if(isset($element->children)) {
-                    foreach($element->children as $child) {
-                        $this->loadChildren($exoID, $child, $element, $callback, $continue);
+                        $nodeName = isset($element->nodeName) ? $element->nodeName : "";
                         
+                        $sth = self::$bdd->prepare('INSERT INTO exercice_elements (exerciceId, parentId, htmlID, wType, dataset, class, content, css)'
+                        . 'values(:exoID, :parentID, :htmlID, :nodeName, :dataset, :jsonClass, :jsonContent, :jsonCss)');
+
+                        $sth->execute(array(":exoID" => $exoID, ":parentID" => $parentID, ":htmlID" => $nodeID, ":dataset" => $dataset, ":nodeName" => $nodeName, ":jsonClass" => $jsonClass,
+                        ":jsonContent" => $jsonContent, ":jsonCss" => $jsonCss));
+                        
+                    }   
+                    //var_dump($sth);
+                    if(isset($element->children)) {
+                        foreach($element->children as $child) {
+                            $this->loadChildren($exoID, $child, $element, $callback, $continue);
+                            
+                        }
                     }
                 }
 
@@ -97,8 +95,6 @@
 
                 //Check if we need to insert new exercice into database
                 $dataExo = $this->getExercice($exerciceID, $this->userID);
-                
-                
                 try {
                     
                     self::$bdd->beginTransaction();

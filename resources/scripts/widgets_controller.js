@@ -66,7 +66,7 @@ class WidgetController {
         if(target.dataset.widget || target.nodeName == 'IMG') {
             let newTarget = target;
             
-            if(target.nodeName) {
+            if(target.nodeName == 'IMG') {
                 newTarget = target.offsetParent
             }
 

@@ -1,26 +1,27 @@
 <?php
+    header('Content-Type: application/json; charset=utf-8');
     require_once "../api.php";
+    
     class SaveExerice extends Api{
 
         private $userID;
         public function __construct()
         {
 
-            if(isset($_SESSION["newsession"])) {
+            if(isset($_SESSION["newsession"]) && isset($_POST["exoJson"])) {
                 $value = $_POST["exoJson"];
                 //echo $_SESSION["newsession"];
                 $this->save(json_decode($value));
             } else {
-                echo json_encode("not connected");
+                echo json_encode(array("code"=>0, "message"=>"Bad request"));
             }
         }
 
         public function loadChildren($exoID, $element, $parent, $callback, $continue) {
             if($continue) {
                 if(!is_int($element)) {
-                    var_dump($element->nodeID);
                     $parentID = isset($parent) ? $parent->nodeID : null;
-                    var_dump($exoID);
+
                     if($parent != null) {
                         
                     }
@@ -116,18 +117,21 @@
 
                 } catch(PDOException $e) {
                     self::$bdd->rollback();
+                    $this->isOk(false);
                     die($e->getMessage());
                 }
             }
         }
 
         public function isOk($ok) {
+            
+            
             if($ok) {
                 
-                echo json_encode("oui");
+                echo json_encode(array("code" => 1));
                 
             } else {
-                echo json_encode("non");
+                echo json_encode(array("code" => 0, "message"=>"Critical error"));
             }
         }
     }

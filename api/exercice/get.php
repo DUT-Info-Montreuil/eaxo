@@ -1,4 +1,5 @@
 <?php
+    header('Content-Type: application/json; charset=utf-8');
     require_once "../api.php";
 
     class GetExercice extends Api {
@@ -19,10 +20,10 @@
                 $result = $sth->fetchAll();
 
 
-                echo json_encode($result);
+                echo json_encode(array("code"=>1, "content"=>$result));
             }
             else {
-                echo "Non autorisé";
+                echo json_encode(array("code"=>0));
             }
             
         }

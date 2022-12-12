@@ -22,11 +22,8 @@ function loadDragFunction(element, container) {
             var exoList = $("[data-widget='box']")
             for(var i = 0; i < exoList.length; i++) {
                 var exo = $(exoList[i]);
-                //console.log(exo[0].id == exoList[i].id)
                 if(element[0].id != exoList[i].id) {
-                    //console.log(ui.helper[0].id + " " + exoList[i].id)
                     if (checkCollision(element, exo)) {
-                        console.log(element[0])
                         
                        return true;
                     }

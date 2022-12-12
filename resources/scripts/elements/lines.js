@@ -73,10 +73,7 @@ function createLinesElement(origin, isPreview) {
     } else {
         canvas = $(origin);
         let parent = $(canvas).parent()
-        console.log(parent)
         appendBtnTo = parent
-
-        console.log(parent.css("width"))
 
         if(parent.css) {
             canvas[0].width = parseInt(parent.css("width").substring(0, parent.css("width").indexOf("px")));

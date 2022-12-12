@@ -258,6 +258,32 @@ function recuperrerDossiers(){
     });
 }
 
+function renomerDossierAPI_Images(id, nom){
+    $.ajax({
+        type: "POST",
+        url: "./api/controleur_requetes_bd.php?module=dossiers&action=rename",
+        //processData: false,
+        data: {id: id, nom: nom},
+        dataType: "json"
+    }).done(function(retour) {
+        if(retour)
+            dossiers.filtrer(t => t.id == id)[0].renomer(nom);
+    });
+}
+
+function renomerImageAPI_Images(id, nom){
+    $.ajax({
+        type: "POST",
+        url: "./api/controleur_requetes_bd.php?module=images&action=rename",
+        //processData: false,
+        data: {id: id, nom: nom},
+        dataType: "json"
+    }).done(function(retour) {
+        if(retour)
+            Images.filtrer(t => t.id == id)[0].renomer(nom);
+    });
+}
+
 function recuperrerImages(parent){
     Images.detruire();
     $.ajax({
@@ -308,6 +334,9 @@ function listeImages(){
     this.add = function (image){
         this.Images.push(image);
     }
+    this.filtrer = function (filtre){
+        return this.Images.filter(filtre);
+    }
     this.cacher = function (){
         if (niveauAfficher != -1) {
             for (var img of this.Images) {
@@ -322,64 +351,88 @@ function listeImages(){
         }
      }
 }
-function Image(id, nom, parent, img){
+function Image(id, nom, parent, img) {
     this.id = id;
     this.nom = nom;
     this.parent = parent;
     this.imageEncoder = img;
-    this.vue = "<div id='image_" + this.id + "' class='divImageApiImages' class='divContenu'> <img id='vueImage_" + this.id + "'class='vueImageApiImages' src='" + this.imageEncoder + "'/> <p id='titre_Images_" + this.id + "' class='titreImages'>" + this.nom + "</p> </div>";
-    this.afficher = function (){
+    this.vue = "<div id='image_" + this.id + "' class='divImageApiImages' class='divContenu'> <img id='vueImage_" + this.id + "'class='vueImageApiImages' src='" + this.imageEncoder + "'/> <p id='titre_Images_" + this.id + "' class='titreImages'>" + this.nom + "</p> <input id='renomer_Image_" + this.id + "' class='renomer' type='text' placeholder='" + this.nom + "' required minlength='1' maxlength='55' size='10'> </div>";
+    this.afficher = function () {
         $("#image_" + this.id).css("display", "block");
     }
-    this.cacher = function (){
+    this.renomer = function (nom) {
+        this.nom = nom;
+        $("#titre_Images_" + id).text(nom);
+    }
+    this.cacher = function () {
         $("#image_" + this.id).css("display", "none");
     }
-    this.detruire = function (){
+    this.detruire = function () {
         $("#image_" + this.id).remove();
     }
-    this.toString = function (){
+    this.toString = function () {
         console.log("Affichage du dossier " + this.id + "\nnom: " + this.nom + "\nparent: " + this.parent + "\n");
     }
 
     $("#divImagesHome").append(this.vue);
-    $("#image_" + this.id).click(function (){
-        if(selectionner != "#image_" + id)
+
+    $("#image_" + this.id).click(function () {
+        if (selectionner != "#image_" + id)
             selection("#image_" + id);
         else
             return;
-    })
-    $("#image_" + this.id).contextmenu(function (event){
+    });
+    $("#image_" + this.id).contextmenu(function (event) {
         selection("#image_" + id);
         var x = event.clientX;
         var y = event.clientY;
         console.log("X=" + event.clientX + ", Y=" + event.clientY);
         $("#Dossier_Contextuel_Menu").css("display", "block");
-        $("#Dossier_Contextuel_Menu").css("top", y-93);
-        $("#Dossier_Contextuel_Menu").css("left", x-702);
+        $("#Dossier_Contextuel_Menu").css("top", y - 93);
+        $("#Dossier_Contextuel_Menu").css("left", x - 702);
 
-        $("#Dossier_delete_Div").click(function (){
+        $("#Dossier_delete_Div").click(function () {
             $("#image_" + id).css("display", "none");
             $("#Dossier_Contextuel_Menu").mouseleave();
             $("#image_" + id).remove();
             supprimerImageAPI_Image(id);
         });
-        $("#Dossier_download_Div").click(function (){
+        $("#Dossier_download_Div").click(function () {
             console.log("nous devons telecharger");
         });
-        $("#Dossier_rename_Div").click(function (){
-            console.log("renomon le");
+        $("#Dossier_rename_Div").click(function () {
+            $("#Dossier_Contextuel_Menu").mouseleave();
+            $("#renomer_Image_" + id).css("display", "block");
+            $("#renomer_Image_" + id).focus();
+            $("#titre_Images_" + id).css("display", "none");
+            $("#renomer_Image_" + id).focusout(function () {
+                $("#renomer_Image_" + id).text("");
+                $("#renomer_Image_" + id).css("display", "none");
+                $("#titre_Images_" + id).css("display", "block");
+                $("#renomer_Image_" + id).off();
+
+            });
+            $("#renomer_Image_"+id).keyup(function(e){
+                if (e.keyCode == 13){
+                    $("#renomer_Image_"+id).css("display", "none");
+                    $("#titre_Images_" + id).css("display", "block");
+                    $("#renomer_Image_"+id).off();
+                    console.log("inséron le nom: "+$("#renomer_Image_"+id).val()+" dans la BD");
+                    renomerImageAPI_Images(id, $("#renomer_Image_"+id).val());
+                }
+            });
         });
 
-        $("#Dossier_Contextuel_Menu").mouseleave(function (){
+        $("#Dossier_Contextuel_Menu").mouseleave(function () {
             $("#Dossier_Contextuel_Menu").css("display", "none");
             $("#image_" + id).mouseleave();
             $("#Dossier_Contextuel_Menu").off();
         });
         return false;
     });
-    $("#image_" + this.id).mouseenter(function (){
+    $("#image_" + this.id).mouseenter(function () {
         $("#titre_Images_" + id).css("font-weight", "600");
-        if($("#image_" + id).css("border") != "1px solid rgb(153, 209, 255)"){
+        if ($("#image_" + id).css("border") != "1px solid rgb(153, 209, 255)") {
             $("#vueImage_" + id).css("height", "97");
             $("#vueImage_" + id).css("width", "100");
             $("#vueImage_" + id).css("margin-left", "10px");
@@ -387,17 +440,16 @@ function Image(id, nom, parent, img){
             $("#image_" + id).css("background-color", "#e5f3ff");
         }
     });
-    $("#image_" + this.id).mouseleave(function (){
+    $("#image_" + this.id).mouseleave(function () {
         $("#titre_Images_" + id).css("font-weight", "normal");
         $("#vueImage_" + id).css("height", "67");
         $("#vueImage_" + id).css("width", "70");
         $("#vueImage_" + id).css("margin-left", "25px");
         $("#vueImage_" + id).css("border-radius", "20px");
-        if($("#image_" + id).css("border") != "1px solid rgb(153, 209, 255)"){
+        if ($("#image_" + id).css("border") != "1px solid rgb(153, 209, 255)") {
             $("#image_" + id).css("background-color", "unset");
         }
     });
-
 }
 
 function listeDossiers(){
@@ -478,9 +530,13 @@ function Dossier(id, nom, parent){
     this.id = id;
     this.nom = nom;
     this.parent = parent;
-    this.vue = "<div id='dossier_" + this.id + "' class='divDossierApiImages' class='divContenu'> <img id ='vueDossier_" + this.id + "' class='vueDossierApiImages' src=\"resources/images/api_images/dossier.png\"/> <p id='titre_Dossier_" + this.id + "' class='titreDossiers'>" + this.nom + "</p> </div>";
+    this.vue = "<div id='dossier_" + this.id + "' class='divDossierApiImages' class='divContenu'> <img id ='vueDossier_" + this.id + "' class='vueDossierApiImages' src=\"resources/images/api_images/dossier.png\"/> <p id='titre_Dossier_" + this.id + "' class='titreDossiers'>" + this.nom + "</p> <input id='renomer_Dossier_" + this.id + "' class='renomer' type='text' placeholder='" + this.nom + "' required minlength='1' maxlength='55' size='10'> </div>";
     this.afficher = function (){
         $("#dossier_" + this.id).css("display", "block");
+    }
+    this.renomer = function (nom){
+        this.nom = nom;
+        $("#titre_Dossier_"+id).text(nom);
     }
     this.cacher = function (){
         $("#dossier_" + this.id).css("display", "none");
@@ -495,10 +551,11 @@ function Dossier(id, nom, parent){
     $("#divImagesHome").append(this.vue);
     this.cacher();
     $("#dossier_" + this.id).click(function (){
-        if(selectionner != "#dossier_" + id)
-            selection("#dossier_" + id);
-        else
-            dossiers.afficher(id);
+        if($("#titre_Dossier_" + id).css("display") != "none")
+            if(selectionner != "#dossier_" + id)
+                selection("#dossier_" + id);
+            else
+                dossiers.afficher(id);
     });
     $("#dossier_" + this.id).contextmenu(function (event){
         selection("#dossier_" + id);
@@ -519,6 +576,26 @@ function Dossier(id, nom, parent){
             console.log("nous devons telecharger");
         });
         $("#Dossier_rename_Div").click(function (){
+            $("#Dossier_Contextuel_Menu").mouseleave();
+            $("#renomer_Dossier_"+id).css("display", "block");
+            $("#renomer_Dossier_"+id).focus();
+            $("#titre_Dossier_" + id).css("display", "none");
+            $("#renomer_Dossier_"+id).focusout(function (){
+                $("#renomer_Dossier_"+id).text("");
+                $("#renomer_Dossier_"+id).css("display", "none");
+                $("#titre_Dossier_" + id).css("display", "block");
+                $("#renomer_Dossier_"+id).off();
+            });
+            $("#renomer_Dossier_"+id).keyup(function(e){
+                if (e.keyCode == 13){
+                    $("#renomer_Dossier_"+id).css("display", "none");
+                    $("#titre_Dossier_" + id).css("display", "block");
+                    $("#renomer_Dossier_"+id).off();
+                    console.log("inséron le nom: "+$("#renomer_Dossier_"+id).val()+" dans la BD");
+                    renomerDossierAPI_Images(id, $("#renomer_Dossier_"+id).val());
+                }
+            });
+
             console.log("renomon le");
         });
 
@@ -546,6 +623,7 @@ function Dossier(id, nom, parent){
     });
 
 }
+
 
 
 

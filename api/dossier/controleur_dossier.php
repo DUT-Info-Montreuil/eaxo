@@ -3,6 +3,7 @@ require_once "./dossier/controleur_dossier.php";
 require_once "./dossier/requette_recupperer_dossier.php";
 require_once "./dossier/requette_ajouter_dossier.php";
 require_once "./dossier/requette_supprimer_dossier.php";
+require_once "./dossier/requette_renomer_dossier.php";
 
 
 class controleur_dossier extends Connexion
@@ -27,6 +28,10 @@ class controleur_dossier extends Connexion
             case "delFolder":
                 if(isset($_POST['id']))
                     supprimerDossier(Connexion::$bdd, $_SESSION['newsession'], $_POST['id']);
+                break;
+            case "rename":
+                if(isset($_POST['nom']) && isset($_POST['id']))
+                    renomerDossier(Connexion::$bdd, $_SESSION['newsession'], $_POST['nom'], $_POST['id']);
                 break;
         }
     }

@@ -361,6 +361,10 @@ API Images
 
 }
 
+.renomer{
+    display: none;
+}
+
 .Dossier_Icone_Menu_Contextuel_text{
     display: inline-block;
     text-align: center;

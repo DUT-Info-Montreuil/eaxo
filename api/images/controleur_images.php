@@ -3,6 +3,7 @@ require_once "./images/controleur_images.php";
 require_once "./images/requette_recupperer_images.php";
 require_once "./images/requette_ajouter_image.php";
 require_once "./images/requette_supprimer_image.php";
+require_once "./images/requette_renomer_image.php";
 
 class controleur_images extends Connexion
 {
@@ -27,6 +28,10 @@ class controleur_images extends Connexion
             case "delImage":
                 if(isset($_POST['id']))
                     supprimerIMG(Connexion::$bdd, $_SESSION['newsession'],$_POST['id']);
+                break;
+            case "rename":
+                if(isset($_POST['nom']) && isset($_POST['id']))
+                    renomerImage(Connexion::$bdd, $_SESSION['newsession'], $_POST['nom'], $_POST['id']);
                 break;
         }
     }

@@ -267,7 +267,7 @@ function recuperrerDossiers(){
         data: {},
         dataType: "json"
     }).done(function(retour) {
-        console.log("Fin de recuperation des dossier\n");
+        //console.log("Fin de recuperation des dossier\n");
         indexerDossiers(retour);
     });
 }
@@ -307,7 +307,7 @@ function recuperrerImages(parent){
         data: {folderParent: parent},
         dataType: "json"
     }).done(function(retour) {
-        console.log("Fin de récupération des images du niveau " + parent + ".");
+        //console.log("Fin de récupération des images du niveau " + parent + ".");
         indexerImages(retour);
     });
 }
@@ -400,13 +400,14 @@ function Image(id, nom, parent, img) {
         selection("#image_" + id);
         var x = event.clientX;
         var y = event.clientY;
-        console.log("X=" + event.clientX + ", Y=" + event.clientY);
+        //console.log("X=" + event.clientX + ", Y=" + event.clientY);
         $("#Dossier_Contextuel_Menu").css("display", "block");
         $("#Dossier_Contextuel_Menu").css("top", y - 93);
         $("#Dossier_Contextuel_Menu").css("left", x - 702);
 
         $("#Dossier_delete_Div").click(function () {
             $("#image_" + id).css("display", "none");
+            $("#Dossier_rename_Div").off();
             $("#Dossier_Contextuel_Menu").mouseleave();
             $("#image_" + id).remove();
             supprimerImageAPI_Image(id);
@@ -424,7 +425,7 @@ function Image(id, nom, parent, img) {
                 $("#renomer_Image_" + id).css("display", "none");
                 $("#titre_Images_" + id).css("display", "block");
                 $("#renomer_Image_" + id).off();
-
+                $("#Dossier_rename_Div").off();
             });
             $("#renomer_Image_"+id).keyup(function(e){
                 if (e.keyCode == 13){
@@ -432,6 +433,7 @@ function Image(id, nom, parent, img) {
                     $("#titre_Images_" + id).css("display", "block");
                     $("#renomer_Image_"+id).off();
                     console.log("inséron le nom: "+$("#renomer_Image_"+id).val()+" dans la BD");
+                    $("#Dossier_rename_Div").off();
                     renomerImageAPI_Images(id, $("#renomer_Image_"+id).val());
                 }
             });
@@ -523,7 +525,7 @@ function listeDossiers(){
                 dossier.cacher();
             }
         }else {
-            console.log("le niveau actuelle n'est pas encore définit");
+            //console.log("le niveau actuelle n'est pas encore définit");
         }
     }
 }
@@ -575,7 +577,7 @@ function Dossier(id, nom, parent){
         selection("#dossier_" + id);
         var x = event.clientX;
         var y = event.clientY;
-        console.log("X=" + event.clientX + ", Y=" + event.clientY);
+        //console.log("X=" + event.clientX + ", Y=" + event.clientY);
         $("#Dossier_Contextuel_Menu").css("display", "block");
         $("#Dossier_Contextuel_Menu").css("top", y-93);
         $("#Dossier_Contextuel_Menu").css("left", x-702);
@@ -588,7 +590,7 @@ function Dossier(id, nom, parent){
             supprimerDossiersAPI_Dossier(id);
         });
         $("#Dossier_download_Div").click(function (){
-            console.log("nous devons telecharger");
+            //console.log("nous devons telecharger");
         });
         $("#Dossier_rename_Div").click(function (){
             $("#Dossier_Contextuel_Menu").mouseleave();

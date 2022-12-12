@@ -22,6 +22,7 @@ function createTrueOrFalseTxt(parent)
 }
 
 function createTrueOrFalse(parent) {
+    parent = $(parent)
     createBtnAction(function(btn) {
         btn.on("click", function() {
             createTrueOrFalseTxt(parent)
@@ -37,10 +38,13 @@ function createTrueOrFalse(parent) {
         })
     }, "-").appendTo(parent)
 
-    for (var i = 0; i < 5; i++) {
-        createTrueOrFalseTxt(parent)
+    if(!$(parent).data("widget")) {
+        for (var i = 0; i < 5; i++) {
+            createTrueOrFalseTxt(parent)
+        }
+    
     }
-
+    
     
 
 }

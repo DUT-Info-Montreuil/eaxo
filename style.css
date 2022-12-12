@@ -251,9 +251,6 @@ Components style css
   list-style: none;
 }
 
-.eaxoResizable  {
-  border: 1px dashed black;
-}
 
 
 .surrounded {
@@ -308,4 +305,10 @@ Components style css
 .modal-backdrop {
   /* bug fix - no overlay */    
   display: none;    
+}
+
+.eaxoSelectedBorder {
+
+  border: 1px dashed black;
+  
 }

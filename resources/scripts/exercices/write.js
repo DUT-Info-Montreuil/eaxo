@@ -4,7 +4,6 @@ import {createText} from '../elements/text.js'
 function createWrite(parent) {
     let div = $("<div>");
 
-    createText(parent);
     createLinesElement(parent);
     
     div.appendTo(parent);

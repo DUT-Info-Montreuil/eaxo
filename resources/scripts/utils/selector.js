@@ -2,7 +2,6 @@
 var hold = false
 var pos = {}
 $("#pageContainer").mousedown(function(e) {
-    //console.log(e)
     if(e.target == this) {
         var offsetX = e.currentTarget.offsetLeft
         var offsetY = e.currentTarget.offsetTop
@@ -44,9 +43,8 @@ $("#pageContainer").mousemove(function(e) {
         
 
         if(targetX - pos.x > 0) {
-            // A debug
             var bound = pos.x + e.originalEvent.clientX 
-            //console.log(targetX + " " + e.currentTarget.offsetWidth)
+
             selector.css({width: targetX, height:targetY})
         } else {
             var size = pos.x - targetX

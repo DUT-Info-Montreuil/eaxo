@@ -14,8 +14,6 @@ class PreviewLoader{
                 let parent = preview[i];
                 let name = preview[i].dataset["eaxoelement"];
                 
-                console.log(self.previewFunction["text"]);
-                
                 if(self.getPreview(name)) {
                     self.getPreview(name)(parent, true);
                 }

@@ -441,7 +441,6 @@ function Image(id, nom, parent, img) {
                     $("#renomer_Image_"+id).css("display", "none");
                     $("#titre_Images_" + id).css("display", "block");
                     $("#renomer_Image_"+id).off();
-                    console.log("inséron le nom: "+$("#renomer_Image_"+id).val()+" dans la BD");
                     $("#Dossier_rename_Div").off();
                     renomerImageAPI_Images(id, $("#renomer_Image_"+id).val());
                 }
@@ -591,7 +590,7 @@ function Dossier(id, nom, parent){
         var y = event.clientY;
         //console.log("X=" + event.clientX + ", Y=" + event.clientY);
         $("#Dossier_Contextuel_Menu").css("display", "block");
-        $("#Dossier_Contextuel_Menu").css("top", y-215);
+        $("#Dossier_Contextuel_Menu").css("top", y-220);
         $("#Dossier_Contextuel_Menu").css("left", x-670);
 
         $("#Dossier_delete_Div").click(function (){
@@ -610,18 +609,18 @@ function Dossier(id, nom, parent){
             $("#renomer_Dossier_"+id).focus();
             $("#titre_Dossier_" + id).css("display", "none");
             $("#renomer_Dossier_"+id).focusout(function (){
-                $("#Dossier_rename_Div").off();
-                $("#renomer_Dossier_"+id).text("");
+                //$("#Dossier_rename_Div").off();
+                //$("#renomer_Dossier_"+id).text("");
                 $("#renomer_Dossier_"+id).css("display", "none");
                 $("#titre_Dossier_" + id).css("display", "block");
-                $("#renomer_Dossier_"+id).off();
+                //$("#renomer_Dossier_"+id).off();
             });
             $("#renomer_Dossier_"+id).keyup(function(e){
                 if (e.keyCode == 13){
-                    $("#Dossier_rename_Div").off();
                     $("#renomer_Dossier_"+id).css("display", "none");
                     $("#titre_Dossier_" + id).css("display", "block");
                     $("#renomer_Dossier_"+id).off();
+                    $("#Dossier_rename_Div").off();
                     renomerDossierAPI_Images(id, $("#renomer_Dossier_"+id).val());
                 }
             });
@@ -629,7 +628,7 @@ function Dossier(id, nom, parent){
 
         $("#Dossier_Contextuel_Menu").mouseleave(function (){
             $("#Dossier_Contextuel_Menu").css("display", "none");
-            $("#renomer_Dossier_"+id).off();
+            //$("#renomer_Dossier_"+id).off();
         });
         return false;
     });

@@ -1,5 +1,7 @@
 
 import exoParser from './exoParser.js'
+import widget_c from './widgets_controller.js'
+
 let ctrlPressed = false
 let copyPressed = false
 let pastePressed = false
@@ -12,6 +14,12 @@ $("body").keydown(function(event) {
     if(event.ctrlKey && event.keyCode == 83) {
         event.preventDefault();
         exoParser.saveExo();
+    }
+
+    if(event.originalEvent.key == "Delete") {
+        if(widget_c.getSelectedElement().dataset.widget || widget_c.getSelectedElement().dataset.imageid) {
+            $(widget_c.getSelectedElement()).remove()
+        }
     }
     
 })

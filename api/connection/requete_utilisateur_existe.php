@@ -1,17 +1,17 @@
 <?php
 
     function verifUtilisateurExiste($sth, $user){
-        $reponsse = $sth->prepare('SELECT username FROM users WHERE username=:userTest');
-        $reponsse->execute(array(':userTest' => $user));
-        $resultat=$reponsse->fetch();
+        $reponse = $sth->prepare('SELECT username FROM users WHERE username=:userTest');
+        $reponse->execute(array(':userTest' => $user));
+        $resultat=$reponse->fetch();
         if($resultat){
-            reponsseUser($resultat['username']);
+            reponseArchitecture($resultat['username']);
         }else{
-            reponsseUser(null);
+            reponseArchitecture(null);
         }
     }
 
-    function reponsseUser($tuple){
+    function reponseUser($tuple){
         header('Content-Type: application/json; charset=utf-8');
 
         if($tuple == null){

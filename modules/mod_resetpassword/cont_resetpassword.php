@@ -2,6 +2,7 @@
 require_once(__DIR__ . "/modele_resetpassword.php");
 require_once(__DIR__ . "/vue_resetpassword.php");
 require_once("composants/composant_Images/vue_Images.php");
+require_once "./guardian.php";
 
     class ContResetPassword {
         public function __construct()
@@ -11,6 +12,7 @@ require_once("composants/composant_Images/vue_Images.php");
             $this->v = new VueResetPassword();
             $this->action = isset($_GET['action']) ? $_GET['action'] : "show";
             $this->exec();
+            create_token();
         }
 
 

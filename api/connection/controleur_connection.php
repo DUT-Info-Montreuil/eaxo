@@ -1,7 +1,7 @@
 <?php
 
-require_once __DIR__ . "/requette_utilisateur_existe.php";
-require_once __DIR__ . "/requette_utilisateur_mail_existe.php";
+require_once __DIR__ . "/requete_utilisateur_existe.php";
+require_once __DIR__ . "/requete_utilisateur_mail_existe.php";
 require_once __DIR__ . "/../../connexion.php";
 
 class controleur_connection extends Connexion

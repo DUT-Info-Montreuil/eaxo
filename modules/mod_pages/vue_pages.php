@@ -29,6 +29,7 @@ class VuePages extends VueGenerique
                     </div>
                 </div>
             </div>
+
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingTwo">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
@@ -144,13 +145,92 @@ class VuePages extends VueGenerique
                     </div>
 
                 </div>
-                
+
+
+                <!-- Button trigger modal -->
+                <button type="button" id="ouvertureVolet" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  Mes images
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade modal-lg" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Ma galerie d'images</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                      <?php
+                        $this->contenuImages();
+                      ?>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
             </div>
 
             
             <?php
 
             $this->test();
+        }
+
+        public function contenuImages(){
+        ?>
+
+            <div id="divImagesHome">
+
+                <div id="controleurImages">
+
+                    <img id='Dossier_Home' class='Dossier_Controleurs' src="resources/images/api_images/home.png">
+                    <img id='Dossier_Add_Folder' class='Dossier_Controleurs' src="resources/images/api_images/folder_add.png">
+                    <img id='Dossier_Add_Picture' class='Dossier_Controleurs' src="resources/images/api_images/picture_add.png">
+                    <img id='Dossier_Back' class='Dossier_Controleurs' src="resources/images/api_images/back.png">
+
+                    <input type="file" id="Dossier_Add_Picture_Input" accept="image/*">
+
+                    <div id='Dossier_Contextuel_Menu'>
+                        <table id='Dossier_Contextuel_Menu_Tab'>
+                            <tr>
+                                <td>
+                                    <div id='Dossier_rename_Div' class='Dossier_Div_Menu_Contextuel'>
+                                        <img id='Dossier_rename' class='Dossier_Icone_Menu_Contextuel' src='resources/images/api_images/rename.png'>
+                                        <p id='Dossier_rename_text' class='Dossier_Icone_Menu_Contextuel_text'>Renomer</p>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div id='Dossier_download_Div' class='Dossier_Div_Menu_Contextuel'>
+                                         <img id='Dossier_download' class='Dossier_Icone_Menu_Contextuel' src='resources/images/api_images/download.png'>
+                                         <p id='Dossier_download_text' class='Dossier_Icone_Menu_Contextuel_text'>Télécharger</p>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div id='Dossier_delete_Div' class='Dossier_Div_Menu_Contextuel'>
+                                        <img id='Dossier_delete' class='Dossier_Icone_Menu_Contextuel' src='resources/images/api_images/delete.png'>
+                                        <p id='Dossier_delete_text' class='Dossier_Icone_Menu_Contextuel_text'>Supprimer</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                </div>
+
+                <p id="Dossiers_Chemin"></p>
+
+            </div>
+
+        <?php
+
         }
     }
             ?>

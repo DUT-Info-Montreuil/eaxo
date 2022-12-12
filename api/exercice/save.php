@@ -1,57 +1,56 @@
 <?php
+    header('Content-Type: application/json; charset=utf-8');
     require_once "../api.php";
+    
     class SaveExerice extends Api{
 
         private $userID;
         public function __construct()
         {
 
-            if(isset($_SESSION["newsession"])) {
+            if(isset($_SESSION["newsession"]) && isset($_POST["exoJson"])) {
                 $value = $_POST["exoJson"];
                 //echo $_SESSION["newsession"];
                 $this->save(json_decode($value));
             } else {
-                echo json_encode("not connected");
+                echo json_encode(array("code"=>0, "message"=>"Bad request"));
             }
         }
 
         public function loadChildren($exoID, $element, $parent, $callback, $continue) {
             if($continue) {
-                if(!is_int($element)) {
-                    var_dump($element->nodeID);
-                    $parentID = isset($parent) ? $parent->nodeID : null;
-                    var_dump($exoID);
-                    if($parent != null) {
+                if(isset($element->nodeName) && $element->nodeName != "IMG") {
+                    if(!is_int($element)) {
+                        $parentID = isset($parent) ? $parent->nodeID : null;
+
+                        if($parent != null) {
+                            
+                        }
                         
-                    }
-                    
-                    $jsonClass = is_object($element->classList) ?  json_encode($element->classList) : "{}";
-                    $nodeID = isset($element->nodeID) ? intval($element->nodeID) : null;
-                    $dataset = isset($element->dataset) ? json_encode($element->dataset) : "";
+                        $jsonClass = is_object($element->classList) ?  json_encode($element->classList) : "{}";
+                        $nodeID = isset($element->nodeID) ? intval($element->nodeID) : null;
+                        $dataset = isset($element->dataset) ? json_encode($element->dataset) : "";
 
 
-                    $jsonCss =  is_object($element->style) ? json_encode($element->style) : "";
-                    $jsonContent =  property_exists($element, "textContent") ? json_encode($element->textContent) : "";
+                        $jsonCss =  is_object($element->style) ? json_encode($element->style) : "";
+                        $jsonContent =  property_exists($element, "textContent") ? json_encode($element->textContent) : "";
 
 
-                    //var_dump($jsonContent);
-                    $nodeName = isset($element->nodeName) ? $element->nodeName : "";
-                    if($nodeName == "") {
-                        var_dump($element);
-                    }
-                    
-                    $sth = self::$bdd->prepare('INSERT INTO exercice_elements (exerciceId, parentId, htmlID, wType, dataset, class, content, css)'
-                    . 'values(:exoID, :parentID, :htmlID, :nodeName, :dataset, :jsonClass, :jsonContent, :jsonCss)');
-
-                    $sth->execute(array(":exoID" => $exoID, ":parentID" => $parentID, ":htmlID" => $nodeID, ":dataset" => $dataset, ":nodeName" => $nodeName, ":jsonClass" => $jsonClass,
-                    ":jsonContent" => $jsonContent, ":jsonCss" => $jsonCss));
-                    
-                }   
-                //var_dump($sth);
-                if(isset($element->children)) {
-                    foreach($element->children as $child) {
-                        $this->loadChildren($exoID, $child, $element, $callback, $continue);
+                        $nodeName = isset($element->nodeName) ? $element->nodeName : "";
                         
+                        $sth = self::$bdd->prepare('INSERT INTO exercice_elements (exerciceId, parentId, htmlID, wType, dataset, class, content, css)'
+                        . 'values(:exoID, :parentID, :htmlID, :nodeName, :dataset, :jsonClass, :jsonContent, :jsonCss)');
+
+                        $sth->execute(array(":exoID" => $exoID, ":parentID" => $parentID, ":htmlID" => $nodeID, ":dataset" => $dataset, ":nodeName" => $nodeName, ":jsonClass" => $jsonClass,
+                        ":jsonContent" => $jsonContent, ":jsonCss" => $jsonCss));
+                        
+                    }   
+                    //var_dump($sth);
+                    if(isset($element->children)) {
+                        foreach($element->children as $child) {
+                            $this->loadChildren($exoID, $child, $element, $callback, $continue);
+                            
+                        }
                     }
                 }
 
@@ -96,8 +95,6 @@
 
                 //Check if we need to insert new exercice into database
                 $dataExo = $this->getExercice($exerciceID, $this->userID);
-                
-                
                 try {
                     
                     self::$bdd->beginTransaction();
@@ -116,18 +113,21 @@
 
                 } catch(PDOException $e) {
                     self::$bdd->rollback();
+                    $this->isOk(false);
                     die($e->getMessage());
                 }
             }
         }
 
         public function isOk($ok) {
+            
+            
             if($ok) {
                 
-                echo json_encode("oui");
+                echo json_encode(array("code" => 1));
                 
             } else {
-                echo json_encode("non");
+                echo json_encode(array("code" => 0, "message"=>"Critical error"));
             }
         }
     }

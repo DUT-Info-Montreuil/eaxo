@@ -11,11 +11,31 @@ class WidgetController {
         
         $("#pageContainer").on("click", function(handler) {
             var target = handler.target;
+
+            var old = self.getSelectedElement()
+        
+            if(old && (old.dataset.widget || old.dataset.imageid)) {
+                $(old).removeClass("eaxoSelectedBorder")
+            }
+
             if(self.canEditNode(target)) {
+                
                 self.enableEdit(target)
                 self.setSelectedElement(target)
+            } else {
+                self.canSetSelectedExercice(target);
             }
+            
+            
         });
+    }
+    
+    unselect() {
+        var old = this.getSelectedElement()
+        
+        if(old && old.dataset.widget) {
+            $(old).removeClass("eaxoSelectedBorder")
+        }
     }
 
     //Next step : find better function to generate new unique id
@@ -41,8 +61,22 @@ class WidgetController {
 
     }
 
+    canSetSelectedExercice(target) {
+
+        if(target.dataset.widget || target.nodeName == 'IMG') {
+            let newTarget = target;
+            
+            if(target.nodeName == 'IMG') {
+                newTarget = target.offsetParent
+            }
+
+            this.selectedElement = newTarget;
+            $(newTarget).addClass("eaxoSelectedBorder");
+        }
+    }
+
     canEditNode(node) {
-        if(node.id != "pageContainer" && !this.getSelectedElement()) {
+        if(node.id != "pageContainer") {
             let array = ["h", "p"]
             for(var n in array) {
                 if(node.tagName.toLowerCase().includes(array[n]) && node.tagName != "PAGE") {
@@ -59,8 +93,34 @@ class WidgetController {
         txt.enableEdit(this, node)
     }
 
-    unselect() {
+    cloneImage(img, id) {
+        //Close image folder
+        $("#exampleModal").modal('hide')
+        
 
+        var newImg = $(img).clone();
+
+        var div = $("<div>");
+        div[0].dataset.imageid = id;
+        div.css("width", newImg.css("width"))
+        div.css("height", newImg.css("height"))
+        newImg.css({width: '', height:''})
+        newImg.css("margin-left", '')
+        newImg.css("border-radius", '')
+
+
+        newImg.removeClass("vueImageApiImages")
+        newImg.addClass("imageLoaded")
+        newImg[0].dataset.nosave = true
+
+        newImg.appendTo(div)
+        div.appendTo("#pageContainer")
+        div.draggable({
+            containment:"#pageContainer"
+        })
+        div.resizable({
+            containment:"#pageContainer"
+        });
     }
 }
 

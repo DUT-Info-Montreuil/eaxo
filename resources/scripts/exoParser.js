@@ -4,6 +4,7 @@ class ExoParser {
     constructor() {
         this.page = $("#pageContainer")
         this.exoArray = {}
+
         
     }
 
@@ -99,7 +100,6 @@ class ExoParser {
 
 
     loadChild(child, parent) {
-        //console.log(child)
         let nodeElement = $(`<${child.nodeName}>`)
         if(child.nodeID) {
             nodeElement.attr("id", child.nodeID);
@@ -111,8 +111,9 @@ class ExoParser {
 
         //Add class
         for(var classID in child.classList) {
-            
-            nodeElement.addClass(child.classList[classID])
+            if(child.classList[classID] != "eaxoSelectedBorder") {
+                nodeElement.addClass(child.classList[classID])
+            }
         }
         
         //Add to parent
@@ -135,7 +136,7 @@ class ExoParser {
                 exoJson : json
             }
             $.post("./api/exercice/save.php", data, function(result) {
-                console.log(result)
+
                 setTimeout(function() {
                     $("#spinnerLoading").css({"opacity":0} );
                 }, 300)
@@ -149,7 +150,6 @@ class ExoParser {
         if(jsonExo) {
             let parsedElement = JSON.parse(jsonExo)
             for(var key in parsedElement.children) {
-                console.log(key)
                 this.loadChild(parsedElement.children[key], "#pageContainer")
             }
         }

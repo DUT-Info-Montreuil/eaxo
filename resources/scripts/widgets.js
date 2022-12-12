@@ -8,6 +8,7 @@ import dataSaver from './dataToModal.js'
 
 import exoLoader from './exerciceLoader.js'
 import * as textcon from './utils/fonts_controller.js'
+import * as vueimage from './modules/composants_images/vue_images.js'
 
 $( "select" ).on("click", function() {
     var str = "";
@@ -41,12 +42,5 @@ $( function() {
             //exoParser.stringify(); 
         }
     }) 
-
-    $(".eaxoText", function() {
-
-    })
-
-    //exoParser.stringify();
-    //exoParser.loadExo("test")
 
 } ); 

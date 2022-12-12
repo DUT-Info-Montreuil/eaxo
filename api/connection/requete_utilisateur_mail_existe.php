@@ -5,13 +5,13 @@
         $reponsse->execute(array(':userMail' => $mail));
         $resultat=$reponsse->fetch();
         if($resultat){
-            reponsseMail($resultat['email']);
+            reponseMail($resultat['email']);
         }else{
-            reponsseMail(null);
+            reponseMail(null);
         }
     }
 
-    function reponsseMail($tuple){
+    function reponseMail($tuple){
         header('Content-Type: application/json; charset=utf-8');
         if($tuple == null){
             $tuple = "";

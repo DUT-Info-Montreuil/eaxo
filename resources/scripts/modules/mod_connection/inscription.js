@@ -1,6 +1,6 @@
 
 $('DOMContentLoaded', function() {
-
+    $("#bouton_send").attr("disabled", true)
     var marginInscriptionDiv = $("#formulaire-saisie-inscription").css("margin-left");
 
 
@@ -92,6 +92,13 @@ $('DOMContentLoaded', function() {
         }else{
             $("#CharactereMDP").css("color", "red");
             parfait = false;
+        }
+
+        if(parfait) {
+            $("#bouton_send").attr("disabled", false)
+        } else {
+            $("#bouton_send").attr("disabled", true)
+
         }
 
         return parfait;

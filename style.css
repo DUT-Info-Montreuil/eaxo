@@ -378,8 +378,12 @@ API Images
 
 #Dossier_Add_Folder{
    padding: 5px;
-    margin-left: 20px;
+   margin-left: 300px;
 
+}
+
+.modal-lg{
+    width: 100%;
 }
 
 /*Menu Contextuel*/

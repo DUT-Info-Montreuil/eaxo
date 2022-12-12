@@ -332,7 +332,7 @@ function indexerImages(resultat){
 
 function actualiserCommandes(id){
     actualiserChemin(id);
-    if(id == 0) {
+    if(id == null) {
         $("#Dossier_Back").css("opacity", 0.3);
         $("#Dossier_Back").css("background-color", "#F4F4F4");
 

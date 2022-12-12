@@ -361,6 +361,10 @@ API Images
 
 }
 
+#Dossier_download_Div{
+    opacity: 0.3;
+}
+
 .renomer{
     display: none;
 }

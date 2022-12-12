@@ -1,9 +1,9 @@
 <?php
 require_once "./dossier/controleur_dossier.php";
-require_once "./dossier/requette_recupperer_dossier.php";
-require_once "./dossier/requette_ajouter_dossier.php";
-require_once "./dossier/requette_supprimer_dossier.php";
-require_once "./dossier/requette_renomer_dossier.php";
+require_once "./dossier/requete_recupperer_dossier.php";
+require_once "./dossier/requete_ajouter_dossier.php";
+require_once "./dossier/requete_supprimer_dossier.php";
+require_once "./dossier/requete_renomer_dossier.php";
 
 
 class controleur_dossier extends Connexion
@@ -31,7 +31,7 @@ class controleur_dossier extends Connexion
                 break;
             case "rename":
                 if(isset($_POST['nom']) && isset($_POST['id']))
-                    renomerDossier(Connexion::$bdd, $_SESSION['newsession'], $_POST['nom'], $_POST['id']);
+                    renommerDossier(Connexion::$bdd, $_SESSION['newsession'], $_POST['nom'], $_POST['id']);
                 break;
         }
     }

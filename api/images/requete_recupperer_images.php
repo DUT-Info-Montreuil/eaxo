@@ -9,10 +9,10 @@
             $reponsse->execute(array(':ownerid' => $ownerid, ':parent' => $folderParent));
         }
         $resultat=$reponsse->fetchAll();
-        reponsseArchitectureIMG($resultat);
+        reponseArchitectureIMG($resultat);
     }
 
-    function reponsseArchitectureIMG($tuples){
+    function reponseArchitectureIMG($tuples){
         header('Content-Type: application/json; charset=utf-8');
         echo json_encode($tuples);
     }

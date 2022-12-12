@@ -32,12 +32,12 @@ class VueNavbar
                             <a href="./index.php?module=mod_connexion&action=form_connexion" type="button"
                                class="btn btn-outline-light me-2">Connexion</a>
                             <a href="./index.php?module=mod_connexion&action=form_inscription" type="button"
-                               class="btn btn-warning">Creer un compte</a>
+                               class="btn btn-warning">Créer un compte</a>
                             <?php
                         } else {
                             ?>
                             <a href="./index.php?module=mod_connexion&action=deconnexion" type="button"
-                               class="btn btn-warning">Deconnexion</a>
+                               class="btn btn-warning">Déconnexion</a>
                             <?php
                         }
                         ?>

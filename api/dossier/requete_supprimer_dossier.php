@@ -11,10 +11,10 @@ function supprimerDossier($sth, $ownerid, $id){
         $remove->execute(array(':ownerId' => $ownerid, ':id' => $id));
         $remove1->execute(array(':ownerId' => $ownerid, ':id' => $id));
     }
-    reponsseDelFolder($remove, $remove1);
+    reponseDelFolder($remove, $remove1);
 }
 
-function reponsseDelFolder($remove, $remove1){
+function reponseDelFolder($remove, $remove1){
     header('Content-Type: application/json; charset=utf-8');
     if($remove && $remove1)
        echo json_encode(true);

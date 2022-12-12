@@ -4,13 +4,14 @@ DROP TABLE IF EXISTS exercices;
 DROP TABLE IF EXISTS folders;
 DROP TABLE IF EXISTS widgets_exercices_list;
 DROP TABLE IF EXISTS exercice_elements;
-DROP TABLE IF EXISTS gallery_folders;
 DROP TABLE IF EXISTS gallery_images;
+DROP TABLE IF EXISTS gallery_folders;
 DROP TABLE IF EXISTS `groups`;
 DROP TABLE IF EXISTS permissions;
-DROP TABLE IF EXISTS users;
+
 DROP TABLE IF EXISTS widgets;
 DROP TABLE IF EXISTS reset_password;
+DROP TABLE IF EXISTS users;
 
 CREATE TABLE IF NOT EXISTS `groups`(
     id serial,
@@ -138,3 +139,4 @@ CREATE TABLE IF NOT EXISTS reset_password(
 
 
 INSERT INTO users (email, username, passwd) VALUES('prof@gmail.com', 'proftest', '$2y$10$CRsZddHPQ66oc8fE2l6VEOL4epL8P2XT7KIqacSR.ZfGA8TJ/WWea');
+INSERT INTO users (email, username, groupid, passwd) VALUES('admin@gmail.com', 'admin', 2, '$2y$10$Oc.1DItD3XdFQpvkIjCjTeUkN4E9wN4ElOZzPDBrqT4T1sNfHkktu');

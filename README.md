@@ -11,3 +11,7 @@ Il y a aussi un compte admin qui peut seulement consulter la liste des utilisate
 - En tant que professeur, pouvoir voir son profil et le modifier.
 - En tant que professeur, pouvoir ajouter une photo de profil.
 - En tant que professeur, pouvoir créer des dossiers dans sa galerie d'exercice.
+
+## Langages utilisés
+
+PHP, Javascript, JQuery et Bootstrap

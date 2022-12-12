@@ -29,7 +29,7 @@ class ContHome {
 
     public function delete_exercice() {
         $this->m->delete_exercice();
-        $this->homepage();
+        header("Location: ./index.php?module=mod_home&action=homepage");
     }
     
     public function exec() {

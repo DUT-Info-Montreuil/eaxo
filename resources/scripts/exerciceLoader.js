@@ -1,7 +1,7 @@
 import jqueryLoader from "./loader/jqueryLoader.js";
 import {createLinesElement} from './elements/lines.js'
 import {exo} from './exercices/surrounded.js'
-import {exo as sur} from './exercices/trueorfalse'
+import {exo as sur} from './exercices/trueorfalse.js'
 
 class ExerciceLoader {
     constructor() { 

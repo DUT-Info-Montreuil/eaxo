@@ -27,6 +27,9 @@
       display: none;
     }
 
+    .eaxoResizable {
+      border: none;
+    }
 
 
     @page {
@@ -59,6 +62,7 @@
 /* Custom */
 body {
     height: 100%;
+    background-color: #f8f8f8;
 }
 
 /*Page de connection au compte*/
@@ -170,6 +174,36 @@ body {
   
 }
 
+.pagination {
+  display: inline-block;
+  align-items: center;
+}
+
+.paginationbis {
+  text-align: center;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 1px solid #ddd;
+}
+
+.pagination a.active {
+  background-color: #ffc107;
+  color: white;
+  border: 1px solid #ffc107;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+
+/*Temporary*/
+.bd-placeholder-img {
+  background-color: gray;
+}
 .eaxoInput {
   border:none;
   background: none;
@@ -390,4 +424,59 @@ API Images
     background-color: white;
     width: 110px;
     height: 85px;
+}
+
+
+.surrounded {
+  border:1px solid black;
+  padding: 5px;
+}
+
+.subsurrounded {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-backdrop {
+  /* bug fix - no overlay */
+  display: none;
 }

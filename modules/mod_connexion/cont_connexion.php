@@ -1,30 +1,37 @@
 <?php
 require_once __DIR__ . "/modele_connexion.php";
 require_once __DIR__ . "/vue_connexion.php";
+require_once "./guardian.php";
 
 class ContConnexion
 {
+    public $m;
+    public $v;
+    public $action;
     public function __construct()
     {
         $this->m = new ModeleConnexion();
         $this->v = new VueConnexion();
         $this->action = isset($_GET['action']) ? $_GET['action'] : "form_connexion";
+        if($this->action != "new_inscription") {
+            create_token();
+        }
+
         $this->exec();
     }
 
-    public function form_connexion()
-    {
+    public function form_connexion() {
+        
         $this->v->formConnexion();
     }
 
-    public function form_inscription()
-    {
+    public function form_inscription() {
         $this->v->formInscription();
     }
 
     public function inscrit()
     {
-        if ($this->m->form_ajout()) {
+        if ($this->m->ajouterUtilisateur()) {
             $this->action = "form_connexion";
             $this->exec();
         } else {
@@ -35,17 +42,25 @@ class ContConnexion
 
     public function connexion()
     {
+        
         if ($this->m->verif_connexion()) {
-            $this->action = "connected";
-            $this->exec();
-        } else {
+            
+            header('Location: ./index.php');
+        }
+        else {
             $this->action = "form_connexion";
             $this->exec();
         }
     }
 
-    public function connected()
-    {
+    public function deconnexion() {
+        session_destroy();
+        unset($_SESSION['newsession']);
+        $this->action = "form_connexion";
+        $this->exec();
+    }
+
+    public function connected() {
         echo "connected";
     }
 
@@ -64,16 +79,13 @@ class ContConnexion
                 $this->connexion();
                 break;
             case "deconnexion":
-                session_destroy();
-                unset($_SESSION['newsession']);
+                $this->deconnexion();
                 break;
             case "new_inscription":
-                $ajouter = FALSE;
-                while ($ajouter === FALSE){
-                    $ajouter = $this->m->form_ajout();
+                if ($this->m->ajouterUtilisateur()) {
+                    $this->action = "form_connexion";
+                    $this->exec();
                 }
-                $this->action = "form_connexion";
-                $this->exec();
                 break;
         }
     }

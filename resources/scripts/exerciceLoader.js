@@ -1,11 +1,17 @@
+import jqueryLoader from "./loader/jqueryLoader.js";
+import {createLinesElement} from './elements/lines.js'
+
 class ExerciceLoader {
-    constructor() {
-        this.loadExercice(1);
+    constructor() { 
+        let exoID = $("#pageContainer")[0].dataset.exoid;
+        this.loadExercice(exoID);
+        this.loaderFunction = {}
+        this.loaderFunction["lines"] = createLinesElement;
     }
 
     loadExercice(exoID) {
         let self = this;
-        $.get("./api/exercice/get.php", {}, function(result) {
+        $.get("./api/exercice/get.php?exoID=" + exoID, {}, function(result) {
             self.createExercice(JSON.parse(result));
         })
     }
@@ -13,7 +19,7 @@ class ExerciceLoader {
     findOrCreatElement(id) {
         let found = $("#" + id);
         if(!found) {
-            console.log("ok")
+
         } else {
             //return $()
         }
@@ -29,10 +35,27 @@ class ExerciceLoader {
             let elementData = object[arr];
             let jElement = $("<" + elementData.wType + ">");
             jElement.attr('id', elementData.htmlID);
+
+            //Append to the parent first
+            if(elementData.parentId == null) {
+                jElement.appendTo($("#pageContainer"));
+            } else {
+                
+                jElement.appendTo($("#" + elementData.parentId));
+            }
         
             let objectCSS = JSON.parse(elementData.css);
+            let dataset = JSON.parse(elementData.dataset);
 
-            //console.log(jElement)
+            for(let ind in dataset) {
+                jElement[0].dataset[ind] = dataset[ind];
+                if(ind == "lines") {
+                    createLinesElement(jElement[0])
+                }
+                if(dataset[ind] == "surrounded") {
+
+                }
+            }
             //Load css
             for(let ind in objectCSS) {
                 if(CSS.supports(ind, objectCSS[ind])) {
@@ -49,20 +72,15 @@ class ExerciceLoader {
 
             //Set content
             if (elementData.content) {
-                console.log(elementData.content);
                 jElement.text(elementData.content.replace(/['"]+/g, ''));
             } 
 
-            if(elementData.parentId == null) {
-                jElement.appendTo($("#pageContainer"));
-            } else {
-                
-                jElement.appendTo($("#" + elementData.parentId));
-            }
             
+            
+            jqueryLoader.loadElement(jElement);
         }
 
-        console.log($("#" + parentID))
+        //console.log($("#" + parentID))
     }
 
 }

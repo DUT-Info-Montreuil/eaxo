@@ -11,13 +11,19 @@ class Controleur
         require_once ("modele.php");
 
         $this->m = new Modele();
-        $this->module = isset($_GET['module']) ? $_GET['module'] : "mod_connexion";
+        $this->module = isset($_GET['module']) ? $_GET['module'] : "mod_home";
         $this->exec();
+
+
+    }
+
+    public function groupUser() {
+        return $this->m->userGroup();
     }
 
     public function exec()
     {
-        if (!isset($_SESSION["newsession"])) {
+        if (!isset($_SESSION["newsession"]) && $this->module != "mod_resetpassword") {
             $this->module = "mod_connexion";
         }
         switch ($this->module) {
@@ -25,14 +31,23 @@ class Controleur
                 require_once "./modules/mod_connexion/mod_connexion.php";
                 $this->mod = new ModConnexion();
                 break;
-            case "deconnexion":
-                session_destroy();
-                unset($_SESSION["newsession"]);
-                echo "Deconnecté";
-                break;
             case "mod_pages":
                 require_once "./modules/mod_pages/mod_pages.php";
                 $this->mod = new ModPages();
+                break;
+            case "mod_home":
+                if ($this->groupUser() == 2) {
+                    require_once "./admin/modules_admin/mod_userList/mod_userList.php"; // pour les Faille include 
+                    $this->mod = new ModUserList();
+                } else {
+                    require_once "./modules/mod_home/mod_home.php";
+                    $this->mod = new ModHome();
+                }
+                break;
+            case "mod_resetpassword":
+                require_once "./modules/mod_resetpassword/mod_resetpassword.php";
+
+                $this->mod = new ModResetPassword();
                 break;
 
         }

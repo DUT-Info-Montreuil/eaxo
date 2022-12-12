@@ -10,5 +10,9 @@ class ContNavbar {
     public function exec() {
         $this->v->vueNavbar();
     }
+
+    public function getVue() {
+        return $this->v;
+    }
 }
 ?>

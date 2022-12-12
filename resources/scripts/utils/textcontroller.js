@@ -5,6 +5,7 @@
 import widget_c from "../widgets_controller.js";
 
 export function enableEdit(widgetController, node) {
+    $(node).css("background-color", "aliceblue");
     $("#fontSizeInput").val($(node).css("font-size"));
     widgetController.setSelectedElement(node);
     var oldTxt = node.textContent;
@@ -38,6 +39,8 @@ export function enableEdit(widgetController, node) {
             node.textContent = input.val()
             input.remove()
         }
+
+        $(node).css("background-color", "");
     }
 
     
@@ -58,7 +61,6 @@ export function enableEdit(widgetController, node) {
         let target = handler.target;
 
         if(widget_c.getSelectedElement() && (target.nodeName == "PAGE")) {
-            console.log(target)
             if(target.nodeName == "PAGE" || $(target) != $(widget_c.getSelectedElement())) {
                 saveContent(node, input)
             }

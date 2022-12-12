@@ -14,7 +14,6 @@ class ExoParser {
            if(array[key] && array[key] != "" && typeof(array[key]) != "function") {
             style[key] = array[key]
            }
-           
         }
 
         return style
@@ -37,49 +36,52 @@ class ExoParser {
     }
 
     stringifySub(element, parent, array) {
-        if(element.nodeName == "H3") {
-            //console.log(element);
-        }
+
         let jQueryElement = $(element);
+        let dataValues = jQueryElement.data();
         let arrayObj;
 
-        jQueryElement.attr("id", widget_c.getNewID(element));
+        if(!dataValues["nosave"]) {
+    
+            jQueryElement.attr("id", widget_c.getNewID(element));
 
-        array[jQueryElement.attr("id")] = array[jQueryElement.attr("id")] ? array[jQueryElement.attr("id")] : {}
-        arrayObj = array[jQueryElement.attr("id")];
+            array[jQueryElement.attr("id")] = array[jQueryElement.attr("id")] ? array[jQueryElement.attr("id")] : {}
+            arrayObj = array[jQueryElement.attr("id")];
+            arrayObj.dataset = {}
 
+            for(var dataAttr in dataValues) {
+                if(typeof(dataAttr) == "string" && typeof(dataValues[dataAttr]) != "object") {
+                    arrayObj.dataset[dataAttr] = dataValues[dataAttr];
+                }
+            }
 
-        arrayObj.nodeName = element.nodeName;
-        arrayObj.nodeID = jQueryElement.attr("id");
-        arrayObj.parent = parent.attr("id")
+            arrayObj.nodeName = element.nodeName;
+            arrayObj.nodeID = jQueryElement.attr("id");
+            arrayObj.parent = parent.attr("id")
 
-        if(element.innerText != "" && element.nodeName != "DIV") {
-            arrayObj.textContent = element.innerText
-        }
-        
-        arrayObj.classList = element.classList
-        arrayObj.children = {length:0}
-        
-        arrayObj.style = this.clearArray(jQueryElement[0].style)
-
-        //Only div can include html element,so just extends tree when we found new div
-        if(element.nodeName == "DIV") {
+            if(element.innerText != "" && element.nodeName != "DIV") {
+                arrayObj.textContent = element.innerText
+            }
             
+            arrayObj.classList = element.classList
+            arrayObj.children = {length:0}
+            
+            arrayObj.style = this.clearArray(jQueryElement[0].style)
 
-            for(var i = 0; i < jQueryElement.children().length; i++) {
+            //Only div can include html element,so just extends tree when we found new div
+            if(element.nodeName == "DIV") {
+                for(var i = 0; i < jQueryElement.children().length; i++) {
 
-                this.stringifySub(jQueryElement.children()[i], jQueryElement, arrayObj.children)
-                arrayObj.children.length++
+                    this.stringifySub(jQueryElement.children()[i], jQueryElement, arrayObj.children)
+                    arrayObj.children.length++
+                }
             }
         }
-
-        
         
     }
 
     stringify(callback) {
         this.exoArray.children = {}
-        //for(var i = 0; i < this.page.children().length; i++) {
 
         if(this.page.children().length > 0) {
             for(var i = 0; i < this.page.children().length; i++) {
@@ -114,7 +116,6 @@ class ExoParser {
         }
         
         //Add to parent
-        
         nodeElement.appendTo($(parent))
 
         //Load custom css style
@@ -133,9 +134,8 @@ class ExoParser {
             let data = {
                 exoJson : json
             }
-            //console.log(json)
             $.post("./api/exercice/save.php", data, function(result) {
-                console.log(result);
+                console.log(result)
                 setTimeout(function() {
                     $("#spinnerLoading").css({"opacity":0} );
                 }, 300)

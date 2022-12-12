@@ -1,5 +1,4 @@
 export function createText(parent, isPreview) {
-    console.log("fdffsd")
     let text = $("<textarea>");
     text.addClass("eaxoInput")
 

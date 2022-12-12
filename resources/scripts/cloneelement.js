@@ -34,7 +34,6 @@ export function cloneElement(original, id) {
         
         if(array[i] != "eaxoDraggable") {
             clone.removeClass(array[i])
-            
         }
 
         if(array[i] =="eaxoResizable") {
@@ -44,9 +43,9 @@ export function cloneElement(original, id) {
         }
 
     }
-    clone.resizable({
+    /*clone.resizable({
         containment:"#pageContainer"
-    });
+    });*/
 
     clone.on("drag", function() {
         clone.position({
@@ -58,9 +57,11 @@ export function cloneElement(original, id) {
     clone.attr("id", widget_c.getNewID(clone[0]))
     clone.appendTo("#pageContainer");
 
+
    
     $(clone).draggable({
-        containment:"#pageContainer"
+        containment:"#pageContainer",
+        
     });
 
     loadChildrenElements(clone)

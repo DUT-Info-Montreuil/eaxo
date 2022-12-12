@@ -4,8 +4,10 @@ import {getFontProperty} from './elements/fonts.js';
 import {cloneElement} from './cloneelement.js'
 import exoParser from './exoParser.js'
 import {createLinesElement} from './elements/lines.js'
+import dataSaver from './dataToModal.js' 
 
 import exoLoader from './exerciceLoader.js'
+import * as textcon from './utils/fonts_controller.js'
 
 $( "select" ).on("click", function() {
     var str = "";
@@ -21,12 +23,6 @@ $( "select" ).on("click", function() {
 
 
 $( function() {
-    
-    
-    $( ".widgetResizable" ).resizable({
-        containment:"#pageContainer"
-    });
-
     $(".eaxoDraggable").draggable();
 
     $(".eaxoClonable").draggable({
@@ -47,7 +43,7 @@ $( function() {
     }) 
 
     $(".eaxoText", function() {
-        console.log("ok")
+
     })
 
     //exoParser.stringify();

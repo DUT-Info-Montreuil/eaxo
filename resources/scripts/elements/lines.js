@@ -1,3 +1,6 @@
+
+import {createBtnAction} from '../utils/addBtn.js'
+
 function drawLines(canvas) {
     canvas[0].getContext("2d").clearRect(0,0, canvas[0].width, canvas[0].height)
     let lines = canvas.data("lines");
@@ -35,75 +38,77 @@ function drawLines(canvas) {
         ctx.stroke();
         
     }
+
+    canvas[0].dataset["width"] = canvas[0].width
+    canvas[0].dataset["height"] = canvas[0].height
 }
 
 
+//Origin can be div or canvas
+function createLinesElement(origin, isPreview) {
+    let appendBtnTo;
+    let canvas;
+    if(origin.nodeName != "CANVAS") {
+        appendBtnTo = origin;
+        let canvasDiv = $("<div>")
+        canvas = $("<canvas>");
+        canvas.data({"lines": 1});
 
-export function createLinesElement(parent, isPreview) {
+        if(origin.css) {
+            canvas[0].width = parseInt(origin.css("width").substring(0, origin.css("width").indexOf("px")));
+        } else {
+            canvas[0].width = 0
+        }
+        
+        if(!isPreview) {
+            canvasDiv.draggable({
+                containment:origin
+            });
+        } else {
+            canvas[0].width = 200;
+        }
 
-    let canvasDiv = $("<div>")
-
-    let canvas = $("<canvas>");
-    canvas.data({"lines": 1});
-
-    if(parent.css) {
-        canvas[0].width = parseInt(parent.css("width").substring(0, parent.css("width").indexOf("px")));
+        canvas.appendTo(canvasDiv);
+        canvasDiv.appendTo(origin)
     } else {
-        canvas[0].width = 0
+        canvas = $(origin);
+        let parent = $(canvas).parent()
+        console.log(parent)
+        appendBtnTo = parent
+
+        console.log(parent.css("width"))
+
+        if(parent.css) {
+            canvas[0].width = parseInt(parent.css("width").substring(0, parent.css("width").indexOf("px")));
+        } else {
+            canvas[0].width = 0
+        }
     }
-    
 
     if(!isPreview) {
-    
+        createBtnAction(function(btn) {
+            btn.on("click", function() {
+                let nbLines = canvas.data("lines");
+                canvas.data({"lines": nbLines- 1 > 0 ? nbLines- 1: 0})
+                drawLines(canvas)
+            })
+            
+        }, "-").prependTo(appendBtnTo)
 
-        let addBtn = $("<button>");
-        addBtn.text("+");
-        addBtn.css({"position": "relative", "left":"95%"})
-        addBtn.addClass("hideForPrint");
+        createBtnAction(function(btn) {
+            btn.on("click", function() {
+                let nbLines = canvas.data("lines");
+                canvas.data({"lines": nbLines+ 1})
+                drawLines(canvas)
+            })
+        }, "+").prependTo(appendBtnTo)
 
-        let removeBtn = $("<button>");
-        removeBtn.text("-");
-        removeBtn.css({"position": "relative", "left":"90%"})
-        removeBtn.addClass("hideForPrint");
-
-        addBtn.on("click", function() {
-            let nbLines = canvas.data("lines");
-            canvas.data({"lines": nbLines+ 1})
-            drawLines(canvas)
-        })
-    
-        removeBtn.on("click", function() {
-            let nbLines = canvas.data("lines");
-            canvas.data({"lines": nbLines- 1 > 0 ? nbLines- 1: 0})
-            drawLines(canvas)
-        })
-
-        addBtn.appendTo(canvasDiv)
-        removeBtn.appendTo(canvasDiv)
-
-        //clone.remove();
-
-        canvasDiv.draggable({
-            containment:parent
-        });
-    } else {
-        canvas[0].width = 200;
     }
 
-    
-    
+    drawLines($(canvas))
 
-    drawLines(canvas)
-    
-    
-    canvas.appendTo(canvasDiv);
-    canvasDiv.appendTo(parent)
-
-    
-
-    
     
 }
 
 const element = {"name" : "lines", "func" : createLinesElement};
-export {element};
+export {element, drawLines, createLinesElement};

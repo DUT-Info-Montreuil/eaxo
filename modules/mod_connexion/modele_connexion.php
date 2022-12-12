@@ -1,22 +1,26 @@
 <?php
 
 require_once "./connexion.php";
-
-class ModeleConnexion extends Connexion
-{
+require_once "./guardian.php";
+class ModeleConnexion extends Connexion{
     public function __construct()
     {
 
     }
 
     //Inserts the data (emailAdress, username and password) in the database, returns True if it worked, False otherwise
-    public function form_ajout()
+    public function ajouterUtilisateur()
     {
+        if(!isset($_POST["username"]) || !isset($_POST["passwd"]) || !isset($_POST["email"]) || !token_verification()) {
+            return false;
+        }
         $sth = self::$bdd->prepare('INSERT INTO users (email, username, passwd) values(:email, :username, :password)');
-        if (!$this->verif_username($_POST['username'])) {
-            if (!$this->verif_email($_POST['emailAdress'])) {
-                if($this->verifierMotDePasseFormAjout($_POST['passwd']) === TRUE && $this->verif_email($_POST['email']) === TRUE && $this->verif_username($_POST['username']) === TRUE){
-                    $sth->execute(array(':username' => $_POST['username'], ':password' => password_hash($_POST['passwd'], PASSWORD_DEFAULT), ':email' => $_POST['emailAdress']));
+        if ($this->verif_username($_POST['username'])) {
+            
+            if ($this->verif_email($_POST['email'])) {
+                
+                if($this->verifierMotDePasseFormAjout($_POST['passwd']) && $this->verif_email($_POST['email'])  && $this->verif_username($_POST['username']) ){
+                    $sth->execute(array(':username' => $_POST['username'], ':password' => password_hash($_POST['passwd'], PASSWORD_DEFAULT), ':email' => $_POST['email']));
                     return true;
                 }else{
                     return false;
@@ -34,9 +38,9 @@ class ModeleConnexion extends Connexion
     }
 
     //Checks if the couple (username or email adress/password) exists in the database, returns True if it does, False otherwise
-    public function verif_connexion()
-    {
+    public function verif_connexion() {
         if (isset($_SESSION)) {
+            
             $sql = 'SELECT * FROM users WHERE (username=:login) OR (email=:login)';
             $sth = self::$bdd->prepare($sql);
             $sth->execute(array(':login' => $_POST['login']));
@@ -44,6 +48,7 @@ class ModeleConnexion extends Connexion
             if ($result) {
                 if (password_verify($_POST['password'], $result['passwd'])) {
                     $_SESSION['newsession'] = $result['id'];
+                    $_SESSION["remember"] = isset($_POST["remember"]);
                     return true;
                 }
             }
@@ -58,7 +63,7 @@ class ModeleConnexion extends Connexion
         $sth = self::$bdd->prepare($sql);
         $sth->execute(array(':login' => $username));
         $tab = $sth->fetch();
-        if($tab['user'] == $username)
+        if($tab)
             return false;
         return true;
     }
@@ -70,7 +75,7 @@ class ModeleConnexion extends Connexion
         $sth = self::$bdd->prepare($sql);
         $sth->execute(array(':email' => $email));
         $tab = $sth->fetch();
-        if($tab['email'] == $email)
+        if($tab)
             return false;
         return true;
     }

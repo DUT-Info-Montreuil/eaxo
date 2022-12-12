@@ -13,10 +13,12 @@ class VueConnexion extends VueGenerique
         ?>
         <div id="Div_Connection" class="text-center pt-5">
             <main class="form-signin w-100 mt-5 m-auto">
-                <form action="./index.php?module=mod_connexion&action=connexion" method="POST">
-                    <?php
+                <form action="./index.php?module=mod_connexion&action=connexion" method="POST"> 
+                  <?php
                     if (!isset($_SESSION['newsession'])) {
                         ?>
+                                    <input type="hidden" name="token" value='<?php echo $_SESSION['token']?>'> <!--TOKEN -->
+
                         <img class="mt-5 mb-4" src="resources/images/logo.jpg" alt="" width="100" height="100">
                         <h1 class="h3 mb-3 fw-normal">Connexion</h1>
 
@@ -31,11 +33,13 @@ class VueConnexion extends VueGenerique
                             <label for="floatingPassword">Mot de passe</label>
                         </div>
 
-                        <a id="TextePasEncoreDeCompte" href="https://example.com">pas encore de compte ?</a>
+                        <a id="TextePasEncoreDeCompte" href="./index.php?module=mod_connexion&action=form_inscription">S'inscrire</a>
+                        <a id="TextePasEncoreDeCompte" href="./index.php?module=mod_resetpassword">Mot de passe oublié ?</a>
 
                         <div class="checkbox mt-2 mb-2">
                             <label>
-                                <input id="test" type="checkbox" value="remember-me" checked> Se souvenir de moi
+                                <input id="test" type="checkbox" value="remember-me" checked name="remember"> Se souvenir de moi
+                                
                             </label>
                         </div>
                         <button id="bouton_send" class="w-100 btn btn-lg btn-warning" type="submit">Connexion</button>
@@ -56,6 +60,7 @@ class VueConnexion extends VueGenerique
     {
         ?>
         <form action="./index.php?module=mod_connexion&action=new_inscription" method="POST">
+            <input type="hidden" name="token" value='<?php echo $_SESSION['token']?>'>
             <div class="container">
                 <main>
                     <div class="pt-5 text-center">
@@ -70,11 +75,11 @@ class VueConnexion extends VueGenerique
 
                         <div id="forceMotPasseMinimal" class="pt-0 pb-0 ml-0 mr-0 mb-0">
                             <p id="specMotPasse" class="pt-0 mt-0 mb-0">Le mot de passe doit contenir :</p>
-                            <p id="MinusculeMDP" class="pt-0 mt-0 mb-0">⋰ Au moin une minuscule</p>
-                            <p id="MajusculeMDP" class="pt-0 mt-0 mb-0">⋰ Au moin une majuscule</p>
-                            <p id="chifreMDP" class="pt-0 mt-0 mb-0">⋰ Au moin un chiffre</p>
-                            <p id="characteresMDP" class="pt-0 mt-0 mb-0">⋰ Au moin huit charactères</p>
-                            <p id="CharactereMDP" class="pt-0 mt-0 mb-0">⋰ Un de ces charactère special: $ @ % * + - _ !</p>
+                            <p id="MinusculeMDP" class="pt-0 mt-0 mb-0">⋰ Au moins une minuscule</p>
+                            <p id="MajusculeMDP" class="pt-0 mt-0 mb-0">⋰ Au moins une majuscule</p>
+                            <p id="chifreMDP" class="pt-0 mt-0 mb-0">⋰ Au moins un chiffre</p>
+                            <p id="characteresMDP" class="pt-0 mt-0 mb-0">⋰ Au moins huit caractères</p>
+                            <p id="CharactereMDP" class="pt-0 mt-0 mb-0">⋰ Un de ces caractères spéciaux: $ @ % * + - _ !</p>
                         </div>
 
                         <script src="resources/scripts/modules/mod_connection/inscription.js"></script>
@@ -113,14 +118,14 @@ class VueConnexion extends VueGenerique
                                 <div class="col-12">
                                     <label for="email" class="form-label">Email <span class="text-muted"></span></label>
                                     <input type="email" class="form-control" id="email"
-                                           placeholder="utilisateur@example.com" name="emailAdress">
+                                           placeholder="utilisateur@example.com" name="email">
                                     <div class="invalid-feedback">adresse e-mail invalide</div>
                                 </div>
 
                                 <p id="eMailIncorect" class="pt-0 mt-0 mb-0, inscriptionErreur">*L'adresse e-mail utiliser n'existe pas</p>
                                 <p id="eMailUtiliser" class="pt-0 mt-0 mb-0, inscriptionErreur">*Cette adresse e-mail est déjà utilisée</p>
 
-                                <button id="bouton_send_incription" class="w-100 btn btn-primary btn-lg" type="submit">
+                                <button id="bouton_send" class="w-100 btn btn-primary btn-lg" type="submit">
                                     Inscription
                                 </button>
                         </form>

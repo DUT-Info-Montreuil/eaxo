@@ -17,7 +17,6 @@ class PreviewLoader{
                 console.log(self.previewFunction["text"]);
                 
                 if(self.getPreview(name)) {
-                    //console.log(self.getPreview(name))
                     self.getPreview(name)(parent, true);
                 }
             }

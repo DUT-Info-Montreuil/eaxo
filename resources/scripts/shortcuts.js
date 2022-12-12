@@ -5,7 +5,6 @@ let copyPressed = false
 let pastePressed = false
 
 
-
 $("body").keydown(function(event) {
     
     

@@ -92,6 +92,18 @@ function ajouterEvents(){
         $("#Dossier_Add_Picture").css("background-color", "unset");
     });
 
+    eventMenu();
+
+    $("#Dossier_Contextuel_Menu").mouseleave(function (){
+        $("#Dossier_Contextuel_Menu").css("display", "none");
+    });
+
+    $("#ouvertureVolet").click(function(){
+        dossiers.afficher(null);
+    });
+}
+
+function eventMenu(){
     $("#Dossier_rename_Div").mouseenter(function (){
         $("#Dossier_rename_text").css("font-size", 15);
         $("#Dossier_rename").css("width", 20);
@@ -124,14 +136,6 @@ function ajouterEvents(){
         $("#Dossier_delete").css("height", 15);
         $("#Dossier_delete").css("width", 15);
     })
-
-    $("#Dossier_Contextuel_Menu").mouseleave(function (){
-        $("#Dossier_Contextuel_Menu").css("display", "none");
-    });
-
-    $("#ouvertureVolet").click(function(){
-        dossiers.afficher(null);
-    });
 }
 
 function ajouterImageAPI_Images(image, nom) {
@@ -398,17 +402,17 @@ function Image(id, nom, parent, img) {
             return;
     });
     $("#image_" + this.id).contextmenu(function (event) {
-        $("#Dossier_Contextuel_Menu").off();
         $("#Dossier_delete_Div").off();
         $("#Dossier_download_Div").off()
         $("#Dossier_rename_Div").off();
+        eventMenu();
         selection("#image_" + id);
         var x = event.clientX;
         var y = event.clientY;
         //console.log("X=" + event.clientX + ", Y=" + event.clientY);
         $("#Dossier_Contextuel_Menu").css("display", "block");
-        $("#Dossier_Contextuel_Menu").css("top", y - 93);
-        $("#Dossier_Contextuel_Menu").css("left", x - 702);
+        $("#Dossier_Contextuel_Menu").css("top", y - 215);
+        $("#Dossier_Contextuel_Menu").css("left", x - 670);
 
         $("#Dossier_delete_Div").click(function () {
             $("#image_" + id).css("display", "none");
@@ -447,7 +451,6 @@ function Image(id, nom, parent, img) {
         $("#Dossier_Contextuel_Menu").mouseleave(function () {
             $("#Dossier_Contextuel_Menu").css("display", "none");
             $("#image_" + id).mouseleave();
-            $("#Dossier_Contextuel_Menu").off();
         });
         return false;
     });
@@ -579,17 +582,17 @@ function Dossier(id, nom, parent){
                 dossiers.afficher(id);
     });
     $("#dossier_" + this.id).contextmenu(function (event){
-        $("#Dossier_Contextuel_Menu").off();
         $("#Dossier_delete_Div").off();
         $("#Dossier_download_Div").off()
         $("#Dossier_rename_Div").off();
+        eventMenu();
         selection("#dossier_" + id);
         var x = event.clientX;
         var y = event.clientY;
         //console.log("X=" + event.clientX + ", Y=" + event.clientY);
         $("#Dossier_Contextuel_Menu").css("display", "block");
-        $("#Dossier_Contextuel_Menu").css("top", y-93);
-        $("#Dossier_Contextuel_Menu").css("left", x-702);
+        $("#Dossier_Contextuel_Menu").css("top", y-215);
+        $("#Dossier_Contextuel_Menu").css("left", x-670);
 
         $("#Dossier_delete_Div").click(function (){
             $("#Dossier_Contextuel_Menu").mouseleave();
@@ -607,7 +610,6 @@ function Dossier(id, nom, parent){
             $("#renomer_Dossier_"+id).focus();
             $("#titre_Dossier_" + id).css("display", "none");
             $("#renomer_Dossier_"+id).focusout(function (){
-                $("#Dossier_Contextuel_Menu").off();
                 $("#Dossier_rename_Div").off();
                 $("#renomer_Dossier_"+id).text("");
                 $("#renomer_Dossier_"+id).css("display", "none");
@@ -616,7 +618,6 @@ function Dossier(id, nom, parent){
             });
             $("#renomer_Dossier_"+id).keyup(function(e){
                 if (e.keyCode == 13){
-                    $("#Dossier_Contextuel_Menu").off();
                     $("#Dossier_rename_Div").off();
                     $("#renomer_Dossier_"+id).css("display", "none");
                     $("#titre_Dossier_" + id).css("display", "block");
@@ -629,7 +630,6 @@ function Dossier(id, nom, parent){
         $("#Dossier_Contextuel_Menu").mouseleave(function (){
             $("#Dossier_Contextuel_Menu").css("display", "none");
             $("#renomer_Dossier_"+id).off();
-            $("#Dossier_Contextuel_Menu").off();
         });
         return false;
     });
@@ -646,7 +646,6 @@ function Dossier(id, nom, parent){
         if($("#dossier_" + id).css("border") != "1px solid rgb(153, 209, 255)"){
             $("#dossier_" + id).css("background-color", "unset");
         }
-        //$("#Dossier_Contextuel_Menu").off();
 
     });
 

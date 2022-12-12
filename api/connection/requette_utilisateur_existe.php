@@ -5,9 +5,9 @@
         $reponsse->execute(array(':userTest' => $user));
         $resultat=$reponsse->fetch();
         if($resultat){
-            reponsseUser($resultat['username']);
+            reponsseArchitecture($resultat['username']);
         }else{
-            reponsseUser(null);
+            reponsseArchitecture(null);
         }
     }
 

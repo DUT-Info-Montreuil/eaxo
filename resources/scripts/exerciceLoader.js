@@ -1,5 +1,7 @@
 import jqueryLoader from "./loader/jqueryLoader.js";
 import {createLinesElement} from './elements/lines.js'
+import {exo} from './exercices/surrounded.js'
+import {exo as sur} from './exercices/trueorfalse.js'
 
 class ExerciceLoader {
     constructor() { 
@@ -7,12 +9,16 @@ class ExerciceLoader {
         this.loadExercice(exoID);
         this.loaderFunction = {}
         this.loaderFunction["lines"] = createLinesElement;
+        this.loaderFunction["surrounded"] = exo["func"];
+        this.loaderFunction["trueorfalse"] = sur["func"];
     }
 
     loadExercice(exoID) {
         let self = this;
         $.get("./api/exercice/get.php?exoID=" + exoID, {}, function(result) {
-            self.createExercice(JSON.parse(result));
+            if(result.code == 1) {
+                self.createExercice(result.content);
+            }
         })
     }
 
@@ -49,11 +55,12 @@ class ExerciceLoader {
 
             for(let ind in dataset) {
                 jElement[0].dataset[ind] = dataset[ind];
+                console.log(ind)
                 if(ind == "lines") {
-                    createLinesElement(jElement[0])
-                }
-                if(dataset[ind] == "surrounded") {
+                    this.loaderFunction[ind](jElement[0])
+                } else if (ind == "widget" && this.loaderFunction[dataset[ind]]) {
 
+                    this.loaderFunction[dataset[ind]](jElement[0])
                 }
             }
             //Load css
@@ -80,7 +87,7 @@ class ExerciceLoader {
             jqueryLoader.loadElement(jElement);
         }
 
-        //console.log($("#" + parentID))
+
     }
 
 }

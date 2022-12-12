@@ -108,9 +108,14 @@ CREATE TABLE IF NOT EXISTS gallery_images(
     id serial,
     folderParent bigint(20) UNSIGNED,
     pName varchar(255),
+    Img64 LONGTEXT,
+    ownerId bigint(20) UNSIGNED,
     FOREIGN KEY (folderParent) 
-    	REFERENCES gallery_images(id) 
+    	REFERENCES gallery_folders(id)
     	ON DELETE CASCADE,
+    FOREIGN KEY (ownerId)
+        REFERENCES users(id)
+        ON DELETE CASCADE,
     PRIMARY KEY(id)
 );
 
@@ -124,7 +129,7 @@ CREATE TABLE IF NOT EXISTS permissions(
 
 CREATE TABLE IF NOT EXISTS reset_password(
     id serial,
-    userid bigint(20) UNSIGNED,
+    userid bigint(20) UNSIGNED UNIQUE,
     link varchar(255),
     expire timestamp,
     FOREIGN KEY (userid)

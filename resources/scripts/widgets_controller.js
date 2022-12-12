@@ -11,11 +11,31 @@ class WidgetController {
         
         $("#pageContainer").on("click", function(handler) {
             var target = handler.target;
+
+            var old = self.getSelectedElement()
+        
+            if(old && old.dataset.widget) {
+                $(old).removeClass("eaxoSelectedBorder")
+            }
+
             if(self.canEditNode(target)) {
+                
                 self.enableEdit(target)
                 self.setSelectedElement(target)
+            } else {
+                self.canSetSelectedExercice(target);
             }
+            
+            
         });
+    }
+    
+    unselect() {
+        var old = this.getSelectedElement()
+        
+        if(old && old.dataset.widget) {
+            $(old).removeClass("eaxoSelectedBorder")
+        }
     }
 
     //Next step : find better function to generate new unique id
@@ -41,8 +61,16 @@ class WidgetController {
 
     }
 
+    canSetSelectedExercice(target) {
+        
+        if(target.dataset.widget) {
+            this.selectedElement = target;
+            $(target).addClass("eaxoSelectedBorder");
+        }
+    }
+
     canEditNode(node) {
-        if(node.id != "pageContainer" && !this.getSelectedElement()) {
+        if(node.id != "pageContainer") {
             let array = ["h", "p"]
             for(var n in array) {
                 if(node.tagName.toLowerCase().includes(array[n]) && node.tagName != "PAGE") {

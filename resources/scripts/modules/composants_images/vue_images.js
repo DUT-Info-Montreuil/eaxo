@@ -36,7 +36,7 @@ function ajouterEvents(){
 
     $("#Dossier_Home").click(function (){
         if($("#Dossier_Home").css("opacity") != "0.3")
-            dossiers.afficher(0);
+            dossiers.afficher(null);
     });
     $("#Dossier_Home").mouseenter(function (){
         if($("#Dossier_Home").css("opacity") == 1) {
@@ -130,7 +130,7 @@ function ajouterEvents(){
     });
 
     $("#ouvertureVolet").click(function(){
-        dossiers.afficher(0);
+        dossiers.afficher(null);
     });
 }
 
@@ -167,6 +167,7 @@ function supprimerDossiersAPI_Dossier(id){
             supprimerDossierAPI_Dossier(doss2.id);
         }
     }
+    console.log(doss);
     dossiers.remove(id);
     supprimerDossierAPI_Dossier(id);
 };
@@ -240,7 +241,7 @@ function toBase64(image){
     }
     var fichier = new FileReader();
     fichier.readAsDataURL(image);
-    fichier.onload = () => ajouterImageAPI_Images(fichier.result, image.name.slice(0, (image.name.length-image.name.lastIndexOf("."))));
+    fichier.onload = () => ajouterImageAPI_Images(fichier.result, image.name);
     fichier.onerror = error => reject(error);
 }
 
@@ -248,8 +249,8 @@ function toBase64(image){
 function actualiserChemin(niveau){
     var chemin = "";
     var dossier;
-    if(niveau != 0) {
-        while (niveau != 0) {
+    if(niveau != null) {
+        while (niveau != null) {
             dossier = dossiers.getElementById(niveau);
             chemin = "/" + dossier.nom + chemin;
             niveau = dossier.parent;
@@ -397,6 +398,10 @@ function Image(id, nom, parent, img) {
             return;
     });
     $("#image_" + this.id).contextmenu(function (event) {
+        $("#Dossier_Contextuel_Menu").off();
+        $("#Dossier_delete_Div").off();
+        $("#Dossier_download_Div").off()
+        $("#Dossier_rename_Div").off();
         selection("#image_" + id);
         var x = event.clientX;
         var y = event.clientY;
@@ -574,6 +579,10 @@ function Dossier(id, nom, parent){
                 dossiers.afficher(id);
     });
     $("#dossier_" + this.id).contextmenu(function (event){
+        $("#Dossier_Contextuel_Menu").off();
+        $("#Dossier_delete_Div").off();
+        $("#Dossier_download_Div").off()
+        $("#Dossier_rename_Div").off();
         selection("#dossier_" + id);
         var x = event.clientX;
         var y = event.clientY;
@@ -584,9 +593,9 @@ function Dossier(id, nom, parent){
 
         $("#Dossier_delete_Div").click(function (){
             $("#Dossier_Contextuel_Menu").mouseleave();
+            $("#Dossier_rename_Div").off();
             $("#dossier_" + id).css("display", "none");
             $("#dossier_" + id).remove();
-            $("#Dossier_rename_Div").off();
             supprimerDossiersAPI_Dossier(id);
         });
         $("#Dossier_download_Div").click(function (){
@@ -598,19 +607,20 @@ function Dossier(id, nom, parent){
             $("#renomer_Dossier_"+id).focus();
             $("#titre_Dossier_" + id).css("display", "none");
             $("#renomer_Dossier_"+id).focusout(function (){
+                $("#Dossier_Contextuel_Menu").off();
+                $("#Dossier_rename_Div").off();
                 $("#renomer_Dossier_"+id).text("");
                 $("#renomer_Dossier_"+id).css("display", "none");
                 $("#titre_Dossier_" + id).css("display", "block");
                 $("#renomer_Dossier_"+id).off();
-                $("#Dossier_Contextuel_Menu").off();
-                $("#Dossier_rename_Div").off();
             });
             $("#renomer_Dossier_"+id).keyup(function(e){
                 if (e.keyCode == 13){
+                    $("#Dossier_Contextuel_Menu").off();
+                    $("#Dossier_rename_Div").off();
                     $("#renomer_Dossier_"+id).css("display", "none");
                     $("#titre_Dossier_" + id).css("display", "block");
                     $("#renomer_Dossier_"+id).off();
-                    $("#Dossier_rename_Div").off();
                     renomerDossierAPI_Images(id, $("#renomer_Dossier_"+id).val());
                 }
             });
@@ -618,6 +628,7 @@ function Dossier(id, nom, parent){
 
         $("#Dossier_Contextuel_Menu").mouseleave(function (){
             $("#Dossier_Contextuel_Menu").css("display", "none");
+            $("#renomer_Dossier_"+id).off();
             $("#Dossier_Contextuel_Menu").off();
         });
         return false;

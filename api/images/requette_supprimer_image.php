@@ -1,8 +1,13 @@
 <?php
 
 function supprimerIMG($sth, $ownerid, $id){
-    $supression = $sth->prepare('DELETE FROM gallery_images WHERE id=:id AND ownerId=:ownerId');
-    $supression->execute(array(':ownerId' => $ownerid, ':id' => $id));
+    if($id == null){
+        $supression = $sth->prepare('DELETE FROM gallery_images WHERE id IS NULL AND ownerId=:ownerId');
+        $supression->execute(array(':ownerId' => $ownerid));
+    }else{
+        $supression = $sth->prepare('DELETE FROM gallery_images WHERE id=:id AND ownerId=:ownerId');
+        $supression->execute(array(':ownerId' => $ownerid, ':id' => $id));
+    }
     reponsseDelIMG($supression);
 }
 

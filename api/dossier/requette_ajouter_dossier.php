@@ -1,5 +1,7 @@
 <?php
 function ajouterDossier($sth, $ownerid, $pName, $folderParent){
+    if($folderParent == '')
+        $folderParent = null;
     $insert = $sth->prepare('INSERT INTO gallery_folders (folderParent, pName, ownerId) VALUES (:folderParent, :pName,:ownerid)');
     $insert->execute(array(':ownerid' => $ownerid, ':pName' => $pName, ':folderParent' => $folderParent));
     $id = $sth -> lastInsertId();

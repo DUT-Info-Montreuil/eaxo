@@ -10,7 +10,7 @@ class VueUserList extends VueGenerique
     public function display($users) {
         ?>
         <script src="./resources/scripts/widgets.js" type="module"></script>
-        <div class="container text-center">
+        <div class="d-flex justify-content-center mt-3">
             <?php
             $this->usersList($users);
             ?>
@@ -47,13 +47,13 @@ class VueUserList extends VueGenerique
     public function usersList($users) #Array of arrays which contains: [name, id]
     {
         if (isset($users) && count($users) > 0) {
-            echo '<ul class="list-group">';
+            echo '<ul class="list-group w-50 justify-content-between gap-1">';
         }
         
         foreach ($users as $name_id) {
             ?>
             
-            <li class="list-group-item"><?php echo htmlspecialchars($name_id["username"])?> <a type="button" class="open-idNameToModal btn-close" data-bs-toggle="modal" data-id=<?php echo $name_id["id"]?> data-name=<?php echo htmlspecialchars($name_id["username"])?> data-bs-target="#modalDeleteUser"></a></li>
+            <li class="list-group-item w-100 d-flex justify-content-between align-items-center"><?php echo htmlspecialchars($name_id["username"])?> <button type="button" class="open-idNameToModal btn btn-danger" data-bs-toggle="modal" data-id=<?php echo $name_id["id"]?> data-name=<?php echo htmlspecialchars($name_id["username"])?> data-bs-target="#modalDeleteUser">Supprimer</button></li>
         <?php
         }
         if (isset($users) && count($users) > 0) {

@@ -8,7 +8,7 @@ class ModeleUserList extends Connexion{
     }
 
     public function getUsersList() {
-        $sth = self::$bdd->prepare("SELECT username, id FROM users WHERE groupid=1");
+        $sth = self::$bdd->prepare("SELECT u.username as username, u.id as id, COUNT(e.userID) as nbExo FROM users u JOIN exercices e ON u.id = e.userID WHERE u.groupid=1 GROUP BY e.userID");
         $sth->execute();
         $result = $sth->fetchAll();
         return $result;

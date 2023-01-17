@@ -137,8 +137,6 @@ class VuePages extends VueGenerique
                         <select id="selectFont" class="form-select" aria-label="Default select example">
                             <option selected>Arial</option>
                             <option value="1">Cursive</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
                         </select>
                     </div>
                     <button id="btnBold"><i class="fa-solid fa-bold"></i></button>

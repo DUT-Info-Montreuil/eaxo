@@ -23,7 +23,7 @@ function createHeaderModele(parent) {
 
     divGroupInfo.addClass("d-flex")
     divGroupInfo.css({"width": "30%"})
-    divGroupInfo.html(`<div style='background-color:#5a5a5a; padding-left:5%; padding-right:5%; margin:5%'>
+    divGroupInfo.html(`<div style='background-color:#5a5a5a; padding-left:5%; padding-right:5%; margin:5%; color:white;'>
         <p class='d-inline'>Lecture</p>
         <p>Texte 2</p>
     </div>

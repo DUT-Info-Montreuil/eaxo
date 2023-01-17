@@ -1,5 +1,3 @@
-import {createLinesElement} from './elements/lines.js'
-
 class PreviewLoader{
     constructor() {
         //this.loadPreviews();

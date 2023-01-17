@@ -3,10 +3,10 @@ class Connexion {
     protected static $bdd;
 
     public static function initConnexion() {
-        $id = "";
+        $id = "eaxo";
         $dbname = "eaxo";
-        $mdp = "";
-        $adress = "";
+        $mdp = "eaxo";
+        $adress = "localhost";
         self::$bdd = new PDO("mysql:host=$adress;dbname=$dbname", $id, $mdp);
     }
 

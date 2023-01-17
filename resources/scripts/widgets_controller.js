@@ -14,7 +14,7 @@ class WidgetController {
 
             var old = self.getSelectedElement()
         
-            if(old && (old.dataset.widget || old.dataset.imageid)) {
+            if(old && (old.dataset.widget || old.dataset.imageid || old.dataset.header)) {
                 $(old).removeClass("eaxoSelectedBorder")
             }
 
@@ -62,10 +62,10 @@ class WidgetController {
     }
 
     canSetSelectedExercice(target) {
-
-        if(target.dataset.widget || target.nodeName == 'IMG') {
-            let newTarget = target;
-            
+        let headerElement = target.dataset.header ? target : (target.offsetParent.dataset.header ? target.offsetParent : null)
+        if(target.dataset.widget || target.nodeName == 'IMG' || headerElement) {
+            let newTarget = headerElement ? headerElement : target;
+            console.log(newTarget)
             if(target.nodeName == 'IMG') {
                 newTarget = target.offsetParent
             }

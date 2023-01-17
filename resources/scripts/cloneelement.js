@@ -6,6 +6,7 @@ function loadChildrenElements(clone) {
     //let attrs = clone[0].dataset.widget
     let widgetType = clone[0].dataset.widget
     let elementType = clone[0].dataset.eaxoelement;
+    let header = clone[0].dataset.header;
     let isPreview = clone.hasClass("elementPreview")
 
     if(widgetType) {
@@ -16,6 +17,12 @@ function loadChildrenElements(clone) {
     else if (elementType) {
         if(widgetElementLoader.loadElement(elementType)) {
             widgetElementLoader.loadElement(elementType)(clone, isPreview)
+        }
+    } else if (header) {
+        
+        if(widgetElementLoader.loadHeader("modele_" + header)) {
+            console.log("modele_" + header)
+            widgetElementLoader.loadHeader("modele_" + header)(clone)
         }
     }
     

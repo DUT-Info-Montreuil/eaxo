@@ -17,7 +17,7 @@ $("body").keydown(function(event) {
     }
 
     if(event.originalEvent.key == "Delete") {
-        if(widget_c.getSelectedElement().dataset.widget || widget_c.getSelectedElement().dataset.imageid) {
+        if(widget_c.getSelectedElement().dataset.widget || widget_c.getSelectedElement().dataset.imageid || widget_c.getSelectedElement().dataset.header) {
             $(widget_c.getSelectedElement()).remove()
         }
     }

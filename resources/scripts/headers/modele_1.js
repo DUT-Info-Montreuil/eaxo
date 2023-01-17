@@ -10,7 +10,7 @@ function createHeaderModele(parent) {
     name.css({"font-weight":"bold"})
 
     let date = $("<p>")
-    date.text("Date __/___/____")
+    date.text("Date __|___|____")
     date.css({"text-align":"right", "font-weight":"bold"})
 
     let background = $("<div>")

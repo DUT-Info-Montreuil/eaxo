@@ -140,3 +140,9 @@ CREATE TABLE IF NOT EXISTS reset_password(
 
 INSERT INTO users (email, username, passwd) VALUES('prof@gmail.com', 'proftest', '$2y$10$CRsZddHPQ66oc8fE2l6VEOL4epL8P2XT7KIqacSR.ZfGA8TJ/WWea');
 INSERT INTO users (email, username, groupid, passwd) VALUES('admin@gmail.com', 'admin', 2, '$2y$10$Oc.1DItD3XdFQpvkIjCjTeUkN4E9wN4ElOZzPDBrqT4T1sNfHkktu');
+
+/*
+Version 1.0 - 23/01/2023
+GNU General Public License v3.0 2022-2032 
+Initiated by SANTOS Philippe, FAURE Grégoire & OURZIK Kamel
+*/

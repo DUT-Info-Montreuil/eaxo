@@ -11,7 +11,7 @@ use PHPMailer\PHPMailer\Exception;
     require_once SITE_ROOT."/lib/PHPMailer/SMTP.php";
     
     class ModeleResetPassword extends Connexion {
-        
+        private $con;
         public function __construct($cont)
         {
             $this->con = $cont;
@@ -138,4 +138,9 @@ use PHPMailer\PHPMailer\Exception;
 
 
     }
+/*
+Version 1.0 - 23/01/2023
+GNU General Public License v3.0 2022-2032 
+Initiated by SANTOS Philippe, FAURE Grégoire & OURZIK Kamel
+*/
 ?>

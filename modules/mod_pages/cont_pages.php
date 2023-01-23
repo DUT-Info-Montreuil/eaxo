@@ -4,6 +4,10 @@ require_once(__DIR__ . "/vue_pages.php");
 require_once("composants/composant_Images/vue_Images.php");
 
     class ContPages {
+        private $m;
+        private $v;
+        private $action;
+        private $saveExercice;
         public function __construct()
         {
 
@@ -34,4 +38,10 @@ require_once("composants/composant_Images/vue_Images.php");
             return $this->v;
         }
     }
+
+/*
+Version 1.0 - 23/01/2023
+GNU General Public License v3.0 2022-2032 
+Initiated by SANTOS Philippe, FAURE Grégoire & OURZIK Kamel
+*/
 ?>

@@ -42,6 +42,12 @@ else
     echo "Erreur lor de la lecture d'une variable ligne 32 fichier template.php";
 
 
+
+/*
+Version 1.0 - 23/01/2023
+GNU General Public License v3.0 2022-2032 
+Initiated by SANTOS Philippe, FAURE Grégoire & OURZIK Kamel
+*/
 ?>
 
 

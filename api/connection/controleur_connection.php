@@ -6,7 +6,7 @@ require_once __DIR__ . "/../../connexion.php";
 
 class controleur_connection extends Connexion
 {
-
+    private $action;
     public function __construct(){
         $this->action = isset($_GET['action']) ? $_GET['action'] : "null";
         $this->exec();
@@ -25,3 +25,9 @@ class controleur_connection extends Connexion
         }
     }
 }
+
+/*
+Version 1.0 - 23/01/2023
+GNU General Public License v3.0 2022-2032 
+Initiated by SANTOS Philippe, FAURE Grégoire & OURZIK Kamel
+*/
